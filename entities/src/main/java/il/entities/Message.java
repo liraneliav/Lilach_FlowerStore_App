@@ -6,6 +6,10 @@ import java.util.LinkedList;
 public class Message implements Serializable {
     String message;
 
+
+
+    String messageDescribe;
+
     public Message(String message){
         this.message = message;
     }
@@ -26,6 +30,10 @@ public class Message implements Serializable {
     String credit_card;
     String plan;
     String name;
+
+
+
+    int status;
     boolean registerStatus;
 
     //setPrice
@@ -144,4 +152,19 @@ public class Message implements Serializable {
         isWorker = worker;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getMessageDescribe() {
+        return messageDescribe;
+    }
+
+    public void setMessageDescribe(String messageDescribe) {
+        this.messageDescribe = messageDescribe;
+    }
 }

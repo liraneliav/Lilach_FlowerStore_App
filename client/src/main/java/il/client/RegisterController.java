@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class RegisterController extends ParentClass{
+public class RegisterController extends ParentClass {
 
     public static void setCurrectRegister(int currectRegister) {
         RegisterController.currectRegister = currectRegister;
@@ -54,15 +54,16 @@ public class RegisterController extends ParentClass{
     private MainPageController main_controller;
 
     @FXML
-    void initialize(){
+    void initialize() {
         { //initialize combobox
             this.plan_chooser.getItems().add("Specific Store Member");
             this.plan_chooser.getItems().add("Store Wide Member");
             this.plan_chooser.getItems().add("Yearly Member");
         }
     }
+
     @FXML
-    void RegisterBTNClicked(ActionEvent event) throws JSONException, IOException {
+    void RegisterBTNClicked(ActionEvent event) throws IOException {
         int counter_of_correctness = 6;
         String name = this.name_tf.getText();
         String username = this.username_tf.getText();
@@ -70,26 +71,45 @@ public class RegisterController extends ParentClass{
         String id = this.id_tf.getText();
         String credit_card = this.credit_card_tf.getText();
         String plan;
-        if(this.plan_chooser.getValue()==null){
+        if (this.plan_chooser.getValue() == null) {
             plan_chooser.setValue("Plan is not chosen");
-            plan="";
+            plan = "";
             counter_of_correctness--;
-        }
-        else {
+        } else {
             plan = this.plan_chooser.getValue().toString();
         }
 
         String[] settings = {name, username, pass, id, credit_card};
         boolean[] result = isEmpty(settings);
 
-        for(int i=0; i<result.length; i++){
-            if(result[i]) {
+        for (int i = 0; i < result.length; i++) {
+            if (result[i]) {
                 switch (i) {
-                    case 0: {name_tf.setPromptText("Name is Empty"); counter_of_correctness--; break;}
-                    case 1: {username_tf.setPromptText("UserName is Empty"); counter_of_correctness--; break;}
-                    case 2: {pass_tf.setPromptText("Password is Empty"); counter_of_correctness--; break;}
-                    case 3: {id_tf.setPromptText("ID is Empty"); counter_of_correctness--; break;}
-                    case 4: {credit_card_tf.setPromptText("creditCard is Empty"); counter_of_correctness--; break;}
+                    case 0: {
+                        name_tf.setPromptText("Name is Empty");
+                        counter_of_correctness--;
+                        break;
+                    }
+                    case 1: {
+                        username_tf.setPromptText("UserName is Empty");
+                        counter_of_correctness--;
+                        break;
+                    }
+                    case 2: {
+                        pass_tf.setPromptText("Password is Empty");
+                        counter_of_correctness--;
+                        break;
+                    }
+                    case 3: {
+                        id_tf.setPromptText("ID is Empty");
+                        counter_of_correctness--;
+                        break;
+                    }
+                    case 4: {
+                        credit_card_tf.setPromptText("creditCard is Empty");
+                        counter_of_correctness--;
+                        break;
+                    }
                 }
             }
         }
@@ -97,48 +117,40 @@ public class RegisterController extends ParentClass{
         //check if username already exist in the DB ==> if(in DB) {counter--;}
         //else{ nameCheck
         int name_check = nameCheck(name);
-        if(name_check == 0){
+        if (name_check == 0) {
             counter_of_correctness--;
         }
 
         int pass_check = passwordCheck(pass);
-        if(pass_check == 0){
+        if (pass_check == 0) {
             counter_of_correctness--;
         }
 
         int id_check = idCheck(id);
-        if(id_check == 0){
+        if (id_check == 0) {
             counter_of_correctness--;
         }
 
         int credit_card_check = creditCardCheck(credit_card);
-        if(credit_card_check == 0){
+        if (credit_card_check == 0) {
             counter_of_correctness--;
         }
 
-        if(counter_of_correctness == 6){
-            //send register details to the server
-            String[] registerDetails = {name, username, pass, id, credit_card, plan};
-
-
-            RegisterControl.register(name, username, pass, id ,credit_card, plan);
-
-//            while(currectRegister<0){
-//            }
-
-            System.out.println("you register sucssesfuly");
-
-
-
-            this.errorWarning.setVisible(false);
-            //move to the login page
-
-            this.main_controller.LoadLoginPage();
-        }
-        else{
+        /**send register details to the server**/
+        if (counter_of_correctness == 6) {
+            RegisterControl.register(name, username, pass, id, credit_card, plan, 1);
+        } else {
             this.errorWarning.setVisible(true);
         }
-        currectRegister=-1;
+    }
+
+    @FXML
+    @Override
+    protected void registerComplit() throws IOException {
+       this.errorWarning.setVisible(false);
+    //move to the login page
+
+        this.main_controller.LoadLoginPage();
     }
 
     private boolean[] isEmpty(String[] settings){
