@@ -44,6 +44,8 @@ public class MainPageController extends ParentClass{
 
     public static String LoginName;
 
+
+    MainPageController(){}
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() throws IOException, ClassNotFoundException, InterruptedException, JSONException {
         init_priority();
@@ -174,7 +176,7 @@ public class MainPageController extends ParentClass{
         }
         return;
     }
-
+    @Override
     public void LoadLoginPage() throws IOException {
         this.main_first_load_pane.getChildren().clear();
         FXMLLoader fxmlLoader = new FXMLLoader();

@@ -12,6 +12,7 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @OrderColumn
     private String userName;
     private String password;
     private String creditCard;
@@ -23,6 +24,11 @@ public class User implements Serializable {
     private String expiryDate;
     private String identifyNumbers;
     private double discount;
+    private int accountStatus;
+
+
+
+
 
 
 //    @ManyToMany
@@ -36,7 +42,7 @@ public class User implements Serializable {
     public int getId() {
         return id;
     }
-    public User(String userName, String password, String creditCard, String position, String name, String identifyNumbers) {
+    public User(String userName, String password, String creditCard, String position, String name, String identifyNumbers, int accountStatus) {
         this.userName = userName;
         this.password = password;
         this.creditCard = creditCard;
@@ -44,6 +50,7 @@ public class User implements Serializable {
         this.position = position;
         this.name = name;
         this.identifyNumbers = identifyNumbers;
+        this.accountStatus = 1;
 //        this.phone = phone;
 //        this.mail = mail;
 //        this.expiryDate = expiryDate;
@@ -148,6 +155,11 @@ public class User implements Serializable {
     public void setDiscount(double discount) {
         this.discount = discount;
     }
+
+
+    public int  getaccountStatus() {return accountStatus;}
+
+    public void  setaccountStatus(int newSatus) {this.accountStatus = newSatus;}
 
 //    public List<Order_Obj> getListOrders() {
 //        return listOrders;

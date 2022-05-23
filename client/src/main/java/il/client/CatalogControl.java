@@ -1,14 +1,13 @@
 package il.client;
 
 import il.entities.Message;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Base64;
-import java.util.concurrent.TimeUnit;
+
 
 public class CatalogControl {
     public static void getItemsList() throws IOException, ClassNotFoundException, InterruptedException {

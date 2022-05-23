@@ -359,7 +359,7 @@ public abstract class AbstractClient implements Runnable
    *
    * @param msg   the message sent.
    */
-  protected abstract void handleMessageFromServer(Object msg) throws JSONException;
+  protected abstract void handleMessageFromServer(Object msg) throws JSONException, IOException;
 
 
 // METHODS TO BE USED FROM WITHIN THE FRAMEWORK ONLY ----------------

@@ -32,7 +32,6 @@ public class SimpleServer extends AbstractServer {
     protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
         try {
             Message message  = (Message) msg;
-
             Message sendMessage = new Message("");
 
             if(message.getMessage().equals("login")){
@@ -78,21 +77,55 @@ public class SimpleServer extends AbstractServer {
 
 
             if(message.getMessage().equals("register")){
-
                 String username = message.getUsername();
                 String name = message.getName();
-                String pass = message.getName();
-                String id = message.getId();
+                String pass = message.getPass();
+                String identifyNumbers = message.getId();
                 String credit_card = message.getCredit_card();
-                String plan = sendMessage.getPlan();
-
-                User newUser = new User(username, pass,credit_card, plan, name, id);
+                String plan = message.getPlan();
+                int status = message.getStatus();
+                User newUser = new User(username, pass, credit_card, plan, name, identifyNumbers, status);
                 System.out.println("get register request:" + username);
-                boolean resultRegister = RegisterControl.register(newUser);
 
-                sendMessage.setMessage("result register");
-                sendMessage.setRegisterStatus(resultRegister);
-                client.sendToClient(sendMessage);
+                int result = RegisterControl.checknewUser(newUser);
+                switch (result){
+                    case 1:{
+                        System.out.println("User name " + username+" has been used");
+                        sendMessage.setMessageDescribe("User has been used");
+                        sendMessage.setMessage("result register");
+                        client.sendToClient(sendMessage);
+                        break;
+                    }
+                    case 2:{
+                        System.out.println("ID " + identifyNumbers+" has been used");
+                        sendMessage.setMessageDescribe("ID has been used");
+                        sendMessage.setMessage("result register");
+                        client.sendToClient(sendMessage);
+                        break;
+                    }
+                    case 3:{
+                        System.out.println("credit_card " + credit_card+" is frozen");
+                        sendMessage.setMessageDescribe("credit_card belong to frozen account");
+                        sendMessage.setMessage("result register");
+                        client.sendToClient(sendMessage);
+                        break;
+                    }
+                    case 0:{
+                        System.out.println("All data is good");
+                        boolean registerProblam = RegisterControl.register(newUser);
+                        if (registerProblam) {
+                            sendMessage.setMessageDescribe("All data is good");
+                            sendMessage.setMessage("result register");
+                            client.sendToClient(sendMessage);
+                        }
+                        else
+                            sendMessage.setMessageDescribe("problem with database");
+                            sendMessage.setMessage("result register");
+                            client.sendToClient(sendMessage);
+                        break;
+                    }
+                }
+
             }
 
 
