@@ -4,6 +4,8 @@ import java.io.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "employee")
@@ -11,12 +13,12 @@ public class Employee implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private int id;
     private String name;
     private String password;
     private int permission;
     private String username;
-    private String store;
+    private String identifyNumbers;
 
     public Employee(){}
 
@@ -25,12 +27,25 @@ public class Employee implements Serializable{
         this.username =username;
         this.password =pass;
         this.permission = permission; // 1:= system admin, 2:= store wide manager 3:= shop manager, 4:= service employee, 5: shop employee
-        this.store = store;
+        //this.store = store;
     }
 
     /* gets and sets*/
 
-    public String getId() {
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getIdentifyNumbers() {
+        return identifyNumbers;
+    }
+
+    public void setIdentifyNumbers(String identifyNumbers) {
+        this.identifyNumbers = identifyNumbers;
+    }
+
+    public int getId() {
         return id;
     }
 
@@ -65,14 +80,14 @@ public class Employee implements Serializable{
     public void setUsername(String username) {
         this.username = username;
     }
-
-    public String getStore() {
-        return store;
-    }
-
-    public void setStore(String store) {
-        this.store = store;
-    }
+//
+//    public String getStore() {
+//        return store;
+//    }
+//
+//    public void setStore(String store) {
+//        this.store = store;
+//    }
 
     /* end gets and sets*/
 }

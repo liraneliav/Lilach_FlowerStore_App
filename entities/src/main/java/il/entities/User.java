@@ -2,8 +2,12 @@ package il.entities;
 
 
 
+
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 //@Inheritance(strategy = InheritanceType.JOINED) // not must
@@ -27,11 +31,11 @@ public class User implements Serializable {
     private boolean login;
 
 
-//    @ManyToMany
-//    private List<Order_Obj> listOrders;
-//
-//    @ManyToMany
-//    private List<Complain_Obj> listComplains;
+    @OneToMany(mappedBy = "user")
+    private List<Order> listOrders = new ArrayList<Order>();;
+
+    @OneToMany(mappedBy = "user")
+    private List<Complain> listComplains = new ArrayList<Complain>();
 
 
 
@@ -69,14 +73,8 @@ public class User implements Serializable {
 //        this.mail = mail;
 //        this.expiryDate = expiryDate;
 //        this.discount=discount;
-//        this.listComplains=new ArrayList<>();
-//        this.listOrders=new ArrayList<>();
     }
     public User() {}
-
-//    public void addComplain(Complain_Obj complain) {listComplains.add(complain);}
-//
-//    public void addOrder(Order_Obj order) {listOrders.add(order);}
 
     public String getUserName() {
         return userName;
@@ -170,18 +168,23 @@ public class User implements Serializable {
         this.discount = discount;
     }
 
-//    public List<Order_Obj> getListOrders() {
-//        return listOrders;
-//    }
-//
-//    public void setListOrders(List<Order_Obj> listOrders) {
-//        this.listOrders = listOrders;
-//    }
-//
-//
-//    public List<Complain_Obj> getListComplains() {return listComplains;}
-//
-//    public void setListComplains(List<Complain_Obj> listComplains) {this.listComplains = listComplains;}
+    public void addComplain(Complain complain) {listComplains.add(complain);}
+
+    public void removeComplain(Complain complain){
+        listComplains.remove(complain);
+    }
+
+    public void removeOrder(Order order){
+        listOrders.remove(order);
+    }
+
+    public void addOrder(Order order) {listOrders.add(order);}
+
+    public List<Order> getListOrders() {
+        return listOrders;
+    }
+
+    public List<Complain> getListComplains() {return listComplains;}
 
 
 }

@@ -1,14 +1,7 @@
 package il.server;
 
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
-
-import il.entities.Employee;
-import il.entities.Flower;
+import il.entities.Product;
 import il.entities.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -17,16 +10,13 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-
 public class testDB {
     public static Session session;
 
     private static SessionFactory getSessionFactory() throws HibernateException {
         Configuration configuration = new Configuration();
         // Add ALL of your entities here. You can also try adding a whole package.
-        configuration.addAnnotatedClass(Flower.class).addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(Product.class).addAnnotatedClass(User.class);
         //configuration.addAnnotatedClass(Employee.class); //added this!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
@@ -37,27 +27,27 @@ public class testDB {
     }
 
     private static void generateItems()throws Exception{
-        Flower flower;
+        Product flower;
 
-        flower = new Flower("whiteroses", 20,true,25,"flower", "white");
+        flower = new Product("whiteroses", 20,true,25,"flower", "white");
         CatalogControl.saveNewFlower(flower,"src/main/resources/images/whiteroses.jpeg" );
 
-        flower = new Flower("sunflower", 23,true, 5, "flower", "yellow");
+        flower = new Product("sunflower", 23,true, 5, "flower", "yellow");
         CatalogControl.saveNewFlower(flower, "src/main/resources/images/sunflower.jpeg");
 
-        flower = new Flower("chinaFlower", 20,false, 0, "flower", "red");
+        flower = new Product("chinaFlower", 20,false, 0, "flower", "red");
         CatalogControl.saveNewFlower(flower, "src/main/resources/images/chinaFlower.jpeg");
 
-        flower = new Flower("pin", 20,false, 0,"flower", "pink");
+        flower = new Product("pin", 20,false, 0,"flower", "pink");
         CatalogControl.saveNewFlower(flower, "src/main/resources/images/pin.jpeg");
 
-        flower = new Flower("whiteroses", 20,true, 50, "flower", "white");
+        flower = new Product("whiteroses", 20,true, 50, "flower", "white");
         CatalogControl.saveNewFlower(flower, "src/main/resources/images/whiteroses.jpeg");
 
-        flower = new Flower("sunflower", 20,true, 50, "flower", "yellow");
+        flower = new Product("sunflower", 20,true, 50, "flower", "yellow");
         CatalogControl.saveNewFlower(flower, "src/main/resources/images/sunflower.jpeg");
 
-        flower = new Flower("Lotus", 100, true, 10,"flower","pink");
+        flower = new Product("Lotus", 100, true, 10,"flower","pink");
         CatalogControl.saveNewFlower(flower, "src/main/resources/images/Lotus.png");
 
 

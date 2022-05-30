@@ -1,18 +1,14 @@
 package il.server;
 
-import il.entities.Flower;
+import il.entities.Product;
 import il.entities.Message;
 import il.entities.User;
 import il.server.ocsf.ConnectionToClient;
 import il.server.ocsf.AbstractServer;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 
 import java.io.IOException;
-import java.util.Base64;
 import java.util.LinkedList;
-import java.util.List;
 
 public class SimpleServer extends AbstractServer {
 
@@ -62,7 +58,7 @@ public class SimpleServer extends AbstractServer {
 
             if (message.getMessage().equals("getCatalogItems")) {
                 sendMessage.setMessage("item catalog list");
-                sendMessage.setListItem((LinkedList<Flower>) CatalogControl.getAllItems());
+                sendMessage.setListItem((LinkedList<Product>) CatalogControl.getAllItems());
                 client.sendToClient(sendMessage);
                 System.out.println("send Flowers to catalog");
             }

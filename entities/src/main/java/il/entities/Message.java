@@ -10,8 +10,8 @@ public class Message implements Serializable {
         this.message = message;
     }
 
-    LinkedList<Flower> listItem=null;
-    Flower item=null;
+    LinkedList<Product> listItem=null;
+    Product item=null;
 
     User user=null;
 
@@ -183,19 +183,19 @@ public class Message implements Serializable {
         this.message = message;
     }
 
-    public LinkedList<Flower> getListItem() {
+    public LinkedList<Product> getListItem() {
         return listItem;
     }
 
-    public void setListItem(LinkedList<Flower> listItem) {
+    public void setListItem(LinkedList<Product> listItem) {
         this.listItem = listItem;
     }
 
-    public Flower getItem() {
+    public Product getItem() {
         return item;
     }
 
-    public void setItem(Flower item) {
+    public void setItem(Product item) {
         this.item = item;
     }
 
