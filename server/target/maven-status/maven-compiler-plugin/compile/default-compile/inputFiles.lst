@@ -1,0 +1,14 @@
+/Users/roieshahar/Desktop/הנדסת תוכנה/lilach/server/src/main/java/il/server/AppServer.java
+/Users/roieshahar/Desktop/הנדסת תוכנה/lilach/server/src/main/java/il/server/testDB.java
+/Users/roieshahar/Desktop/הנדסת תוכנה/lilach/server/src/main/java/il/server/ocsf/AbstractConnectionFactory.java
+/Users/roieshahar/Desktop/הנדסת תוכנה/lilach/server/src/main/java/il/server/ocsf/ConnectionToClient.java
+/Users/roieshahar/Desktop/הנדסת תוכנה/lilach/server/src/main/java/il/server/LoginControl.java
+/Users/roieshahar/Desktop/הנדסת תוכנה/lilach/server/src/main/java/il/server/RegisterControl.java
+/Users/roieshahar/Desktop/הנדסת תוכנה/lilach/server/src/main/java/module-info.java
+/Users/roieshahar/Desktop/הנדסת תוכנה/lilach/server/src/main/java/il/server/ocsf/ObservableServer.java
+/Users/roieshahar/Desktop/הנדסת תוכנה/lilach/server/src/main/java/il/server/ocsf/AdaptableServer.java
+/Users/roieshahar/Desktop/הנדסת תוכנה/lilach/server/src/main/java/il/server/SimpleServer.java
+/Users/roieshahar/Desktop/הנדסת תוכנה/lilach/server/src/main/java/il/server/CatalogControl.java
+/Users/roieshahar/Desktop/הנדסת תוכנה/lilach/server/src/main/java/il/server/ocsf/OriginatorMessage.java
+/Users/roieshahar/Desktop/הנדסת תוכנה/lilach/server/src/main/java/il/server/ocsf/ObservableOriginatorServer.java
+/Users/roieshahar/Desktop/הנדסת תוכנה/lilach/server/src/main/java/il/server/ocsf/AbstractServer.java
