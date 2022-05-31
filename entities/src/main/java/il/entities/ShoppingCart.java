@@ -16,7 +16,7 @@ public class ShoppingCart implements Serializable {
     private double sum;
     private double sumAfterSale;
 
-    @OneToMany
+    @OneToMany(mappedBy = "cart")
     private List<CartProduct> listProducts = new ArrayList<CartProduct>();
 
     public ShoppingCart() {

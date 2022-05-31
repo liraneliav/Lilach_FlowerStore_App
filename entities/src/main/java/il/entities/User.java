@@ -3,11 +3,12 @@ package il.entities;
 
 
 
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 //@Inheritance(strategy = InheritanceType.JOINED) // not must
@@ -36,6 +37,9 @@ public class User implements Serializable {
 
     @OneToMany(mappedBy = "user")
     private List<Complain> listComplains = new ArrayList<Complain>();
+
+    @ManyToMany(mappedBy = "users")
+    private Set<Store> listStores = new HashSet<>();
 
 
 

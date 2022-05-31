@@ -11,15 +11,16 @@ public class Complain {
 
     @ManyToOne
     private User user;
-    private String storeID;
+    @ManyToOne
+    private Store store;
     private String date;
     private double answer;
     private boolean isHandle;
     private String complain;
 
-    public Complain(User user, String storeID, String date, double answer, boolean isHandle, String complain) {
+    public Complain(User user, Store store, String date, double answer, boolean isHandle, String complain) {
         this.user = user;
-        this.storeID = storeID;
+        this.store = store;
         this.date = date;
         this.answer = answer;
         this.isHandle = isHandle;
@@ -45,12 +46,12 @@ public class Complain {
         this.user = user;
     }
 
-    public String getStoreID() {
-        return storeID;
+    public Store getStoreID() {
+        return store;
     }
 
-    public void setStoreID(String storeID) {
-        this.storeID = storeID;
+    public void setStoreID(Store store) {
+        this.store = store;
     }
 
     public String getDate() {

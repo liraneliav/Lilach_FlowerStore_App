@@ -1,6 +1,10 @@
-il/entities/Flower.class
-il/entities/User.class
 il/entities/Employee.class
 il/entities/Message.class
-il/entities/Product_Obj.class
+il/entities/Complain.class
 module-info.class
+il/entities/Order.class
+il/entities/ShoppingCart.class
+il/entities/User.class
+il/entities/Product.class
+il/entities/CartProduct.class
+il/entities/Store.class

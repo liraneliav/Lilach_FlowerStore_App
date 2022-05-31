@@ -13,6 +13,12 @@ public class Order {
     @ManyToOne
     private User user;
 
+    @ManyToOne
+    private Complain complain;
+
+    @ManyToOne
+    private Store store;
+
     private String dateReceive;
     private String timeReceive;
     private String dateOrder;
@@ -34,9 +40,27 @@ public class Order {
         this.nameReceives = nameReceives;
         this.phoneReceives = phoneReceives;
         this.address = address;
+        this.complain = null;
     }
 
     public Order() {}
+
+    public Complain getComplain() {
+        return complain;
+    }
+
+    public void setComplain(Complain complain) {
+        this.complain = complain;
+    }
+
+    public String getPhoneReceives() {
+        return phoneReceives;
+    }
+
+    public void setPhoneReceives(String phoneReceives) {
+        this.phoneReceives = phoneReceives;
+    }
+
 
     public int getId() {
         return id;

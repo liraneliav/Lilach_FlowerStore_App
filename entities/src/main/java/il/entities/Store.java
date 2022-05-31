@@ -1,52 +1,79 @@
 package il.entities;
 
+
+
+
+
+
+
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="stores")
-public class Store_Obj {
+public class Store {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int managerID;
     private String address;
-    @ManyToMany
-    private List<Employee> listEmployees=new ArrayList<Employee>();;
-    @ManyToMany
-    private List<User> listUsers=new ArrayList<User>();;
-    @ManyToMany
-    private List<Order> listOrders=new ArrayList<Order>();;
-    @ManyToMany
-    private List<Complain> listComplains=new ArrayList<Complain>();;
 
-    /*
+
     @ManyToMany
-    @JoinTable(name = "stores_Employee_Obj",
-            joinColumns = @JoinColumn(name = "store_Obj_id", referencedColumnName = "employee_Obj_id"))
+    private List<Employee> listEmployees=new ArrayList<Employee>();
 
-     */
-    public Store_Obj() {}
+    @OneToMany(mappedBy = "store")
+    private List<Employee> listEmployee=new ArrayList<Employee>();
 
-    public Store_Obj(int managerID, String address) {
+    @ManyToMany
+    @JoinTable(
+            name = "stores_users",
+            joinColumns = @JoinColumn(name = "stores_id"),
+            inverseJoinColumns = @JoinColumn(name = "users_id"))
+    private Set<User> users=new HashSet<>();
+
+    @OneToMany(mappedBy = "store")
+    private List<Order> listOrders=new ArrayList<Order>();
+
+    @OneToMany(mappedBy = "store")
+    private List<Complain> listComplains=new ArrayList<Complain>();
+
+
+    public Store() {}
+
+    public Store(int managerID, String address) {
         this.managerID = managerID;
         this.address = address;
     }
 
-
     public void addEmployee(Employee employee) {
         listEmployees.add(employee);
+    }
+    public void removeEmployee(Employee employee) {
+        listEmployees.remove(employee);
     }
     public void addOrder(Order order) {
         listOrders.add(order);
     }
+    public void removeOrder(Order order) {
+        listOrders.remove(order);
+    }
     public void addComplain(Complain complain) {
         listComplains.add(complain);
     }
-    public void addUser(User user) {
-        listUsers.add(user);
+    public void removeComplain(Complain complain) {
+        listComplains.remove(complain);
     }
+//    public void addUser(User user) {
+//        listUsers.add(user);
+//    }
+//    public void removeUser(User user){
+//        listUsers.remove(user);
+//    }
 
     public int getId() {
         return id;
@@ -80,13 +107,13 @@ public class Store_Obj {
         this.listEmployees = listEmployees;
     }
 
-    public List<User> getListUsers() {
-        return listUsers;
-    }
-
-    public void setListUsers(List<User> listUsers) {
-        this.listUsers = listUsers;
-    }
+//    public List<User> getListUsers() {
+//        return listUsers;
+//    }
+//
+//    public void setListUsers(List<User> listUsers) {
+//        this.listUsers = listUsers;
+//    }
 
     public List<Order> getListOrders() {
         return listOrders;
