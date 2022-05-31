@@ -2,13 +2,13 @@ package il.client;
 
 
 
-import il.client.ocsf.AbstractClient;
-import il.entities.Flower;
-import il.entities.Message;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.IOException;
+import il.client.events.*;
+import il.client.ocsf.AbstractClient;
+import il.entities.Product;
+import il.entities.Message;
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.*;
 
 public class SimpleClient extends AbstractClient {
@@ -19,44 +19,26 @@ public class SimpleClient extends AbstractClient {
 		super(host, port);
 	}
 
-	private String lastMessage;
-
-	private ParentClass parentClass = null;
-
 	@Override
-	protected void handleMessageFromServer(Object msg) throws IOException {
+	protected void handleMessageFromServer(Object msg){
 		Message message = (Message) msg;
 		System.out.println("get message from server: "+ message.getMessage());
 
+
 		if(message.getMessage().equals("item catalog list")){
-			ParentClass p = new CatalogController();
-			System.out.println("Show flower's catalog!");
-			p.setFlowerlist(message.getListItem());
+			System.out.println("get Flower object!");
+			List<Product> items = message.getListItem();
+			EventBus.getDefault().post(new CatalogItemsEvent(items));
 		}
 
-		else if(message.getMessage().equals("result login")){
-			if(message.getUser()!=null){
-				LoginController.setCorrectLogin(true);
-			}
-			else{
-				LoginController.setCorrectLogin(false);
-			}
+		if(message.getMessage().equals("result login")){
+			EventBus.getDefault().post(new LoginEvent(message.isLoginStatus(), message.getLoginResult(), message.getUsername()));
 		}
 
-		else if(message.getMessage().equals("result register")){
-			if(message.getMessageDescribe().equals("All data is good")) {
-				System.out.println("your register was successful");
-//				ParentClass p = new MainPageController();
-//				MainPageController.LoadLoginPage();
-				ParentClass p = new RegisterController();
-				p.registerComplit();
-			}
-			else
-				System.out.println("you register was not successful");
-			// need to send message describe to controller then show on screen;
+		if(message.getMessage().equals("result register")){
+			EventBus.getDefault().post(new RegisterEvent(message.isRegisterStatus(), message.getRegisterResult()));
 		}
 
-		return;
 	}
 	
 	public static SimpleClient getClient() {

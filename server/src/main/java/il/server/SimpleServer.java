@@ -1,25 +1,21 @@
 package il.server;
 
-import il.entities.Flower;
+import il.entities.Product;
 import il.entities.Message;
 import il.entities.User;
 import il.server.ocsf.ConnectionToClient;
 import il.server.ocsf.AbstractServer;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 
 import java.io.IOException;
-import java.util.Base64;
 import java.util.LinkedList;
-import java.util.List;
 
 public class SimpleServer extends AbstractServer {
 
     public SimpleServer(int port) throws Exception {
         super(port);
         System.out.println("Server listen on port:" + port);
-//        testDB.initMySQL();
+   //    testDB.initMySQL();
     }
 
     public void closeServer() throws IOException {
@@ -32,6 +28,7 @@ public class SimpleServer extends AbstractServer {
     protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
         try {
             Message message  = (Message) msg;
+
             Message sendMessage = new Message("");
 
             if(message.getMessage().equals("login")){
@@ -39,93 +36,91 @@ public class SimpleServer extends AbstractServer {
                 String pass = message.getPass();
                 boolean isWorker = message.isWorker();
 
-                User logInUser = LoginControl.tryLogIn(username, pass, isWorker);
+                String result = LoginControl.checkLogin(username, pass, isWorker);
 
-                if (logInUser!=null){
+                if (result.equals("")){
                     System.out.println("successfully! login: "+ username);
 
                     sendMessage.setMessage("result login");
-                    sendMessage.setUser(logInUser);
+                    sendMessage.setLoginStatus(true);
+                    sendMessage.setUsername(username);
+                    sendMessage.setLoginResult("login was successful");
                     client.sendToClient(sendMessage);
                 }
                 else{
                     System.out.println("faild! login: "+ username);
                     sendMessage.setMessage("result login");
-                    sendMessage.setUser(null);
+                    sendMessage.setLoginStatus(false);
+                    sendMessage.setLoginResult(result);
                     client.sendToClient(sendMessage);
                 }
             }
 
-
             if (message.getMessage().equals("getCatalogItems")) {
                 sendMessage.setMessage("item catalog list");
-                sendMessage.setListItem((LinkedList<Flower>) CatalogControl.getAllItems());
+                sendMessage.setListItem((LinkedList<Product>) CatalogControl.getAllItems());
                 client.sendToClient(sendMessage);
                 System.out.println("send Flowers to catalog");
             }
-            if(message.getMessage().equals("setPrice")){
+
+            if(message.getMessage().equals("setPriceItem")){
                 int id = message.getIdItem();
                 double price = message.getNewPrice();
                 CatalogControl.setPrice(id, price);
             }
-//            if(message.getMessage().equals("setImages")){
-//                int id = cmd.getInt("id");
-//                String bytes64 = cmd.getString("newImage");
-//                byte[] bFile = Base64.getDecoder().decode(bytes64);
-//                CatalogControl.setImage(id, bFile);
-//            }
 
+            if(message.getMessage().equals("logout")){
+                String username = message.getUsername();
+                LoginControl.setToDiactive(username);
+            }
+
+            if(message.getMessage().equals("setImagesItem")){
+                CatalogControl.setImage(message.getIdProduct(), message.getbFile());
+            }
 
             if(message.getMessage().equals("register")){
                 String username = message.getUsername();
                 String name = message.getName();
                 String pass = message.getPass();
-                String identifyNumbers = message.getId();
+                String id = message.getId();
                 String credit_card = message.getCredit_card();
-                String plan = message.getPlan();
-                int status = message.getStatus();
-                User newUser = new User(username, pass, credit_card, plan, name, identifyNumbers, status);
+                String plan = sendMessage.getPlan();
+
+                User newUser = new User(username, pass,credit_card, plan, name, id);
                 System.out.println("get register request:" + username);
 
-                int result = RegisterControl.checknewUser(newUser);
-                switch (result){
-                    case 1:{
-                        System.out.println("User name " + username+" has been used");
-                        sendMessage.setMessageDescribe("User has been used");
-                        sendMessage.setMessage("result register");
-                        client.sendToClient(sendMessage);
-                        break;
+                String result = RegisterControl.checknewUser(newUser);
+
+
+                if(result.equals("")){
+                    if(RegisterControl.register(newUser)){
+                        sendMessage.setRegisterStatus(true);
+                        sendMessage.setRegisterResult("user as been register!");
                     }
-                    case 2:{
-                        System.out.println("ID " + identifyNumbers+" has been used");
-                        sendMessage.setMessageDescribe("ID has been used");
-                        sendMessage.setMessage("result register");
-                        client.sendToClient(sendMessage);
-                        break;
-                    }
-                    case 3:{
-                        System.out.println("credit_card " + credit_card+" is frozen");
-                        sendMessage.setMessageDescribe("credit_card belong to frozen account");
-                        sendMessage.setMessage("result register");
-                        client.sendToClient(sendMessage);
-                        break;
-                    }
-                    case 0:{
-                        System.out.println("All data is good");
-                        boolean registerProblam = RegisterControl.register(newUser);
-                        if (registerProblam) {
-                            sendMessage.setMessageDescribe("All data is good");
-                            sendMessage.setMessage("result register");
-                            client.sendToClient(sendMessage);
-                        }
-                        else
-                            sendMessage.setMessageDescribe("problem with database");
-                            sendMessage.setMessage("result register");
-                            client.sendToClient(sendMessage);
-                        break;
+                    else{
+                        sendMessage.setRegisterStatus(false);
+                        sendMessage.setRegisterResult("Error: somethings wrong with the database.");
                     }
                 }
+                else{
+                    sendMessage.setRegisterStatus(false);
+                    sendMessage.setRegisterResult(result);
+                }
 
+                sendMessage.setMessage("result register");
+                client.sendToClient(sendMessage);
+            }
+
+            if(message.getMessage().equals("setNameItem")){
+                CatalogControl.setName(message.getIdProduct(), message.getNameProduct());
+            }
+
+            if(message.getMessage().equals("setSaleItem")){
+                CatalogControl.setSale(message.getIdProduct(), message.isSale(), message.getDiscountPer());
+            }
+
+            if(message.getMessage().equals("deleteItem")){
+                CatalogControl.deleteItem(message.getIdProduct());
             }
 
 

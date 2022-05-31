@@ -6,16 +6,12 @@ import java.util.LinkedList;
 public class Message implements Serializable {
     String message;
 
-
-
-    String messageDescribe;
-
     public Message(String message){
         this.message = message;
     }
 
-    LinkedList<Flower> listItem=null;
-    Flower item=null;
+    LinkedList<Product> listItem=null;
+    Product item=null;
 
     User user=null;
 
@@ -31,14 +27,97 @@ public class Message implements Serializable {
     String plan;
     String name;
 
+    //recive login
+    boolean loginStatus;
+    String loginResult;
 
-
-    int status;
+    //recive register
     boolean registerStatus;
+    String registerResult;
 
     //setPrice
     int idItem;
     double newPrice;
+
+    //setProduct
+    byte[] bFile;
+    double price;
+    String nameProduct;
+    int idProduct;
+    boolean sale;
+    double discountPer;
+
+    public boolean isSale() {
+        return sale;
+    }
+
+    public void setSale(boolean sale) {
+        this.sale = sale;
+    }
+
+    public double getDiscountPer() {
+        return discountPer;
+    }
+
+    public void setDiscountPer(double discountPer) {
+        this.discountPer = discountPer;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getNameProduct() {
+        return nameProduct;
+    }
+
+    public void setNameProduct(String nameProduct) {
+        this.nameProduct = nameProduct;
+    }
+
+    public int getIdProduct() {
+        return idProduct;
+    }
+
+    public void setIdProduct(int idProduct) {
+        this.idProduct = idProduct;
+    }
+    public byte[] getbFile() {
+        return bFile;
+    }
+
+    public void setbFile(byte[] bFile) {
+        this.bFile = bFile;
+    }
+
+    public boolean isLoginStatus() {
+        return loginStatus;
+    }
+
+    public void setLoginStatus(boolean loginStatus) {
+        this.loginStatus = loginStatus;
+    }
+
+    public String getLoginResult() {
+        return loginResult;
+    }
+
+    public void setLoginResult(String loginResult) {
+        this.loginResult = loginResult;
+    }
+
+    public String getRegisterResult() {
+        return registerResult;
+    }
+
+    public void setRegisterResult(String registerResult) {
+        this.registerResult = registerResult;
+    }
+
 
 
     public boolean isRegisterStatus() {
@@ -104,19 +183,19 @@ public class Message implements Serializable {
         this.message = message;
     }
 
-    public LinkedList<Flower> getListItem() {
+    public LinkedList<Product> getListItem() {
         return listItem;
     }
 
-    public void setListItem(LinkedList<Flower> listItem) {
+    public void setListItem(LinkedList<Product> listItem) {
         this.listItem = listItem;
     }
 
-    public Flower getItem() {
+    public Product getItem() {
         return item;
     }
 
-    public void setItem(Flower item) {
+    public void setItem(Product item) {
         this.item = item;
     }
 
@@ -152,19 +231,4 @@ public class Message implements Serializable {
         isWorker = worker;
     }
 
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public String getMessageDescribe() {
-        return messageDescribe;
-    }
-
-    public void setMessageDescribe(String messageDescribe) {
-        this.messageDescribe = messageDescribe;
-    }
 }

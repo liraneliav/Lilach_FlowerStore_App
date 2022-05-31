@@ -8,18 +8,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import il.client.SimpleClient;
 import javafx.stage.StageStyle;
-import org.kordamp.bootstrapfx.BootstrapFX;
-import org.kordamp.bootstrapfx.scene.layout.Panel;
+//import org.kordamp.bootstrapfx.BootstrapFX;
+//import org.kordamp.bootstrapfx.scene.layout.Panel;
 
 import java.io.IOException;
 
 public class App extends Application {
     private SimpleClient client = null;
 
-    public static String ip = "127.0.0.1";
+    public static String ip = "132.74.210.7";
     public static int port = 3000;
 
     @Override
@@ -31,11 +32,14 @@ public class App extends Application {
 
             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("MainPage.fxml"));
             Parent mainLayout = fxmlLoader.load();
-            Scene scene = new Scene(mainLayout, 1280, 720);
-            scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
-            stage.setTitle("Catalog");
+            Scene scene = new Scene(mainLayout, 1300, 800);
+            stage.setTitle("Lilach");
+            MainPageController.getInstance().setStage(stage);
+
+            scene.setFill(Color.TRANSPARENT);
+            stage.initStyle(StageStyle.TRANSPARENT);
             stage.setScene(scene);
-            stage.initStyle(StageStyle.DECORATED);
+//            stage.initStyle(StageStyle.UNDECORATED);
             stage.show();
         }
         catch (Exception e){

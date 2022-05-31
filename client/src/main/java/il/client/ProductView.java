@@ -2,9 +2,7 @@ package il.client; /**
  * Sample Skeleton for 'ProductView.fxml' Controller Class
  */
 
-
-import il.client.DiffClasses.Priority;
-import il.entities.Flower;
+import il.entities.Product;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +14,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -52,11 +49,12 @@ public class ProductView extends ParentClass{
 
     private String id_of_flower;
 
+    private int clicks_image=0;
 
     URL root = getClass().getResource("PopWindow.fxml");
 
 
-    public void setData(Flower a) throws IOException {
+    public void setData(Product a) throws IOException {
         product_price.setText(String.valueOf(a.getPrice()));
         product_name.setText(a.getName());
 
@@ -69,39 +67,64 @@ public class ProductView extends ParentClass{
             this.discount_logo.setVisible(true);
             this.product_price.setText(String.valueOf((int)(a.getPrice() - (a.getPrice()*this.discound_precentage)/100)));
         }
-        this.id_of_flower = a.getId();
+        this.id_of_flower = String.valueOf(a.getId());
     }
 
     @FXML
     void initialize(){
-        switch(priority.getPriority_level()){
+        System.out.println(UserClient.getInstance().getPriority());
+        switch(UserClient.getInstance().getPriority()){
             case 1: {
-                this.update_product_button.setDisable(true);
-                this.update_product_button.setVisible(false);
+                setPriorityBtnLowerThan2();
+                this.atc_product_button.setDisable(true);
+                this.atc_product_button.setVisible(false);
             } break;
             case 2: {
-                this.update_product_button.setVisible(true);
-                this.update_product_button.setDisable(false);
+                setPriorityBtnLowerThan2();
+                this.atc_product_button.setDisable(false);
+                this.atc_product_button.setVisible(true);
             } break;
             case 3: {
-
+                int i;
+                setPriorityBtnHigherThan2();
+                /*maybe do more*/
             } break;
             case 4: {
-
+                setPriorityBtnHigherThan2();
             } break;
 
         }
     }
 
+    public void setPriorityBtnHigherThan2(){
+        this.update_product_button.setDisable(false);
+        this.update_product_button.setVisible(true);
+        this.atc_product_button.setDisable(true);
+    }
+    public void setPriorityBtnLowerThan2(){
+        this.update_product_button.setDisable(true);
+        this.update_product_button.setVisible(false);
+    }
 
     @FXML
-    void ClickedImage(MouseEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(this.root);
-        Parent pop_window = fxmlLoader.load();    // need to load before using controller.
-        PopWindow controller = fxmlLoader.getController();
-        controller.FullSetter(this.getId(), this.product_name.getText(),this.product_price.getText(), this.on_discount, this.product_image.getImage());
-        cat_controller.setSide_pic_anchorpane(pop_window);
+    void ClickedImage(MouseEvent event) throws IOException, ClassNotFoundException, InterruptedException {
+        clicks_image++;
+        if(clicks_image%2==1) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(this.root);
+            Parent pop_window = fxmlLoader.load();    // need to load before using controller.
+            PopWindow controller = fxmlLoader.getController();
+            controller.FullSetter(this.getId(), this.product_name.getText(), this.product_price.getText(), this.on_discount, this.product_image.getImage());
+            cat_controller.setAnchorpang2Visibale();
+            cat_controller.setProductsAnchorpane2();
+            cat_controller.setSide_pic_anchorpane2(pop_window);
+            clicks_image=1;
+        }
+        else{
+            cat_controller.setAnchorpang2NotVisibale();
+        }
+
+
     }
 
     @FXML
@@ -122,19 +145,18 @@ public class ProductView extends ParentClass{
     void setNewPrice(String price){
         this.product_price.setText(price);
     }
+
     @FXML
     void AddProductToCart(ActionEvent event) throws IOException {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("AddToCart.fxml"));
-        Parent root = fxmlLoader.load();    // need to load before using controller.
-        AddToCartController controller = fxmlLoader.getController();
-        Scene scene = new Scene(root, 330, 31);
+        fxmlLoader.setLocation(getClass().getResource("CartAdder.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 330, 330);
+        CartAdderController CartController = fxmlLoader.getController();
         stage.setTitle("Add To Cart Section");
         stage.setScene(scene);
         stage.show();
-        controller.setStage(stage);
     }
 
 

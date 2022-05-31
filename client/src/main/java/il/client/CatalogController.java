@@ -1,8 +1,8 @@
 package il.client;
 
-import il.client.ProductView;
-import il.client.SimpleClient;
-import il.entities.Flower;
+import il.client.events.CatalogItemsEvent;
+import il.entities.Product;
+import io.github.palexdev.materialfx.controls.MFXScrollPane;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,18 +10,17 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
-import org.json.JSONException;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class CatalogController extends ParentClass{
 
@@ -41,72 +40,140 @@ public class CatalogController extends ParentClass{
     @FXML
     private AnchorPane catalog_main_anchorpane;
 
+
+    @FXML
+    private AnchorPane catalog_anchorpane2;
+
+    @FXML
+    private GridPane gridPane2;
+
+
+    @FXML
+    private MFXScrollPane scrollPane2;
+
+
+    @FXML
+    private AnchorPane side_pic_anchorpane2;
+
     private FXMLLoader my_fxml_loader;
 
-//    private static List<Flower> flowerlist=null;
+    private static List<Product> flowerlist=null;
 
     private MainPageController main_page_holder;
 
-//    public static List<Flower> getFlowerlist() {
-//        return flowerlist;
-//    }
+    private LinkedList<Node> flowersFXML;
+
+    public static List<Product> getFlowerlist() {
+        return flowerlist;
+    }
+
+    public static void setFlowerlist(List<Product> flowerlist1) {
+        flowerlist = flowerlist1;
+    }
+
+    @Subscribe
+    public void setFlowerlist(CatalogItemsEvent event) throws IOException {
+        Platform.runLater(()->{
+                    flowerlist = event.getItems();
+                    int col = 0;
+                    int row = 0;
+
+                    URL path = getClass().getResource("ProductView.fxml");
 
 
-//    private void createf() throws IOException, ClassNotFoundException, InterruptedException, JSONException {
-//        JSONObject cmd = new JSONObject();
-//        cmd.put("command", "getCatalogItems");
-//        SimpleClient.getClient().sendToServer(cmd.toString());
-//        TimeUnit.MILLISECONDS.sleep(200);//need to wait to the server, need to use lock
-//    }
+                    for(int i=0; i<flowerlist.size();i++){
+                        my_fxml_loader = new FXMLLoader();
+                        my_fxml_loader.setLocation(path);//change secondary.fxml to the fxml file from dean and liran
+                        Node node = null;
+                        try {
+                            node = my_fxml_loader.load();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        //     flowersFXML.add(node);
+                        ProductView controller = my_fxml_loader.getController();
+                        controller.setCat_controller(this);
+                        try {
+                            controller.setData(flowerlist.get(i));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        if(col==3){
+                            col=0;
+                            row++;
+                        }
+
+                        GridPane.setConstraints(node,col++,row);
+                        gridPane.getChildren().addAll(node);
+
+                        gridPane.setMinWidth(Region.USE_COMPUTED_SIZE);
+                        gridPane.setPrefWidth(Region.USE_COMPUTED_SIZE);
+                        gridPane.setMaxWidth(Region.USE_COMPUTED_SIZE);
+                        gridPane.setMinHeight(Region.USE_COMPUTED_SIZE);
+                        gridPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
+                        gridPane.setMaxHeight(Region.USE_COMPUTED_SIZE);
+
+                        GridPane.setMargin(node, new Insets(10));
+                    }
+                    scrollPane.setContent(this.gridPane);
+                }
+                );
+
+    }
+
 
     @FXML  // This method is called by the FXMLLoader when initialization is complete
-    void initialize() throws IOException, ClassNotFoundException, InterruptedException, JSONException {
-        //get connection to the server
+    void initialize() throws IOException, ClassNotFoundException, InterruptedException {
+        EventBus.getDefault().register(this);
         CatalogControl.getItemsList();
     }
-    @FXML
-    @Override
-    protected void setFlowerlist(List<Flower> flowerlist) throws IOException {
 
-//        Platform.runLater(() -> {
-            int col = 0;
-            int row = 0;
+    public void setAnchorpang2Visibale(){
+        this.catalog_anchorpane2.setVisible(true);
+    }
 
-            URL path = getClass().getResource("ProductView.fxml");
+    public void setAnchorpang2NotVisibale(){
+        this.catalog_anchorpane2.setVisible(false);
+    }
 
+    public void setProductsAnchorpane2() throws IOException, ClassNotFoundException, InterruptedException {
+        //get connection to the server
 
-            for (int i = 0; i < flowerlist.size(); i++) {
-                my_fxml_loader = new FXMLLoader();
-                my_fxml_loader.setLocation(path);//change secondary.fxml to the fxml file from dean and liran
-                Node node = null;
-                node = my_fxml_loader.load();
+//        CatalogControl.getItemsList();
 
-                ProductView controller = my_fxml_loader.getController();
-                controller.setCat_controller(this);
-                    controller.setData(flowerlist.get(i));
+        int col = 0;
+        int row = 0;
 
-                if (col == 2) {
-                    col = 0;
-                    row++;
-                }
+        URL path = getClass().getResource("ProductView.fxml");
+        scrollPane2.setContent(null);
+        gridPane2.getChildren().removeAll();
+        for(int i=0; i<flowerlist.size();i++){
+            my_fxml_loader = new FXMLLoader();
+            my_fxml_loader.setLocation(path);//change secondary.fxml to the fxml file from dean and liran
+            Node node = my_fxml_loader.load();
+            ProductView controller = my_fxml_loader.getController();
+            controller.setCat_controller(this);
+            controller.setData(flowerlist.get(i));
 
-//            scrollPane.setContent(node);
-                GridPane.setConstraints(node, row, col++);
-//            GridPane.setColumnIndex(node,i);
-//            GridPane.setRowIndex();
-                gridPane.getChildren().addAll(node);
-
-//            gridPane.setMinWidth(Region.USE_COMPUTED_SIZE);
-//            gridPane.setPrefWidth(Region.USE_COMPUTED_SIZE);
-//            gridPane.setMaxWidth(Region.USE_COMPUTED_SIZE);
-//            gridPane.setMinHeight(Region.USE_COMPUTED_SIZE);
-//            gridPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
-//            gridPane.setMaxHeight(Region.USE_COMPUTED_SIZE);
-
-//            GridPane.setMargin(node, new Insets(10));
+            if(col==2){
+                col=0;
+                row++;
             }
-            scrollPane.setContent(this.gridPane);
-//        });
+
+            GridPane.setConstraints(node,col++,row);
+            gridPane2.getChildren().addAll(node);
+
+            gridPane2.setMinWidth(Region.USE_COMPUTED_SIZE);
+            gridPane2.setPrefWidth(Region.USE_COMPUTED_SIZE);
+            gridPane2.setMaxWidth(Region.USE_COMPUTED_SIZE);
+            gridPane2.setMinHeight(Region.USE_COMPUTED_SIZE);
+            gridPane2.setPrefHeight(Region.USE_COMPUTED_SIZE);
+            gridPane2.setMaxHeight(Region.USE_COMPUTED_SIZE);
+
+            GridPane.setMargin(node, new Insets(10));
+        }
+        scrollPane2.setContent(this.gridPane2);
     }
 
 
@@ -120,6 +187,12 @@ public class CatalogController extends ParentClass{
         this.side_pic_anchorpane.setVisible(true);
     }
 
+    public void setSide_pic_anchorpane2(Parent side_pic) {
+        this.side_pic_anchorpane2.getChildren().clear();
+        this.side_pic_anchorpane2.getChildren().addAll(side_pic);
+        this.side_pic_anchorpane2.setVisible(true);
+    }
+
     public AnchorPane getCatalog_main_anchorpane() {
         return catalog_main_anchorpane;
     }
@@ -127,4 +200,7 @@ public class CatalogController extends ParentClass{
     public void setMain_page_holder(MainPageController main_page_holder) {
         this.main_page_holder = main_page_holder;
     }
+
+
+
 }
