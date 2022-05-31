@@ -26,6 +26,7 @@ public class Message implements Serializable {
     String credit_card;
     String plan;
     String name;
+    int iDstore;
 
     //recive login
     boolean loginStatus;

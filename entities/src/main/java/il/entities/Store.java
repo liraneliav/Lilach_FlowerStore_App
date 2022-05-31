@@ -1,43 +1,49 @@
 package il.entities;
 
+import org.hibernate.boot.jaxb.hbm.spi.NativeQueryNonScalarRootReturn;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name="stores")
-public class Store_Obj {
+public class Store {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int managerID;
+    @OneToOne
+    private BranchManager manager;
     private String address;
-    @ManyToMany
-    private List<Employee> listEmployees=new ArrayList<Employee>();;
-    @ManyToMany
-    private List<User> listUsers=new ArrayList<User>();;
-    @ManyToMany
-    private List<Order> listOrders=new ArrayList<Order>();;
-    @ManyToMany
-    private List<Complain> listComplains=new ArrayList<Complain>();;
 
-    /*
-    @ManyToMany
-    @JoinTable(name = "stores_Employee_Obj",
-            joinColumns = @JoinColumn(name = "store_Obj_id", referencedColumnName = "employee_Obj_id"))
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
+    private List<StoreEmployee> listEmployees;
 
-     */
-    public Store_Obj() {}
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "liststore")
+    private List<User> listUsers;
 
-    public Store_Obj(int managerID, String address) {
-        this.managerID = managerID;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
+    private List<Order> listOrders;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
+    private List<Complain> listComplains;
+
+
+    public Store() {}
+
+    public Store(String address) {
         this.address = address;
+        this.listEmployees=new ArrayList<StoreEmployee>();
+        this.listUsers=new ArrayList<User>();
+        this.listOrders=new ArrayList<Order>();
+        this.listComplains=new ArrayList<Complain>();
+
     }
 
 
-    public void addEmployee(Employee employee) {
-        listEmployees.add(employee);
-    }
+//    public void addEmployee(Employee employee) {
+//        listEmployees.add(employee);
+//    }
     public void addOrder(Order order) {
         listOrders.add(order);
     }
@@ -56,12 +62,12 @@ public class Store_Obj {
         this.id = id;
     }
 
-    public int getManagerID() {
-        return managerID;
+    public BranchManager getManager() {
+        return manager;
     }
 
-    public void setManagerID(int managerID) {
-        this.managerID = managerID;
+    public void setManager(BranchManager manager) {
+        this.manager = manager;
     }
 
     public String getAddress() {
@@ -72,11 +78,11 @@ public class Store_Obj {
         this.address = address;
     }
 
-    public List<Employee> getListEmployees() {
+    public List<StoreEmployee> getListEmployees() {
         return listEmployees;
     }
 
-    public void setListEmployees(List<Employee> listEmployees) {
+    public void setListEmployees(List<StoreEmployee> listEmployees) {
         this.listEmployees = listEmployees;
     }
 

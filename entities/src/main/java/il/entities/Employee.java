@@ -1,14 +1,11 @@
 package il.entities;
 
-import java.io.*;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-@Table(name = "employee")
 public class Employee implements Serializable{
 
     @Id
@@ -20,14 +17,14 @@ public class Employee implements Serializable{
     private String username;
     private String identifyNumbers;
 
+
     public Employee(){}
 
-    public Employee(String name, String username, String pass, int permission, String store){
+    public Employee(String name, String username, String pass, int permission){
         this.name = name;
         this.username =username;
         this.password =pass;
         this.permission = permission; // 1:= system admin, 2:= store wide manager 3:= shop manager, 4:= service employee, 5: shop employee
-        //this.store = store;
     }
 
     /* gets and sets*/

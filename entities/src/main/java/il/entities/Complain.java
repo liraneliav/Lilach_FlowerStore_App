@@ -3,27 +3,31 @@ package il.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name="complains")
+@Table(name = "complain")
 public class Complain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
+    @ManyToOne (targetEntity = User.class)
     private User user;
-    private String storeID;
+
+    @ManyToOne
+    private Store store;
+    @Column(name = "complain_date")
     private String date;
     private double answer;
     private boolean isHandle;
-    private String complain;
+    private String complain_data;
 
-    public Complain(User user, String storeID, String date, double answer, boolean isHandle, String complain) {
-        this.user = user;
-        this.storeID = storeID;
+
+    public Complain(User user, String date, double answer, boolean isHandle, String complain) {
+        this.user= user;
         this.date = date;
         this.answer = answer;
         this.isHandle = isHandle;
-        this.complain = complain;
+        this.complain_data = complain;
+
     }
 
     public Complain() {}
@@ -45,12 +49,12 @@ public class Complain {
         this.user = user;
     }
 
-    public String getStoreID() {
-        return storeID;
+    public Store getStore() {
+        return store;
     }
 
-    public void setStoreID(String storeID) {
-        this.storeID = storeID;
+    public void setStore(Store store) {
+        this.store = store;
     }
 
     public String getDate() {
@@ -78,10 +82,10 @@ public class Complain {
     }
 
     public String getComplain() {
-        return complain;
+        return complain_data;
     }
 
     public void setComplain(String complain) {
-        this.complain = complain;
+        this.complain_data = complain;
     }
 }

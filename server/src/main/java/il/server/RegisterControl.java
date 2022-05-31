@@ -1,10 +1,12 @@
 package il.server;
 
+import il.entities.Product;
 import il.entities.User;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,6 +25,17 @@ public class RegisterControl {
         testDB.closeSession();
         return listItems;
     }
+
+
+//    public static void setStore(int id) throws IOException {
+//        if (id -1)   add to all store;
+//        testDB.openSssion();
+//        Product a = testDB.session.get(Store_Obj, id);
+//        a.setPrice(newPrice);
+//        testDB.session.flush();
+//        testDB.session.getTransaction().commit(); // Save everything.
+//        testDB.closeSession();
+//    }
 
     public static String checknewUser(User newUser){
         List<User> lUsers = getAllUsers();

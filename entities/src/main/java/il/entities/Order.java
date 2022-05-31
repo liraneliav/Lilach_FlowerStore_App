@@ -2,6 +2,8 @@ package il.entities;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="orders")
@@ -12,6 +14,9 @@ public class Order {
 
     @ManyToOne
     private User user;
+
+    @ManyToOne
+    private Store store;
 
     private String dateReceive;
     private String timeReceive;
@@ -125,4 +130,13 @@ public class Order {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
 }

@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class RegisterControl {
 
-    public static void register(String name, String username, String pass, String id, String credit_card, String plan, int status) throws IOException {
+    public static void register(String name, String username, String pass, String id, String credit_card, String plan) throws IOException {
         Message message = new Message("register");
         message.setName(name);
         message.setUsername(username);
@@ -13,7 +13,7 @@ public class RegisterControl {
         message.setId(id);
         message.setCredit_card(credit_card);
         message.setPlan(plan);
-        message.setStatus(status);
+
 
         System.out.println("send register requests to server:" + message.getUsername());
 

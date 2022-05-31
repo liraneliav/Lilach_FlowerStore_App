@@ -1,8 +1,7 @@
 package il.server;
 
 
-import il.entities.Product;
-import il.entities.User;
+import il.entities.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,7 +15,10 @@ public class testDB {
     private static SessionFactory getSessionFactory() throws HibernateException {
         Configuration configuration = new Configuration();
         // Add ALL of your entities here. You can also try adding a whole package.
-        configuration.addAnnotatedClass(Product.class).addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(Product.class).addAnnotatedClass(User.class).addAnnotatedClass(Employee.class).addAnnotatedClass(Store.class).addAnnotatedClass(SystemAdmin.class)
+                .addAnnotatedClass(StoreEmployee.class).addAnnotatedClass(NetworkManger.class).addAnnotatedClass(CustomerService.class).addAnnotatedClass(BranchManager.class)
+                .addAnnotatedClass(Complain.class).addAnnotatedClass(Order.class);
+
         //configuration.addAnnotatedClass(Employee.class); //added this!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()

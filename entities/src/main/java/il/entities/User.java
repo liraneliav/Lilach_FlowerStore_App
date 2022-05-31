@@ -31,12 +31,14 @@ public class User implements Serializable {
     private boolean login;
 
 
-    @OneToMany(mappedBy = "user")
-    private List<Order> listOrders = new ArrayList<Order>();;
+    @OneToMany (mappedBy = "user")
+    private List<Order> listOrders;
 
-    @OneToMany(mappedBy = "user")
-    private List<Complain> listComplains = new ArrayList<Complain>();
+    @OneToMany(mappedBy = "user", targetEntity = Complain.class)
+    private List<Complain> listComplains;
 
+    @ManyToMany
+    private List<Store> liststore;
 
 
 
@@ -69,6 +71,11 @@ public class User implements Serializable {
         this.identifyNumbers = identifyNumbers;
         this.accountStatus=1;
         this.login=false;
+        this.listOrders = new ArrayList<Order>();
+        this.listComplains = new ArrayList<Complain>();
+        this.liststore = new ArrayList<Store>();
+
+
 //        this.phone = phone;
 //        this.mail = mail;
 //        this.expiryDate = expiryDate;
