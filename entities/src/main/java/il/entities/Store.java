@@ -46,12 +46,20 @@ public class Store {
 //    }
     public void addOrder(Order order) {
         listOrders.add(order);
+        order.setStore(this);
     }
     public void addComplain(Complain complain) {
         listComplains.add(complain);
+        complain.setStore(this);
     }
     public void addUser(User user) {
         listUsers.add(user);
+        user.addStore(this);
+    }
+
+    public void addEmployee(StoreEmployee employee){
+        this.listEmployees.add(employee);
+        employee.setStore(this);
     }
 
     public int getId() {

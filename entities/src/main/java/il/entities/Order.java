@@ -18,6 +18,9 @@ public class Order {
     @ManyToOne
     private Store store;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
+    private List<CartProduct> products;
+
     private String dateReceive;
     private String timeReceive;
     private String dateOrder;
@@ -39,9 +42,19 @@ public class Order {
         this.nameReceives = nameReceives;
         this.phoneReceives = phoneReceives;
         this.address = address;
+        this.products = new ArrayList<CartProduct>();
     }
 
     public Order() {}
+
+    public void addProduct(CartProduct product){
+        this.products.add(product);
+        product.setOrder(this);
+    }
+
+    public void removeProduct(CartProduct product){
+        this.products.remove(product);
+    }
 
     public int getId() {
         return id;

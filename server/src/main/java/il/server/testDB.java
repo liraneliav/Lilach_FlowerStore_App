@@ -15,11 +15,9 @@ public class testDB {
     private static SessionFactory getSessionFactory() throws HibernateException {
         Configuration configuration = new Configuration();
         // Add ALL of your entities here. You can also try adding a whole package.
-        configuration.addAnnotatedClass(Product.class).addAnnotatedClass(User.class).addAnnotatedClass(Employee.class).addAnnotatedClass(Store.class).addAnnotatedClass(SystemAdmin.class)
-                .addAnnotatedClass(StoreEmployee.class).addAnnotatedClass(NetworkManger.class).addAnnotatedClass(CustomerService.class).addAnnotatedClass(BranchManager.class)
-                .addAnnotatedClass(Complain.class).addAnnotatedClass(Order.class);
-
-        //configuration.addAnnotatedClass(Employee.class); //added this!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        configuration.addAnnotatedClass(Product.class).addAnnotatedClass(User.class).addAnnotatedClass(Complain.class).addAnnotatedClass(Order.class).addAnnotatedClass(Employee.class).addAnnotatedClass(Store.class).addAnnotatedClass(SystemAdmin.class)
+                .addAnnotatedClass(StoreEmployee.class).addAnnotatedClass(NetworkManger.class).addAnnotatedClass(CustomerService.class).addAnnotatedClass(BranchManager.class).addAnnotatedClass(CartProduct.class)
+                ;
 
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                 .applySettings(configuration.getProperties())
@@ -54,10 +52,82 @@ public class testDB {
 
 
         session.flush();
-        session.getTransaction().commit(); // Save everything.
     }
 
-//    //added this!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    private static void generateStores(){
+        Store store = new Store("Haifa");
+        testDB.session.save(store);
+        StoreEmployee e = new StoreEmployee("Malki Grossman", "malki123456" , "123456789", 1);
+        session.save(e);
+        store.addEmployee(e);
+
+
+        e = new StoreEmployee("Shir Snea", "shir123456" , "123456789", 2);
+        session.save(e);
+        store.addEmployee(e);
+
+
+        e = new StoreEmployee("Liran Eliav", "liran123456" , "123456789", 3);
+        session.save(e);
+        store.addEmployee(e);
+
+
+        Store store2 = new Store("Tel Aviv");
+        testDB.session.save(store2);
+        e = new StoreEmployee("Dean Amar", "dean123456" , "123456789", 3);
+        session.save(e);
+        store2.addEmployee(e);
+        e = new StoreEmployee("Ido Shitrit", "ido123456" , "123456789", 3);
+        session.save(e);
+        store2.addEmployee(e);
+        e = new StoreEmployee("Roie Shahar", "roie123456" , "123456789", 2);
+        session.save(e);
+        store2.addEmployee(e);
+
+        Store store3 = new Store("Jerusalem");
+        testDB.session.save(store3);
+        e = new StoreEmployee("Itai Zeitony", "itai123456" , "123456789", 5);
+        session.save(e);
+        store3.addEmployee(e);
+        e = new StoreEmployee("Shira Tzadok", "shira123456" , "123456789", 5);
+        session.save(e);
+        store3.addEmployee(e);
+        e = new StoreEmployee("Shahar Tavor", "shahar123456" , "123456789", 5);
+        session.save(e);
+        store3.addEmployee(e);
+
+
+        User u1 = new User("ido7746", "123456789", "1234567812345678", "1", "ido", "123456789");
+        User u2 = new User("haziza8", "123456789", "1234567812345678", "1", "dolev", "123456789");
+        User u3 = new User("cr7", "123456789", "1234567812345678", "1", "cristiano", "123456789");
+        User u4 = new User("robocolos", "123456789", "1234567812345678", "1", "ori shahr", "123456789");
+        User u5 = new User("goat", "123456789", "1234567812345678", "1", "leo messi", "123456789");
+        User u6 = new User("boom", "123456789", "1234567812345678", "1", "maldini", "123456789");
+
+        testDB.session.save(u1);
+        testDB.session.save(u2);
+        testDB.session.save(u3);
+        testDB.session.save(u4);
+        testDB.session.save(u5);
+        testDB.session.save(u6);
+
+        store.addUser(u1);
+        store.addUser(u2);
+        store.addUser(u3);
+
+        store2.addUser(u1);
+        store2.addUser(u4);
+        store2.addUser(u5);
+        store2.addUser(u3);
+        store2.addUser(u2);
+
+        store3.addUser(u6);
+        store3.addUser(u2);
+        store3.addUser(u3);
+
+        session.flush();
+    }
+
 //    private static void generateEmployee()throws Exception {
 //
 //        Employee employee;
@@ -113,12 +183,15 @@ public class testDB {
 
     public static void initMySQL(){
         try {
-            SessionFactory sessionFactory = getSessionFactory();
-            session = sessionFactory.openSession();
-            session.beginTransaction();
+//            SessionFactory sessionFactory = getSessionFactory();
+//            session = sessionFactory.openSession();
+//            session.beginTransaction();
             System.out.println("open session to mySQL");
+            openSssion();
             generateItems();
-           // generateEmployee(); //added this!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            generateStores();
+            session.getTransaction().commit(); // Save everything.
+            closeSession();
 
         } catch (Exception exception) {
             if (session != null) {

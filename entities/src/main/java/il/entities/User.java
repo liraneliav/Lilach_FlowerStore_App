@@ -175,7 +175,10 @@ public class User implements Serializable {
         this.discount = discount;
     }
 
-    public void addComplain(Complain complain) {listComplains.add(complain);}
+    public void addComplain(Complain complain) {
+        listComplains.add(complain);
+        complain.setUser(this);
+    }
 
     public void removeComplain(Complain complain){
         listComplains.remove(complain);
@@ -185,13 +188,21 @@ public class User implements Serializable {
         listOrders.remove(order);
     }
 
-    public void addOrder(Order order) {listOrders.add(order);}
+    public void addOrder(Order order) {listOrders.add(order);
+    order.setUser(this);}
 
     public List<Order> getListOrders() {
         return listOrders;
     }
 
     public List<Complain> getListComplains() {return listComplains;}
+
+    public void addStore(Store store){
+        this.liststore.add(store);
+    }
+    public void removeStore(Store store){
+        this.liststore.remove(store);
+    }
 
 
 }
