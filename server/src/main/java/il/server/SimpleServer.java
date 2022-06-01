@@ -2,6 +2,7 @@ package il.server;
 
 import il.entities.Product;
 import il.entities.Message;
+import il.entities.Store;
 import il.entities.User;
 import il.server.ocsf.ConnectionToClient;
 import il.server.ocsf.AbstractServer;
@@ -9,6 +10,7 @@ import il.server.ocsf.AbstractServer;
 
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.List;
 
 public class SimpleServer extends AbstractServer {
 
@@ -63,6 +65,13 @@ public class SimpleServer extends AbstractServer {
                 System.out.println("send Flowers to catalog");
             }
 
+            if (message.getMessage().equals("getStore")) {
+                sendMessage.setMessage("item store list");
+                sendMessage.setStores((LinkedList<Store>) RegisterControl.getAllItems());
+                client.sendToClient(sendMessage);
+                System.out.println("send stores to client");
+            }
+
             if(message.getMessage().equals("setPriceItem")){
                 int id = message.getIdItem();
                 double price = message.getNewPrice();
@@ -84,7 +93,8 @@ public class SimpleServer extends AbstractServer {
                 String pass = message.getPass();
                 String id = message.getId();
                 String credit_card = message.getCredit_card();
-                String plan = sendMessage.getPlan();
+                String plan = Message.getPlan();
+                List<Store> stores = Message.getStores();
 
                 User newUser = new User(username, pass,credit_card, plan, name, id);
                 System.out.println("get register request:" + username);
@@ -96,6 +106,7 @@ public class SimpleServer extends AbstractServer {
                     if(RegisterControl.register(newUser)){
                         sendMessage.setRegisterStatus(true);
                         sendMessage.setRegisterResult("user as been register!");
+                        newUser.addStore2(stores);
                     }
                     else{
                         sendMessage.setRegisterStatus(false);

@@ -4,8 +4,6 @@ package il.entities;
 import java.io.Serializable;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 
 
@@ -28,8 +26,9 @@ public class StoreEmployee extends Employee implements Serializable {
         super();
     }
 
-    public StoreEmployee(String name, String username, String pass, int permission) {
-        super(name, username, pass, permission);
+    public StoreEmployee(String name, String username, String pass) {
+        super(name, username, pass);
+        this.permission =5;
     }
 
 }

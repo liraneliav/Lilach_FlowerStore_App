@@ -68,7 +68,7 @@ public class RegisterController extends ParentClass{
             this.plan_chooser.getItems().add("Specific Store Member");
             this.plan_chooser.getItems().add("Store Wide Member");
             this.plan_chooser.getItems().add("Yearly Member");
-            this.store_choose.getItems().add("Store 1");
+            this.store_choose.getItems().add("Store 1");  //NEED TO ADD FUNC GETSTORES -  CALL FOR STORE LIST, func will send to server - "getStore"
             this.store_choose.getItems().add("Store 2");
             this.store_choose.getItems().add("Store 3");
             this.store_choose.getItems().add("Store 4");

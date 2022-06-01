@@ -2,11 +2,9 @@ package il.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "cartProducts")
 public class CartProduct extends Product implements Serializable {
     private int amount;
 

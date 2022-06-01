@@ -9,16 +9,20 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class testDB {
     public static Session session;
 
     private static SessionFactory getSessionFactory() throws HibernateException {
         Configuration configuration = new Configuration();
         // Add ALL of your entities here. You can also try adding a whole package.
-        configuration.addAnnotatedClass(Product.class).addAnnotatedClass(User.class).addAnnotatedClass(Complain.class).addAnnotatedClass(Order.class).addAnnotatedClass(Employee.class).addAnnotatedClass(Store.class).addAnnotatedClass(SystemAdmin.class)
-                .addAnnotatedClass(StoreEmployee.class).addAnnotatedClass(NetworkManger.class).addAnnotatedClass(CustomerService.class).addAnnotatedClass(BranchManager.class).addAnnotatedClass(CartProduct.class)
+        configuration.addAnnotatedClass(Product.class).addAnnotatedClass(User.class).addAnnotatedClass(Complain.class).addAnnotatedClass(Order.class)
+                .addAnnotatedClass(Employee.class).addAnnotatedClass(Store.class).addAnnotatedClass(SystemAdmin.class)
+                .addAnnotatedClass(StoreEmployee.class).addAnnotatedClass(NetworkManger.class).addAnnotatedClass(CustomerService.class)
+                .addAnnotatedClass(BranchManager.class).addAnnotatedClass(CartProduct.class).addAnnotatedClass(ShoppingCart.class)
                 ;
-
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                 .applySettings(configuration.getProperties())
                 .build();
@@ -55,44 +59,45 @@ public class testDB {
     }
 
     private static void generateStores(){
+        SystemAdmin a = new SystemAdmin("admin admin", "admin", "adminadmin");
+        testDB.session.save(a);
         Store store = new Store("Haifa");
         testDB.session.save(store);
-        StoreEmployee e = new StoreEmployee("Malki Grossman", "malki123456" , "123456789", 1);
+        BranchManager b = new BranchManager("Malki Grossman", "malki123456" , "123456789", store);
+        session.save(b);
+        session.flush();
+
+        StoreEmployee e = new StoreEmployee("Shir Snea", "shir123456" , "123456789");
         session.save(e);
         store.addEmployee(e);
+        session.flush();
 
-
-        e = new StoreEmployee("Shir Snea", "shir123456" , "123456789", 2);
+        e = new StoreEmployee("Liran Eliav", "liran123456" , "123456789");
         session.save(e);
         store.addEmployee(e);
-
-
-        e = new StoreEmployee("Liran Eliav", "liran123456" , "123456789", 3);
-        session.save(e);
-        store.addEmployee(e);
-
+        session.flush();
 
         Store store2 = new Store("Tel Aviv");
         testDB.session.save(store2);
-        e = new StoreEmployee("Dean Amar", "dean123456" , "123456789", 3);
+        b = new BranchManager("Dean Amar", "dean123456" , "123456789", store2);
+        session.save(b);
+
+        e = new StoreEmployee("Ido Shitrit", "ido123456" , "123456789");
         session.save(e);
         store2.addEmployee(e);
-        e = new StoreEmployee("Ido Shitrit", "ido123456" , "123456789", 3);
+        e = new StoreEmployee("Roie Shahar", "roie123456" , "123456789");
         session.save(e);
         store2.addEmployee(e);
-        e = new StoreEmployee("Roie Shahar", "roie123456" , "123456789", 2);
-        session.save(e);
-        store2.addEmployee(e);
+        session.flush();
 
         Store store3 = new Store("Jerusalem");
         testDB.session.save(store3);
-        e = new StoreEmployee("Itai Zeitony", "itai123456" , "123456789", 5);
+        b = new BranchManager("Itai Zeitony", "itai123456" , "123456789", store3);
+        session.save(b);
+        e = new StoreEmployee("Shira Tzadok", "shira123456" , "123456789");
         session.save(e);
         store3.addEmployee(e);
-        e = new StoreEmployee("Shira Tzadok", "shira123456" , "123456789", 5);
-        session.save(e);
-        store3.addEmployee(e);
-        e = new StoreEmployee("Shahar Tavor", "shahar123456" , "123456789", 5);
+        e = new StoreEmployee("Shahar Tavor", "shahar123456" , "123456789");
         session.save(e);
         store3.addEmployee(e);
 
@@ -111,19 +116,32 @@ public class testDB {
         testDB.session.save(u5);
         testDB.session.save(u6);
 
-        store.addUser(u1);
-        store.addUser(u2);
-        store.addUser(u3);
+        List<Store> s =new ArrayList<>();
+        s.add(store);
+        s.add(store2);
+        s.add(store3);
 
-        store2.addUser(u1);
-        store2.addUser(u4);
-        store2.addUser(u5);
-        store2.addUser(u3);
-        store2.addUser(u2);
-
-        store3.addUser(u6);
-        store3.addUser(u2);
-        store3.addUser(u3);
+        u1.addStore2(s);
+        u2.addStore2(s);
+        u3.addStore2(s);
+        s.remove(store);
+        u4.addStore2(s);
+        s.remove(store2);
+        u5.addStore2(s);
+        u6.addStore2(s);
+//        store.addUser(u1);
+//        store.addUser(u2);
+//        store.addUser(u3);
+//
+//        store2.addUser(u1);
+//        store2.addUser(u4);
+//        store2.addUser(u5);
+//        store2.addUser(u3);
+//        store2.addUser(u2);
+//
+//        store3.addUser(u6);
+//        store3.addUser(u2);
+//        store3.addUser(u3);
 
         session.flush();
     }

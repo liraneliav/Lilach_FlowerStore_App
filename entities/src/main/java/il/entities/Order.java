@@ -2,12 +2,13 @@ package il.entities;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name="orders")
-public class Order {
+public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -20,6 +21,11 @@ public class Order {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
     private List<CartProduct> products;
+
+
+    @OneToOne
+    private Complain complain;
+
 
     private String dateReceive;
     private String timeReceive;
@@ -65,11 +71,11 @@ public class Order {
     }
 
     public User getUser() {
-        return user;
+        return  user;
     }
 
     public void setUser(User user) {
-        this.user = user;
+        this. user = user;
     }
 
     public String getDateReceive() {
@@ -150,6 +156,14 @@ public class Order {
 
     public void setStore(Store store) {
         this.store = store;
+    }
+
+    public Complain getComplain() {
+        return complain;
+    }
+
+    public void setComplain(Complain complain) {
+        this.complain = complain;
     }
 
 }

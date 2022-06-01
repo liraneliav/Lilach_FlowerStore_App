@@ -1,6 +1,7 @@
 package il.server;
 
 import il.entities.Product;
+import il.entities.Store;
 import il.entities.User;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -13,6 +14,16 @@ import java.util.List;
 public class RegisterControl {
 
 
+    public static List<Store> getAllItems(){
+        testDB.openSssion();
+        CriteriaBuilder builder = testDB.session.getCriteriaBuilder();
+        CriteriaQuery<Store> query = builder.createQuery(Store.class);
+        query.from(Store.class);
+        List<Store> data = testDB.session.createQuery(query).getResultList();
+        LinkedList<Store> storeslist = new LinkedList<Store>(data);
+        testDB.closeSession();
+        return storeslist;
+    }
 
     public static List<User> getAllUsers(){
         testDB.openSssion();
@@ -27,15 +38,6 @@ public class RegisterControl {
     }
 
 
-//    public static void setStore(int id) throws IOException {
-//        if (id -1)   add to all store;
-//        testDB.openSssion();
-//        Product a = testDB.session.get(Store_Obj, id);
-//        a.setPrice(newPrice);
-//        testDB.session.flush();
-//        testDB.session.getTransaction().commit(); // Save everything.
-//        testDB.closeSession();
-//    }
 
     public static String checknewUser(User newUser){
         List<User> lUsers = getAllUsers();

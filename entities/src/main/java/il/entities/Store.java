@@ -3,16 +3,18 @@ package il.entities;
 import org.hibernate.boot.jaxb.hbm.spi.NativeQueryNonScalarRootReturn;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name="stores")
-public class Store {
+public class Store implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @OneToOne
+    @JoinColumn(name = "Branch_manager_name")
     private BranchManager manager;
     private String address;
 
@@ -25,7 +27,7 @@ public class Store {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
     private List<Order> listOrders;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
+    @OneToMany(mappedBy = "store")
     private List<Complain> listComplains;
 
 
@@ -41,9 +43,6 @@ public class Store {
     }
 
 
-//    public void addEmployee(Employee employee) {
-//        listEmployees.add(employee);
-//    }
     public void addOrder(Order order) {
         listOrders.add(order);
         order.setStore(this);
@@ -55,6 +54,9 @@ public class Store {
     public void addUser(User user) {
         listUsers.add(user);
         user.addStore(this);
+    }
+    public void addUser2(User user) {
+        listUsers.add(user);
     }
 
     public void addEmployee(StoreEmployee employee){

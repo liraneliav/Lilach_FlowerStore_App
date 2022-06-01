@@ -11,16 +11,17 @@ import java.util.List;
 
 @Entity
 //@Inheritance(strategy = InheritanceType.JOINED) // not must
-@Table(name = "users")
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String userName;
+    @Column(name = "user_password")
     private String password;
     private String creditCard;
     private double credit;
     private String position;
+    @Column(name = "full_name")
     private String name;
     private String phone;
     private String mail;
@@ -34,7 +35,7 @@ public class User implements Serializable {
     @OneToMany (mappedBy = "user")
     private List<Order> listOrders;
 
-    @OneToMany(mappedBy = "user", targetEntity = Complain.class)
+    @OneToMany(mappedBy = "complain_user")
     private List<Complain> listComplains;
 
     @ManyToMany
@@ -203,6 +204,10 @@ public class User implements Serializable {
     public void removeStore(Store store){
         this.liststore.remove(store);
     }
-
-
+    public void addStore2(List<Store> stores) {
+        for (Store store : stores) {
+            this.liststore.add(store);
+            store.addUser2(this);
+        }
+    }
 }

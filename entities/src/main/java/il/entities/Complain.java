@@ -1,16 +1,17 @@
 package il.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-@Table(name = "complain")
-public class Complain {
+@Table(name = "complains")
+public class Complain implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne (targetEntity = User.class)
-    private User user;
+    @ManyToOne
+    private User complain_user;
 
     @ManyToOne
     private Store store;
@@ -21,13 +22,19 @@ public class Complain {
     private String complain_data;
 
 
-    public Complain(User user, String date, double answer, boolean isHandle, String complain) {
-        this.user= user;
+
+
+    @OneToOne
+    private Order order;
+
+
+    public Complain(User user, String date, double answer, boolean isHandle, String complain, Order order1) {
+        this.complain_user= user;
         this.date = date;
         this.answer = answer;
         this.isHandle = isHandle;
         this.complain_data = complain;
-
+        this.order =order1;
     }
 
     public Complain() {}
@@ -42,11 +49,11 @@ public class Complain {
     }
 
     public User getUser() {
-        return user;
+        return complain_user;
     }
 
     public void setUser(User user) {
-        this.user = user;
+        this.complain_user = user;
     }
 
     public Store getStore() {
@@ -87,5 +94,12 @@ public class Complain {
 
     public void setComplain(String complain) {
         this.complain_data = complain;
+    }
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }

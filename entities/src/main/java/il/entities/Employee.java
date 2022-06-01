@@ -5,26 +5,29 @@ package il.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
-public class Employee implements Serializable{
 
+@Entity
+@Table(name="employee")
+public abstract class Employee implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String name;
-    private String password;
-    private int permission;
-    private String username;
-    private String identifyNumbers;
+    protected int id;
+    @Column(name = "employee_name")
+    protected String name;
+    @Column(name = "employee_password")
+    protected String password;
+    protected int permission;
+    protected String username;
+    protected String identifyNumbers;
 
 
     public Employee(){}
 
-    public Employee(String name, String username, String pass, int permission){
+    public Employee(String name, String username, String pass){
         this.name = name;
         this.username =username;
         this.password =pass;
-        this.permission = permission; // 1:= system admin, 2:= store wide manager 3:= shop manager, 4:= service employee, 5: shop employee
+//        this.permission = permission; // 1:= system admin, 2:= store wide manager 3:= shop manager, 4:= service employee, 5: shop employee
     }
 
     /* gets and sets*/
