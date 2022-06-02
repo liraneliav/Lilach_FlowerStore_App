@@ -15,7 +15,7 @@ import java.util.List;
 public class RegisterControl {
 
     public static<T> List<T> getAllItems(Class<T> object){
-        testDB.openSssion();
+        testDB.openSession();
         CriteriaBuilder builder = testDB.session.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(object);
         Root<T> root = query.from(object);
@@ -49,7 +49,7 @@ public class RegisterControl {
 
 
     public static boolean register(User newUser){
-        testDB.openSssion();
+        testDB.openSession();
         try {
             testDB.session.save(newUser);
             testDB.session.flush();

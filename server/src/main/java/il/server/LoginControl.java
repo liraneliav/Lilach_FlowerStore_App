@@ -58,7 +58,7 @@ public class LoginControl {
 
 
     private static void setToActiveUser(int idUser){
-        testDB.openSssion();
+        testDB.openSession();
         User user = testDB.session.get(User.class, idUser);
         user.setLogin(true);
         testDB.session.flush();
@@ -66,7 +66,7 @@ public class LoginControl {
         testDB.closeSession();
     }
     private static void setToActiveEmp(int idUser){
-        testDB.openSssion();
+        testDB.openSession();
         Employee e = testDB.session.get(Employee.class, idUser);
         e.setLogin(true);
         testDB.session.flush();
@@ -75,7 +75,7 @@ public class LoginControl {
     }
 
     public static void setToDiactiveU(int id){
-        testDB.openSssion();
+        testDB.openSession();
         User a = testDB.session.get(User.class, id);
         a.setLogin(false);
         testDB.session.flush();
@@ -84,7 +84,7 @@ public class LoginControl {
     }
 
     public static void setToDiactiveEmp(int id){
-        testDB.openSssion();
+        testDB.openSession();
         Employee a = testDB.session.get(Employee.class, id);
         a.setLogin(false);
         testDB.session.flush();

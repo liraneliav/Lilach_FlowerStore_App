@@ -7,7 +7,7 @@ import java.io.IOException;
 public class OrderControl {
 
     public static void cancelOrder(int id){
-        testDB.openSssion();
+        testDB.openSession();
         Order a = testDB.session.get(Order.class, id);
         testDB.session.delete(a);
         testDB.session.flush();
@@ -49,7 +49,7 @@ public class OrderControl {
 //    }
 
     public static void newOrder(Order order, int storeID, int userID) throws IOException {
-        testDB.openSssion();
+        testDB.openSession();
         Store store = testDB.session.get(Store.class, storeID);
         User user = testDB.session.get(User.class, userID);
 
