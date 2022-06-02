@@ -200,7 +200,6 @@ public class testDB {
 //        session.getTransaction().commit(); // Save everything.
 //    }
 
-
     public static void openSession(){
         try {
             System.out.println("open session to mySQL");

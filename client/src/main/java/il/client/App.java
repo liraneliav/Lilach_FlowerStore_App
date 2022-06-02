@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import il.client.SimpleClient;
+
 import javafx.stage.StageStyle;
 //import org.kordamp.bootstrapfx.BootstrapFX;
 //import org.kordamp.bootstrapfx.scene.layout.Panel;
@@ -21,7 +21,7 @@ public class App extends Application {
     private SimpleClient client = null;
 
     public static String ip = "127.0.0.1";
-    public static int port = 3000;
+    public static int port = 3001;
 
     @Override
     public void start(Stage stage) throws IOException {
