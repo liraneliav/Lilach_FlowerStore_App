@@ -1,5 +1,6 @@
-package il.client;
+package il.client.contorls;
 
+import il.client.SimpleClient;
 import il.entities.Product;
 import il.entities.Message;
 

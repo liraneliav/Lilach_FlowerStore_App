@@ -1,5 +1,6 @@
-package il.client;
+package il.client.contorls;
 
+import il.client.SimpleClient;
 import il.entities.Message;
 import org.json.JSONException;
 import org.json.JSONObject;
