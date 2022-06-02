@@ -28,6 +28,7 @@ public class OrderControl {
 //        Order a = testDB.session.get(Order.class, id);
 //        testDB.closeSession();
 //        String current_date = java.time.LocalDate.now().toString();
+//        current_date =current_date.substring(0,5);
 //        int current_time = timeToInt(java.time.LocalTime.now().toString());
 //        int order_time = timeToInt(a.getTimeReceive());
 //        if (current_date.equals(a.getDateReceive()) && order_time - current_time < 300) {
