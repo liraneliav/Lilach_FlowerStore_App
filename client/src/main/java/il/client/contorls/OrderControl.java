@@ -30,6 +30,16 @@ public class OrderControl {
         SimpleClient.getClient().sendToServer(message);
     }
 
+//    public static void cancelOrder(int orderID) throws IOException {
+//        System.out.println("cancel order: "+ orderID);
+//        Message message = new Message("cancelOrder");
+//        message.setTimeCancel(java.time.LocalTime.now().toString());
+//        message.setDateCancel(java.time.LocalDate.now().toString());
+//        message.setOrderID(orderID);
+//        SimpleClient.getClient().sendToServer(message);
+//    }
+
+
     public static void newOrder(Order order, int storeID, int userID) throws IOException {
         System.out.println("made new order to store "+ storeID);
         Message message = new Message("newOrder");

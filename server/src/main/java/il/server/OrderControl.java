@@ -16,19 +16,19 @@ public class OrderControl {
     }
     /** added 3 func for refunds*/
 //    public static void deleteOrder(Order a){
-//        testDB.openSssion();
+//        testDB.openSession();
 //        testDB.session.delete(a);
 //        testDB.session.flush();
 //        testDB.session.getTransaction().commit(); // Save everything.
 //        testDB.closeSession();
 //    }
 //
-//    public static void cancelOrder(int id){
-//        testDB.openSssion();
+//    public static void cancelOrder(int id, String time, String date){
+//        String current_date =date.substring(0,5);
+//        testDB.openSession();
 //        Order a = testDB.session.get(Order.class, id);
 //        testDB.closeSession();
-//        String current_date = java.time.LocalDate.now().toString();
-//        int current_time = timeToInt(java.time.LocalTime.now().toString());
+//        int current_time = timeToInt(time);
 //        int order_time = timeToInt(a.getTimeReceive());
 //        if (current_date.equals(a.getDateReceive()) && order_time - current_time < 300) {
 //            if (order_time - current_time > 60)

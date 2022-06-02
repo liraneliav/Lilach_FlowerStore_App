@@ -38,6 +38,8 @@ public class Message implements Serializable {
     int orderID;
     Order order;
     int storeID;
+    String timeCancel;
+    String dateCancel;
 
 
 
@@ -79,6 +81,21 @@ public class Message implements Serializable {
     int idItem;
     double newPrice;
 
+    public String getTimeCancel() {
+        return timeCancel;
+    }
+
+    public void setTimeCancel(String timeCancel) {
+        this.timeCancel = timeCancel;
+    }
+
+    public String getDateCancel() {
+        return dateCancel;
+    }
+
+    public void setDateCancel(String dateCancel) {
+        this.dateCancel = dateCancel;
+    }
     public Order getOrder() {
         return order;
     }
