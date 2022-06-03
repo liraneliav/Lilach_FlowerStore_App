@@ -11,7 +11,7 @@ import java.io.IOException;
 public class OrderControl {
 
     public static void testNewOrder() throws IOException {
-        Order order = new Order(null, null, "testOrderFromClient", "asas","asas","1212", 0,"121212", "21212","", "");
+        Order order = new Order(null, null, "2022-06-03", "16:55","2022-06-03","1212", 0,"121212", "21212","", "");
         order.addProduct(new CartProduct(CatalogController.getFlowerlist().get(0), 3));
         order.addProduct(new CartProduct(CatalogController.getFlowerlist().get(2), 3));
 
@@ -19,7 +19,7 @@ public class OrderControl {
     }
 
     public static void testCancelOrder() throws IOException {
-        cancelOrder(1);
+        cancelOrder(4);
     }
 
 

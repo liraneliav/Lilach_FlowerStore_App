@@ -8,7 +8,7 @@ public class OrderControl {
 
     public static void deleteOrder(Order a){
         testDB.openSession();
-        testDB.session.delete(a);
+        a.setStatus(1);
         testDB.session.flush();
         testDB.session.getTransaction().commit(); // Save everything.
         testDB.closeSession();
@@ -25,13 +25,24 @@ public class OrderControl {
         int order_time = timeToInt(a.getTimeReceive());
         if (current_date.equals(a.getDateReceive()) && order_time - current_time < 300) {
             if (order_time - current_time > 60)
-                //a.get 50% refunds
+                refund(a,0.5,a.getSum());
                 deleteOrder(a);
             return;
         }
-        //a.get 100% refunds
+        refund(a,1,a.getSum());
         deleteOrder(a);
     }
+
+
+    public static void refund(Order a, double percent, double sum){
+        testDB.openSession();
+        User u =a.getUser();
+        u.setCredit(u.getCredit()+(sum*percent));
+        testDB.session.flush();
+        testDB.session.getTransaction().commit(); // Save everything.
+        testDB.closeSession();
+    }
+
 
     public static String makeDate(String date){
         return date.substring(7,9)+date.substring(4,7);
@@ -39,7 +50,8 @@ public class OrderControl {
 
     public static int timeToInt(String time){
         time = time.replace(":", "");
-        time = time.substring(0,3);
+        if(time.length()>4)
+            time = time.substring(0,4);
         return Integer.parseInt(time);
     }
 

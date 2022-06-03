@@ -14,8 +14,8 @@ public class AppServer
     private static SimpleServer server;
 
 
-    private static int port = 3000;
-    private static boolean initServer = false;
+    private static int port = 3002;
+    private static boolean initServer = true;
 
     public static void main( String[] args ) throws IOException {
         try {
