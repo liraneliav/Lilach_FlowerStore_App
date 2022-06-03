@@ -11,7 +11,7 @@ import java.io.IOException;
 public class OrderControl {
 
     public static void testNewOrder() throws IOException {
-        Order order = new Order(null, null, "03-06-2022", "16:55","03-05-2022","1212", 0,"121212", "21212","", "");
+        Order order = new Order(null, null, "03-06-2022", "18:55","03-05-2022","1212", 0,"121212", "21212","", "");
         order.addProduct(new CartProduct(CatalogController.getFlowerlist().get(0), 3));
         order.addProduct(new CartProduct(CatalogController.getFlowerlist().get(2), 3));
 
