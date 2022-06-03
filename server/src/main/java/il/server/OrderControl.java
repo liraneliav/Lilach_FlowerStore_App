@@ -45,7 +45,11 @@ public class OrderControl {
 
 
     public static String makeDate(String date){
-        return date.substring(7,9)+date.substring(4,7);
+        String[] parts = date.split("-");
+        String year = parts[0];
+        String month = parts[1];
+        String day = parts[1];
+        return day+'-'+month+'-'+year;
     }
 
     public static int timeToInt(String time){
