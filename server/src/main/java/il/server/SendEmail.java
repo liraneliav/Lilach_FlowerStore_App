@@ -11,13 +11,14 @@ public class SendEmail {
     private final static String username = "lilach7746";
     private final static String password = "pgnfszsewczixhjr";
 
-    public static void sendTo(String email, String titel, String text){
+    public static void sendTo(String email, String title, String text){
         try {
             Properties prop = new Properties();
             prop.put("mail.smtp.host", "smtp.gmail.com");
             prop.put("mail.smtp.port", "587");
             prop.put("mail.smtp.auth", "true");
             prop.put("mail.smtp.starttls.enable", "true"); //TLS
+
 
             session = Session.getInstance(prop,
                     new javax.mail.Authenticator() {
@@ -32,12 +33,11 @@ public class SendEmail {
                     Message.RecipientType.TO,
                     InternetAddress.parse(email)
             );
-            message.setSubject(titel);
+            message.setSubject(title);
             message.setText(text);
-
             Transport.send(message);
 
-            System.out.println("send Email ("+titel+") to: "+email);
+            System.out.println("send Email ("+title+") to: "+email);
 
         } catch (MessagingException e) {
             System.out.println("Error: dont send email");

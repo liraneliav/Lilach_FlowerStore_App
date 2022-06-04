@@ -17,7 +17,7 @@ public class SimpleServer extends AbstractServer {
         if(initServer)
             testDB.initMySQL();
         //TestControl.testUserControl();
-        UserControl.logOutAllusers();
+//        UserControl.logOutAllusers();
     }
 
     public void closeServer() throws IOException {

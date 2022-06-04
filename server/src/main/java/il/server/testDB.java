@@ -102,6 +102,7 @@ public class testDB {
 
 
         User u1 = new User("ido7746", "123456789", "1234567812345678", "1", "ido", "123456789");
+        u1.setMail("idoO7749@GMAIL.COM");
         User u2 = new User("haziza8", "123456789", "1234567812345678", "1", "dolev", "123456789");
         User u3 = new User("cr7", "123456789", "1234567812345678", "1", "cristiano", "123456789");
         User u4 = new User("robocolos", "123456789", "1234567812345678", "1", "ori shahr", "123456789");
