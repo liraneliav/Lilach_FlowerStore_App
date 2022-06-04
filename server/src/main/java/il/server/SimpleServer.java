@@ -17,7 +17,7 @@ public class SimpleServer extends AbstractServer {
         if(initServer)
             testDB.initMySQL();
         //TestControl.testUserControl();
-        UserControl.logOutAllusers();
+//        UserControl.logOutAllusers();
     }
 
     public void closeServer() throws IOException {
@@ -122,10 +122,10 @@ public class SimpleServer extends AbstractServer {
                 OrderControl.newOrder(message.getOrder(), message.getStoreID(), message.getUserID());
             }
             if (message.getMessage().equals("newComplain")) {
-                OrderControl.newComplain(message.getComplain(), message.getOrderID());
+                ComplaintConrtol.newComplain(message.getComplain(), message.getOrderID());
             }
             if (message.getMessage().equals("complainAnswer")) {
-                OrderControl.complainAnswer(message.getAnswer(), message.getRefund(), message.getComplainID());
+                ComplaintConrtol.complainAnswer(message.getAnswer(), message.getRefund(), message.getComplainID());
             }
 
 

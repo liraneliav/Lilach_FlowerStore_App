@@ -31,8 +31,9 @@ public class Complain implements Serializable {
     public Complain(String complain_text, String date_complain) {
         this.complain_text = complain_text;
         this.date_complain = date_complain;
-        this.status=false;
+        this.status=true;
     }
+
 
     public Complain() {}
 
