@@ -1,8 +1,10 @@
 package il.client;
 
 import il.client.controls.CatalogControl;
+import il.client.controls.ComplainConrtol;
 import il.client.controls.OrderControl;
 import il.client.events.CatalogItemsEvent;
+import il.entities.Message;
 import il.entities.Product;
 import io.github.palexdev.materialfx.controls.MFXScrollPane;
 import javafx.application.Platform;
@@ -118,12 +120,15 @@ public class CatalogController extends ParentClass{
 
                         GridPane.setMargin(node, new Insets(10));
                     }
-//                    try {
+                    try {
 //                       OrderControl.testNewComplain();
-//                        OrderControl.testAnswerComplain();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
+//                        ComplainConrtol.testAnswerComplain();
+                        Message m = new Message("getStore");
+                        SimpleClient.getClient().sendToServer(m);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     scrollPane.setContent(this.gridPane);
                 }
 

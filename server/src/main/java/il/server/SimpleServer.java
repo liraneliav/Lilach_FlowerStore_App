@@ -5,7 +5,11 @@ import il.server.ocsf.ConnectionToClient;
 import il.server.ocsf.AbstractServer;
 
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,6 +28,19 @@ public class SimpleServer extends AbstractServer {
         testDB.closeSession();
         this.close();
     }
+
+    public static <T> LinkedList<T> getAllItems(Class<T> object){
+        testDB.openSession();
+        CriteriaBuilder builder = testDB.session.getCriteriaBuilder();
+        CriteriaQuery<T> query = builder.createQuery(object);
+        Root<T> root = query.from(object);
+        List<T> data = testDB.session.createQuery(query).getResultList();
+        LinkedList<T> listItems = new LinkedList<>(data);
+        testDB.closeSession();
+        return listItems;
+    }
+
+
 
 
     @Override
@@ -50,10 +67,17 @@ public class SimpleServer extends AbstractServer {
 
             if (message.getMessage().equals("getStore")) {
                 sendMessage.setMessage("item store list");
-                sendMessage.setStores(RegisterControl.getAllItems(Store.class));
+                sendMessage.setStores (getAllOfType(Store.class));
                 client.sendToClient(sendMessage);
                 System.out.println("send stores to client");
             }
+            if (message.getMessage().equals("getAllCompliant")) {
+                sendMessage.setMessage("Compliant list");
+                sendMessage.setListComplains(ComplaintConrtol.getAllOpenComplaint());
+                client.sendToClient(sendMessage);
+                System.out.println("send Compliant to client");
+            }
+
 
 
             if (message.getMessage().equals("logout")) {
@@ -77,7 +101,7 @@ public class SimpleServer extends AbstractServer {
                 String id = message.getId();
                 String credit_card = message.getCredit_card();
                 String plan = Message.getPlan();
-                List<Store> stores = Message.getStores();
+                List<Store> stores = message.getStores();
 
                 User newUser = new User(username, pass, credit_card, plan, name, id);
                 System.out.println("get register request:" + username);
@@ -134,5 +158,8 @@ public class SimpleServer extends AbstractServer {
             System.out.println(e.getMessage());
             System.out.println("handleMessageFromClient Error!" + client.getInetAddress());
         }
+    }
+
+    private List<Store> getAllOfType(Class<Store> storeClass) {
     }
 }

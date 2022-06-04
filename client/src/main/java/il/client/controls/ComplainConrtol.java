@@ -25,11 +25,11 @@ public class ComplainConrtol{
     }
 
     public static void testNewComplain() throws IOException {
-        Complain complain = new Complain("it's test complain!", "00/00/00");
+        Complain complain = new Complain("it's test complain!", "04-06-2022");
         newComplain(complain, 1);
     }
 
     public static void testAnswerComplain() throws IOException {
-        complainAnswer("it's a test answer!", 100, 4);
+        complainAnswer("it's a test answer!", 50, 4);
     }
 }

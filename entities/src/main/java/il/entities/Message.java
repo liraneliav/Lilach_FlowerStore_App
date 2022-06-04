@@ -14,6 +14,9 @@ public class Message implements Serializable {
 
     LinkedList<Product> listItem=null;
 
+
+
+
     Product item=null;
 
     ArrayList<User> user=null;
@@ -32,7 +35,7 @@ public class Message implements Serializable {
     String credit_card;
     static String plan;
     String name;
-
+    List<Store> stores=null;
 
 
     String phone;
@@ -53,14 +56,21 @@ public class Message implements Serializable {
     String answer;
     double refund;
     int complainID;
-
+    LinkedList<Complain> listComplains=null;
 
 
     int userID;
 
     int iddatabase;
 
-    static List<Store> stores=null;
+
+    public LinkedList<Complain> getListComplains() {
+        return listComplains;
+    }
+
+    public void setListComplains(LinkedList<Complain> listComplains) {
+        this.listComplains = listComplains;
+    }
 
     public Employee getEmployee() {
         return employee;
@@ -374,7 +384,7 @@ public class Message implements Serializable {
     }
 
 
-    public static List<Store> getStores() {
+    public List<Store> getStores() {
         return stores;
     }
 

@@ -3,16 +3,13 @@ package il.server;
 import il.entities.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+import static il.server.SimpleServer.getAllItems;
 
 public class ComplaintConrtol{
-
-    private int storeID;
-    private int complainID;
-    private String username;
-    private String complaintDate;
-    private String complaintTime;
-    private String complaintDetails;
-
 
     public static void newComplain(Complain complain, int orderID) throws IOException {
         testDB.openSession();
@@ -36,7 +33,6 @@ public class ComplaintConrtol{
     }
 
     public static void complainAnswer(String answer, double refund, int complainID) throws IOException {
-        Message message = new Message("complainAnswer");
         System.out.println("answer to complain "+ complainID);
         testDB.openSession();
         Complain complain = testDB.session.get(Complain.class, complainID);
@@ -46,31 +42,26 @@ public class ComplaintConrtol{
         else{
             User user = complain.getUser();
             if(refund>0)
-                user.setCredit(user.getCredit() + refund);
+                user.setCredit(user.getCredit() + ((refund/100)*complain.getOrder().getSum()));
             complain.setAnswer_text(answer);
             complain.setRefund(refund);
-            complain.setStatus(true);
+            complain.setStatus(false);
             testDB.session.flush();
             testDB.session.getTransaction().commit(); // Save everything.
         }
         testDB.closeSession();
     }
 
-
-    public static void setStatusComplaint(int complaintID){
-        testDB.openSession();
-        Complain a = testDB.session.get(Complain.class, complaintID);
-        a.setStatus(false);
-        testDB.session.flush();
-        testDB.session.getTransaction().commit(); // Save everything.
-        testDB.closeSession();
+    public static LinkedList<Complain> getAllOpenComplaint(){
+        LinkedList<Complain> c = new LinkedList<>();
+        List<Complain> complains = getAllItems(Complain.class);
+        for(Complain comp : complains){
+            if(comp.isStatus())
+                c.add(comp);
+        }
+        return c;
     }
 
 
-    public String complaintToMail() {
-        return "Complaint number " + complainID +": name= " + username
-               + ", complaint date =" + complaintDate + ", complaint time =" + complaintTime +
-                + ", complaint details=" + complaintDetails + "is open=" + isOpen + "]";
-    }
 
 }

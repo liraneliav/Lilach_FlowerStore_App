@@ -4,6 +4,7 @@ import il.client.events.*;
 import il.client.ocsf.AbstractClient;
 import il.entities.Product;
 import il.entities.Message;
+import il.entities.Store;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.*;
@@ -20,6 +21,12 @@ public class SimpleClient extends AbstractClient {
 	protected void handleMessageFromServer(Object msg){
 		Message message = (Message) msg;
 		System.out.println("get message from server: "+ message.getMessage());
+
+		if(message.getMessage().equals("item store list")){
+			System.out.println("get Stores object!");
+			LinkedList<Store> items = (LinkedList<Store>) message.getStores();
+//			EventBus.getDefault().post(new CatalogItemsEvent(items));
+		}
 
 
 		if(message.getMessage().equals("item catalog list")){

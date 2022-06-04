@@ -19,6 +19,7 @@ il/client/Priority.class
 il/client/CustomProductController.class
 il/client/AddToCartController.class
 il/client/RemoveFlowerWindowController.class
+il/client/controls/ComplainConrtol.class
 il/client/EditAccountDetailsController.class
 il/client/CartAdderController.class
 il/client/ExecptionGarage.class

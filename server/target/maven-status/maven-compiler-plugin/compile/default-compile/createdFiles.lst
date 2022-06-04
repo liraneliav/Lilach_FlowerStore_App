@@ -13,6 +13,7 @@ il/server/RegisterControl.class
 il/server/ocsf/OriginatorMessage.class
 il/server/ocsf/AbstractConnectionFactory.class
 il/server/ocsf/AbstractServer$1.class
+il/server/ComplaintConrtol.class
 il/server/SendEmail$1.class
 il/server/OrderControl.class
 il/server/AppServer.class
