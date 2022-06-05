@@ -18,6 +18,11 @@ public class ComplainConrtol{
         SimpleClient.getClient().sendToServer(message);
     }
 
+    public static void getAllOpenComplaints () throws IOException {
+        System.out.println("server send me all compliants");
+        Message message = new Message("getAllOpenComplaints");
+        SimpleClient.getClient().sendToServer(message);
+    }
     public static void complainAnswer(String answer, double refund, int complainID) throws IOException {
         Message message = new Message("complainAnswer");
         message.setComplainID(complainID);
@@ -26,12 +31,12 @@ public class ComplainConrtol{
         SimpleClient.getClient().sendToServer(message);
     }
 
-    public static void testNewComplain() throws IOException {
-        Complain complain = new Complain("it's test complain!", "04-06-2022");
-        newComplain(complain, 1);
+
+    public static void getAllOpenComplaintsByUser (int userID) throws IOException {
+        System.out.println("server send me all compliants for user");
+        Message message = new Message("getAllOpenComplaintsForUser");
+        message.setUserID(userID);
+        SimpleClient.getClient().sendToServer(message);
     }
 
-    public static void testAnswerComplain() throws IOException {
-        complainAnswer("it's a test answer!", 50, 4);
-    }
 }

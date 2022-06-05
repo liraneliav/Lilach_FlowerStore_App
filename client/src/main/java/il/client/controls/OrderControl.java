@@ -24,6 +24,12 @@ public class OrderControl {
         cancelOrder(4);
     }
 
+    public static void getAllOpenOrderByUser (int userID) throws IOException {
+        System.out.println("server send me all orders for user");
+        Message message = new Message("getAllOpenOrdersForUser");
+        message.setUserID(userID);
+        SimpleClient.getClient().sendToServer(message);
+    }
 
     public static void cancelOrder(int orderID) throws IOException {
         System.out.println("cancel order: "+ orderID);

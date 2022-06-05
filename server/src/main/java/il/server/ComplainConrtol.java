@@ -78,6 +78,17 @@ public class ComplainConrtol{
         return text;
     }
 
+    public static LinkedList<Complain> AllOpenComplaintsForStore(){
+        LinkedList<Complain> c = new LinkedList<>();
+        List<Complain> complains = getAllItems(Complain.class);
+        for(Complain comp : complains){
+            if(comp.isStatus())
+                c.add(comp.getComplainForClient());
+        }
+        return c;
+    }
+
+
     public static LinkedList<Complain> getAllOpenComplaint(){
         LinkedList<Complain> c = new LinkedList<>();
         List<Complain> complains = getAllItems(Complain.class);

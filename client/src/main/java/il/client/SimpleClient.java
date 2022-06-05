@@ -28,6 +28,21 @@ public class SimpleClient extends AbstractClient {
 			EventBus.getDefault().post(new CatalogItemsEvent(items));
 		}
 
+		if(message.getMessage().equals("AllOpenComplaints")){
+			System.out.println("All Open Complaints are here!");
+			EventBus.getDefault().post(new ComplaintEvent(message.getListComplains()));
+		}
+
+		if(message.getMessage().equals("AllOpenComplaintsForUser")){
+			System.out.println("All Open Complaints For User are here!");
+			EventBus.getDefault().post(new ComplaintEvent(message.getListComplains()));
+		}
+
+		if(message.getMessage().equals("reportData")){
+			System.out.println("report data for store"+message.getStoreID()+" are here!");
+			EventBus.getDefault().post(new ReportEvent(message.getListComplains(), message.getListOrder()));
+		}
+
 		if(message.getMessage().equals("result login")){
 			LoginEvent eventlogIN = null;
 			if(!message.isLoginStatus())
@@ -42,8 +57,8 @@ public class SimpleClient extends AbstractClient {
 				else{//worker
 					eventlogIN = new LoginEvent(message.getUsername(), message.getPermision());
 					eventlogIN.setId(message.getIddatabase());
-					eventlogIN.setOrderList(message.getListOrder());
-					eventlogIN.setComplainList(message.getListComplains());
+//					eventlogIN.setOrderList(message.getListOrder());
+//					eventlogIN.setComplainList(message.getListComplains());
 				}
 				EventBus.getDefault().post(eventlogIN);
 			}

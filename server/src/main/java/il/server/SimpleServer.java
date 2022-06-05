@@ -29,11 +29,22 @@ public class SimpleServer extends AbstractServer {
     }
 
 
-    public static <T> List<T> getAllItems(Class<T> object){
+    public static <T> LinkedList<T> getAllItems(Class<T> object){
         testDB.openSession();
         CriteriaBuilder builder = testDB.session.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(object);
         Root<T> root = query.from(object);
+        List<T> data = testDB.session.createQuery(query).getResultList();
+        LinkedList<T> listItems = new LinkedList<>(data);
+        testDB.closeSession();
+        return listItems;
+    }
+    private <T, S> LinkedList<T> getAllItemsByKey(Class<T> object, String colum,S key){
+        CriteriaBuilder builder = testDB.session.getCriteriaBuilder();
+        CriteriaQuery<T> query = builder.createQuery(object);
+        Root<T> root = query.from(object);
+        query.select(root);
+        query.where(builder.equal(root.get(colum),key));
         List<T> data = testDB.session.createQuery(query).getResultList();
         LinkedList<T> listItems = new LinkedList<>(data);
         testDB.closeSession();
@@ -57,18 +68,38 @@ public class SimpleServer extends AbstractServer {
 
             if (message.getMessage().equals("getCatalogItems")) {
                 sendMessage.setMessage("item catalog list");
-                sendMessage.setListItem((LinkedList<Product>) CatalogControl.getAllItems());
+               sendMessage.setListItem(getAllItems(Product.class));
                 client.sendToClient(sendMessage);
                 System.out.println("send Flowers to catalog");
             }
 
-            if (message.getMessage().equals("getStore")) {
-                sendMessage.setMessage("item store list");
-                sendMessage.setStores(RegisterControl.getAllItems(Store.class));
+            if (message.getMessage().equals("getAllOpenComplaints")) {
+                sendMessage.setMessage("AllOpenComplaints");
+                sendMessage.setListComplains(ComplainConrtol.getAllOpenComplaint());
+                client.sendToClient(sendMessage);
+                System.out.println("send stores to client");
+            }
+            if (message.getMessage().equals("getAllOpenComplaintsForUser")) {
+                sendMessage.setMessage("AllOpenComplaintsForUser");
+                sendMessage.setListComplains(getAllItemsByKey(Complain.class, "user_id", message.getUserID()));
+                client.sendToClient(sendMessage);
+                System.out.println("send stores to client");
+            }
+            if (message.getMessage().equals("getAllOpenOrdersForUser")) {
+                sendMessage.setMessage("AllOpenOrdersForUser");
+                sendMessage.setListOrder(getAllItemsByKey(Order.class, "user_id", message.getUserID()));
                 client.sendToClient(sendMessage);
                 System.out.println("send stores to client");
             }
 
+            if (message.getMessage().equals("getReport")) {
+                sendMessage.setMessage("reportData");
+                sendMessage.setListOrder(getAllItemsByKey(Order.class, "store_id", message.getStoreID()));
+                sendMessage.setListComplains(getAllItemsByKey(Complain.class, "store_id", message.getStoreID()));
+                sendMessage.setStoreID(message.getStoreID());
+                client.sendToClient(sendMessage);
+                System.out.println("send stores to client");
+            }
 
             if (message.getMessage().equals("logout")) {
                 int id = message.getIddatabase();

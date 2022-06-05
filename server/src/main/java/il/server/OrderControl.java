@@ -50,7 +50,7 @@ public class OrderControl {
 
 
     public static String makeDate(String date){
-        String[] parts = date.split("-");
+        String[] parts = date.split("/");
         String year = parts[0];
         String month = parts[1];
         String day = parts[2];
