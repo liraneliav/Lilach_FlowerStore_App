@@ -1,12 +1,9 @@
 package il.entities;
 
 
-
-
-
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.hibernate.boot.cfgxml.spi.MappingReference;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -51,6 +48,7 @@ public class User implements Serializable {
 
 
     @ManyToMany
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Store> liststore;
 
 

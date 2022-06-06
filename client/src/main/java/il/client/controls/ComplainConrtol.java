@@ -5,8 +5,7 @@ import il.entities.Complain;
 import il.entities.Message;
 
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
+
 
 public class ComplainConrtol{
 
@@ -27,7 +26,7 @@ public class ComplainConrtol{
     }
 
     public static void testNewComplain() throws IOException {
-        Complain complain = new Complain("it's test complain!", "04-06-2022");
+        Complain complain = new Complain("it's test complain!", "04/06/2022");
         newComplain(complain, 1);
     }
 

@@ -1,7 +1,6 @@
 package il.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,20 +27,25 @@ public class Message implements Serializable {
     String pass;
     boolean isWorker;
     String credit_card;
-    static int plan;
+     int plan;
     String name;
     String phone;
     String mail;
     double creadit;
     String priorty;
+    List<Store>userListStore;
 
-    public String getAddress() {
-        return address;
-    }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+
+
+    //login System admin
+    LinkedList<Employee> employeeslist;
+
+    int permision;
+
+    Product product;
+
+
 
     String address;
 
@@ -55,10 +59,30 @@ public class Message implements Serializable {
 
 
 
+    public String getAddress() {
+        return address;
+    }
 
-    int permision;
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-    Product product;
+
+    public List<Store> getUserListStore() {
+        return userListStore;
+    }
+
+    public void setUserListStore(List<Store> userListStore) {
+        this.userListStore = userListStore;
+    }
+
+    public LinkedList<Employee> getEmployeeslist() {
+        return employeeslist;
+    }
+
+    public void setEmployeeslist(LinkedList<Employee> employeeslist) {
+        this.employeeslist = employeeslist;
+    }
 
     public Employee getEmployee() {
         return employee;
@@ -169,7 +193,7 @@ public class Message implements Serializable {
 
     int iddatabase;
 
-    static List<Store> stores=null;
+     List<Store> stores=null;
 
 
     public String getAnswer() {
@@ -363,7 +387,7 @@ public class Message implements Serializable {
         this.credit_card = credit_card;
     }
 
-    public static int getPlan() {
+    public  int getPlan() {
         return plan;
     }
 
@@ -443,7 +467,7 @@ public class Message implements Serializable {
     }
 
 
-    public static List<Store> getStores() {
+    public  List<Store> getStores() {
         return stores;
     }
 

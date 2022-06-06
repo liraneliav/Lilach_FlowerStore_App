@@ -2,11 +2,8 @@ package il.client;
 
 import il.client.events.*;
 import il.client.ocsf.AbstractClient;
-import il.entities.Product;
-import il.entities.Message;
+import il.entities.*;
 import org.greenrobot.eventbus.EventBus;
-
-import java.util.*;
 
 public class SimpleClient extends AbstractClient {
 	
@@ -26,26 +23,37 @@ public class SimpleClient extends AbstractClient {
 			System.out.println("get init data");
 			EventBus.getDefault().post(new CatalogItemsEvent(message.getListItem(), message.getListStors()));
 		}
-
-		if(message.getMessage().equals("result login")){
+		if(message.getMessage().equals("result login")) {
 			LoginEvent eventlogIN = null;
-			if(!message.isLoginStatus())
+			if (!message.isLoginStatus())
 				EventBus.getDefault().post(new LoginEvent(false, message.getLoginResult()));
-			else{
-				if(!message.isWorker()){//user
+			else {
+				if (!message.isWorker()) {//user
 					eventlogIN = new LoginEvent(true, message.getUser(), message.getListComplains(), message.getListOrder(), message.getListStors());
 					eventlogIN.setId(message.getUser().getId());
-					if(message.getPermision()==3 || message.getPermision()==5)
-						eventlogIN.setStoreId(message.getStoreID());
+				} else {//worker
+					switch (message.getPermision()) {
+						case 5://system admin
+							eventlogIN = new LoginEvent((SystemAdmin) message.getEmployee(), message.getPermision(), message.getListComplains(), message.getListOrder(),
+									message.getListStors(), message.getListUsers(), message.getEmployeeslist());
+							break;
+						case 4://networkmaneger
+							eventlogIN = new LoginEvent((NetworkManger) message.getEmployee(), message.getPermision(), message.getListComplains(), message.getListOrder(),
+									message.getListStors());
+							break;
+						case 3://branchManager
+							eventlogIN = new LoginEvent((BranchManager) message.getEmployee(), message.getPermision(), message.getListComplains(), message.getListOrder());
+							break;
+						case 2://CustomerService
+							eventlogIN = new LoginEvent((CustomerService) message.getEmployee(), message.getPermision(), message.getListComplains(), message.getListOrder());
+							break;
+						case 1://StoreEmployee
+							eventlogIN = new LoginEvent((StoreEmployee) message.getEmployee(), message.getPermision(), message.getStoreID());
+							break;
+					}
 				}
-				else{//worker
-					eventlogIN = new LoginEvent(message.getUsername(), message.getPermision());
-					eventlogIN.setId(message.getIddatabase());
-					eventlogIN.setOrderList(message.getListOrder());
-					eventlogIN.setComplainList(message.getListComplains());
-				}
-				EventBus.getDefault().post(eventlogIN);
 			}
+			EventBus.getDefault().post(eventlogIN);
 		}
 
 		if(message.getMessage().equals("result register")){
