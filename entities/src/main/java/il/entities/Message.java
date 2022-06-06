@@ -36,6 +36,10 @@ public class Message implements Serializable {
     String priorty;
     List<Store>userListStore;
 
+
+    //login System admin
+    LinkedList<Employee> employeeslist;
+
     public String getAddress() {
         return address;
     }
@@ -60,6 +64,16 @@ public class Message implements Serializable {
     int permision;
 
     Product product;
+
+
+    public LinkedList<Employee> getEmployeeslist() {
+        return employeeslist;
+    }
+
+    public void setEmployeeslist(LinkedList<Employee> employeeslist) {
+        this.employeeslist = employeeslist;
+    }
+
 
     public Employee getEmployee() {
         return employee;

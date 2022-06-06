@@ -27,49 +27,51 @@ public class LoginControl {
                         }
 
                         //employee
-                        setToActiveEmp(employee.getId());
                         message.setLoginStatus(true);
-                        message.setWorker(true);
-                        message.setUsername(employee.getUsername());
-                        message.setName(employee.getName());
-                        message.setIddatabase(employee.getId());
+                        setToActiveEmp(employee.getId());
                         message.setPermision(employee.getPermission());
-
-                        StoreEmployee storeEmployee;
-                        BranchManager branchManager;
-
                         switch (employee.getPermission()){
-                            case 1://system admin send all information
-                                message.setListComplains(ComplainConrtol.getAllnComplaint(SimpleServer.getAllItems(Complain.class)));
-                                message.setListOrder(OrderControl.getAllOrder(SimpleServer.getAllItems(Order.class)));
+                            case 5://system admin send all information
+                                SystemAdmin admin = (SystemAdmin) employee;
+                                message.setEmployee(admin);
+                                message.setPermision(admin.getPermission());
+                                message.setListOrder(SimpleServer.getAllItems(Order.class));
+                                message.setListComplains(SimpleServer.getAllItems(Complain.class));
+                                message.setListStors(SimpleServer.getAllItems(Store.class));
+                                message.setListUsers(SimpleServer.getAllItems(User.class));
+                                message.setEmployeeslist(SimpleServer.getAllItems(Employee.class));
                                 //users
                                 //employees
                                 //stores
                                 //report
                                 break;
-                            case 2://networkmaneger
-                                message.setListComplains(ComplainConrtol.getAllnComplaint(SimpleServer.getAllItems(Complain.class)));
-                                message.setListOrder(OrderControl.getAllOrder(SimpleServer.getAllItems(Order.class)));
+                            case 4://networkmaneger
+                                NetworkManger net = (NetworkManger) employee;
+                                message.setEmployee(net);
+                                message.setListComplains(SimpleServer.getAllItems(Complain.class));
+                                message.setListOrder(SimpleServer.getAllItems(Order.class));
+                                message.setListStors(SimpleServer.getAllItems(Store.class));
+                                break;
+                            case 3://branchManager
                                 //report
+                                BranchManager e = (BranchManager) employee;
+                                message.setEmployee(employee);
+                                message.setListOrder(SimpleServer.getAllItemsByKey(Order.class, "store", e.getStore().getId()));
+                                message.setListComplains(SimpleServer.getAllItemsByKey(Complain.class, "store",e.getStore().getId()));
                                 break;
-                            case 3:
-                                //report
-                                branchManager = (BranchManager) employee;
-                                message.setStoreID(branchManager.getStore().getId());
+                            case 2://CustomerService
+                                CustomerService c = (CustomerService)employee;
+                                message.setEmployee(c);
+                                message.setListComplains(SimpleServer.getAllItems(Complain.class));
+                                message.setListOrder(SimpleServer.getAllItems(Order.class));
                                 break;
-                            case 4:
-                                message.setListComplains(ComplainConrtol.getAllOpenComplaint(SimpleServer.getAllItems(Complain.class)));
-//                                message.setListOrder(OrderControl.getAllOrder(SimpleServer.getAllItems(Order.class)));
-                                break;
-                            case 5:
-                                storeEmployee = (StoreEmployee) employee;
-                                message.setStoreID(storeEmployee.getStore().getId());
+                            case 1://StoreEmployee
+                                StoreEmployee s = (StoreEmployee)employee;
+                                message.setEmployee(s);
+                                message.setStoreID(s.getStore().getId());
                                 break;
                         }
-//                        message.setListComplains(ComplainConrtol.getAllOpenComplaint());
-//                        message.setListOrder(OrderControl.getAllOrder());
                         return message;
-
                     } else {
                         message.setLoginResult("incorrect password!");
                         message.setLoginStatus(false);

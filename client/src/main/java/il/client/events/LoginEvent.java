@@ -9,6 +9,10 @@ public class LoginEvent {
     private LinkedList<Complain> complainList=null;
     private LinkedList<Order> orderList=null;
     private LinkedList<Store>  storeList=null;
+    private LinkedList<Employee>  empolyeeList=null;
+
+
+    private LinkedList<User>  userList=null;
     private int storeId;
     private int id;
     private boolean isWorker;
@@ -17,13 +21,16 @@ public class LoginEvent {
     private boolean loginStatus;
     private String result;
     private User user;
-    private List<Store>  userlistStore=null;
+    private List<Store> userlistStore=null;
+
+
+    private Store store;
 
     public LoginEvent(boolean status, String result){
         this.loginStatus = status;
         this.result = result;
     }
-
+    //USER
     public LoginEvent(boolean statsu, User user, LinkedList<Complain> complains, LinkedList<Order> orders, LinkedList<Store> userlistStore){
         this.loginStatus = statsu;
         this.userlistStore = userlistStore;
@@ -34,17 +41,81 @@ public class LoginEvent {
         this.isWorker = false;
     }
 
-    public LoginEvent(User user){
-        this.user = user;
-    }
-
-    public LoginEvent(String username, int permission){
+    //  employee branch manager
+    public LoginEvent(BranchManager e, int permission,  LinkedList<Complain> complains, LinkedList<Order> orders){
         this.loginStatus = true;
         this.isWorker = true;
-        this.username = username;
+        this.username = e.getUsername();
+        this.permission = permission;
+        this.store = e.getStore();
+        this.orderList=orders;
+        this.complainList=complains;
+    }
+    //admin
+    public LoginEvent(SystemAdmin e, int permission,  LinkedList<Complain> complains, LinkedList<Order> orders, LinkedList<Store> stores,LinkedList<User> users,
+                      LinkedList<Employee> employees ){
+        this.loginStatus = true;
+        this.isWorker = true;
+        this.username = e.getUsername();
+        this.permission = permission;
+        this. storeList = stores;
+        this.orderList=orders;
+        this.complainList=complains;
+        this.userList =users;
+        this.empolyeeList =employees;
+    }
+    //customer service
+    public LoginEvent(CustomerService e, int permission,  LinkedList<Complain> complains, LinkedList<Order> orders){
+        this.loginStatus = true;
+        this.isWorker = true;
+        this.username = e.getUsername();
+        this.permission = permission;
+        this.orderList=orders;
+        this.complainList=complains;
+    }
+
+
+    //StoreEmployee
+    public LoginEvent(StoreEmployee e, int permission,  int storeId){
+        this.loginStatus = true;
+        this.isWorker = true;
+        this.username = e.getUsername();
         this.permission = permission;
     }
 
+    //netwotkmanager
+    public LoginEvent( NetworkManger e, int permission,  LinkedList<Complain> complains, LinkedList<Order> orders, LinkedList<Store> stores){
+        this.loginStatus = true;
+        this.isWorker = true;
+        this.username = e.getUsername();
+        this.permission = permission;
+        this. storeList = stores;
+        this.orderList=orders;
+        this.complainList=complains;
+    }
+
+
+    public LinkedList<Employee> getEmpolyeeList() {
+        return empolyeeList;
+    }
+
+    public void setEmpolyeeList(LinkedList<Employee> empolyeeList) {
+        this.empolyeeList = empolyeeList;
+    }
+    public LinkedList<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(LinkedList<User> userList) {
+        this.userList = userList;
+    }
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
 
     public List<Store> getUserlistStore() {
         return userlistStore;
