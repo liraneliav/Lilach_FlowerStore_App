@@ -34,6 +34,7 @@ public class Message implements Serializable {
     String mail;
     double creadit;
     String priorty;
+    List<Store>userListStore;
 
     public String getAddress() {
         return address;
@@ -110,7 +111,13 @@ public class Message implements Serializable {
         this.creadit = creadit;
     }
 
+    public List<Store> getUserListStore() {
+        return userListStore;
+    }
 
+    public void setUserListStore(List<Store> userListStore) {
+        this.userListStore = userListStore;
+    }
 
 
     //recive login

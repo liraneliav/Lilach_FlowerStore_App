@@ -4,6 +4,7 @@ import il.client.events.*;
 import il.client.ocsf.AbstractClient;
 import il.entities.Product;
 import il.entities.Message;
+import il.entities.Store;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.*;
@@ -35,14 +36,14 @@ public class SimpleClient extends AbstractClient {
 				if(!message.isWorker()){//user
 					eventlogIN = new LoginEvent(true, message.getUser(), message.getListComplains(), message.getListOrder(), message.getListStors());
 					eventlogIN.setId(message.getUser().getId());
-					if(message.getPermision()==3 || message.getPermision()==5)
-						eventlogIN.setStoreId(message.getStoreID());
 				}
 				else{//worker
 					eventlogIN = new LoginEvent(message.getUsername(), message.getPermision());
 					eventlogIN.setId(message.getIddatabase());
 					eventlogIN.setOrderList(message.getListOrder());
 					eventlogIN.setComplainList(message.getListComplains());
+					if(message.getPermision()==3 || message.getPermision()==5)
+						eventlogIN.setStoreId(message.getStoreID());
 				}
 				EventBus.getDefault().post(eventlogIN);
 			}

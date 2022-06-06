@@ -51,6 +51,7 @@ public class User implements Serializable {
 
 
     @ManyToMany
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Store> liststore;
 
 

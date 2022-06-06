@@ -1,7 +1,9 @@
 package il.server;
 
 import il.entities.*;
+import il.entities.Order;
 
+import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -91,14 +93,60 @@ public class LoginControl {
                         setToActiveUser(user.getId());
                         message.setLoginStatus(true);
                         message.setWorker(false);
-
+                        message.setUser(user);
+                        message.setListOrder(SimpleServer.getAllItemsByKey(Order.class, "user",user.getId()));
+                        message.setListComplains(SimpleServer.getAllItemsByKey(Complain.class, "user",user.getId()));
                         testDB.openSession();
                         user = testDB.session.get(User.class, user.getId());
-                        message.setUser(user.getUserForClien());
-                        message.setListOrder(user.getOrdersForClient());
-                        message.setListComplains(user.getComplainsForClient());
-                        message.setListStors(user.getStoresForClient());
+                        List<Store> s = user.getListstore();
+                        LinkedList<Store> storelist = new LinkedList<>(s);
                         testDB.closeSession();
+                        message.setListStors(storelist);
+
+//
+//                        testDB.openSession();
+//                        CriteriaBuilder builder = testDB.session.getCriteriaBuilder();
+//                        CriteriaQuery<Store> query = builder.createQuery(Store.class);
+//                            Root<Store> student = query.from(Store.class);
+//                            List<Predicate> predicates = new ArrayList<>();
+
+                            // Iterate over each courseName we want to match with
+//                            for(String courseName : courseNames) {
+//                                // Initialize the subquery
+//                                Subquery<Long> subquery = query.subquery(Long.class);
+//                                Root<Store> subqueryStore = subquery.from(Student.class);
+//                                Join<Course, Student> subqueryCourse = subqueryStudent.join("courses");
+//
+//                                // Select the Student ID where one of their courses matches
+//                                subquery.select(subqueryStudent.get("id")).where(
+//                                        cb.equal(subqueryCourse.get("courseName"), courseName));
+//
+//                                // Filter by Students that match one of the Students found in the subquery
+//                                predicates.add(cb.in(student.get("id")).value(subquery));
+//                            }
+//
+//                            // Use all predicates above to query
+//                            cq.where(cb.and(predicates.toArray(new Predicate[predicates.size()])));
+//                            TypedQuery<Student> query = entityManager.createQuery(cq);
+//
+//                            return query.getResultList();
+//                        }
+//
+//
+//                        Root<Store> root = query.from(Store.class);
+//                        query.select(root);
+//                        query.where(root.join("listUsers").in(user.getId()));
+//                        List<T> data = testDB.session.createQuery(query).getResultList();
+//                        LinkedList<T> listItems = new LinkedList<>(data);
+//                        testDB.closeSession();
+//                        return listItems;
+//
+//                        message.setListStors(SimpleServer.getAllItemsByKey(Store.class, "listUsers",user.getId())); //many to many PROblam
+
+
+
+
+
                         return message;
 
                     } else {

@@ -3,6 +3,7 @@ package il.client.events;
 import il.entities.*;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class LoginEvent {
     private LinkedList<Complain> complainList=null;
@@ -16,15 +17,16 @@ public class LoginEvent {
     private boolean loginStatus;
     private String result;
     private User user;
+    private List<Store>  userlistStore=null;
 
     public LoginEvent(boolean status, String result){
         this.loginStatus = status;
         this.result = result;
     }
 
-    public LoginEvent(boolean statsu, User user, LinkedList<Complain> complains, LinkedList<Order> orders, LinkedList<Store> stores){
+    public LoginEvent(boolean statsu, User user, LinkedList<Complain> complains, LinkedList<Order> orders, LinkedList<Store> userlistStore){
         this.loginStatus = statsu;
-        this.storeList = stores;
+        this.userlistStore = userlistStore;
         this.orderList = orders;
         this.complainList = complains;
         this.user = user;
@@ -32,6 +34,9 @@ public class LoginEvent {
         this.isWorker = false;
     }
 
+    public LoginEvent(User user){
+        this.user = user;
+    }
 
     public LoginEvent(String username, int permission){
         this.loginStatus = true;
@@ -41,6 +46,13 @@ public class LoginEvent {
     }
 
 
+    public List<Store> getUserlistStore() {
+        return userlistStore;
+    }
+
+    public void setUserlistStore(List<Store> userlistStore) {
+        this.userlistStore = userlistStore;
+    }
     public int getStoreId() {
         return storeId;
     }

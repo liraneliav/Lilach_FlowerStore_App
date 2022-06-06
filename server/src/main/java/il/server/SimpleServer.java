@@ -1,6 +1,5 @@
 package il.server;
 
-import il.client.UserClient;
 import il.entities.*;
 import il.server.ocsf.ConnectionToClient;
 import il.server.ocsf.AbstractServer;
@@ -29,7 +28,7 @@ public class SimpleServer extends AbstractServer {
         this.close();
     }
 
-    private <T, S> LinkedList<T> getAllItemsByKey(Class<T> object, String colum,S key){
+    public static  <T, S> LinkedList<T> getAllItemsByKey(Class<T> object, String colum,S key){
         testDB.openSession();
         CriteriaBuilder builder = testDB.session.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(object);
