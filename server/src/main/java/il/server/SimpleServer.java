@@ -40,6 +40,7 @@ public class SimpleServer extends AbstractServer {
         return listItems;
     }
     private <T, S> LinkedList<T> getAllItemsByKey(Class<T> object, String colum,S key){
+        testDB.openSession();
         CriteriaBuilder builder = testDB.session.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(object);
         Root<T> root = query.from(object);
@@ -82,7 +83,7 @@ public class SimpleServer extends AbstractServer {
             //Complint for custmer USER
             if (message.getMessage().equals("getAllComplaintsForUser")) {
                 sendMessage.setMessage("AllComplaintsForUser");
-                sendMessage.setListComplains(getAllItemsByKey(Complain.class, "user_id", message.getUserID()));
+                sendMessage.setListComplains(ComplainConrtol.AllComplaintsForUser(getAllItemsByKey(Complain.class, "user", message.getUserID())));
                 client.sendToClient(sendMessage);
                 System.out.println("send All Complaints for User: "+message.getUserID()+"to client");
             }
@@ -94,14 +95,14 @@ public class SimpleServer extends AbstractServer {
 //                System.out.println("send All Order for User: "+message.getUserID()+"to client");
 //            }
 
-            if (message.getMessage().equals("getReport")) {
-                sendMessage.setMessage("reportData");
-                sendMessage.setListOrder(getAllItemsByKey(Order.class, "store_id", message.getStoreID()));
-                sendMessage.setListComplains(getAllItemsByKey(Complain.class, "store_id", message.getStoreID()));
-                sendMessage.setStoreID(message.getStoreID());
-                client.sendToClient(sendMessage);
-                System.out.println("send stores to client");
-            }
+//            if (message.getMessage().equals("getReport")) {
+//                sendMessage.setMessage("reportData");
+//                sendMessage.setListOrder(getAllItemsByKey(Order.class, "store", message.getStoreID()));
+//                sendMessage.setListComplains(getAllItemsByKey(Complain.class, "store", message.getStoreID()));
+//                sendMessage.setStoreID(message.getStoreID());
+//                client.sendToClient(sendMessage);
+//                System.out.println("send stores to client");
+//            }
 
             if (message.getMessage().equals("logout")) {
                 int id = message.getIddatabase();

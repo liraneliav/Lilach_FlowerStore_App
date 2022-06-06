@@ -1,6 +1,7 @@
 package il.client.DiffClasses;
 
 import il.client.OrderClient;
+import il.entities.Complain;
 
 public class ComplaintClient {
     private static int id = 0;
@@ -24,7 +25,19 @@ public class ComplaintClient {
 
     }
 
-
+    public ComplaintClient(Complain complaint){
+        this.this_id = complaint.getId();
+        this.complaint = complaint.getComplain_text();
+        this.complaintDate = complaint.getDate_complain();
+        this.refund = complaint.getRefund();
+        this.ComplaintTime = complaint.getComplaintTime();
+        this.isHandled = complaint.isStatus();
+        this.Answer = complaint.getAnswer_text();
+        if(this.refund > 0){
+            this.isRefund = true;
+        }
+        this.order = new OrderClient(complaint.getOrder()); //constructor
+    }
     public OrderClient getOrder() {
         return order;
     }

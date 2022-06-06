@@ -38,11 +38,11 @@ public class UserClient {
         user = this;
         {
             ObservableList<CartItem> cart = FXCollections.observableArrayList();
-            cart.add(new CartItem("sunflower", 159.90, 2, 1));
-            cart.add(new CartItem("rose", 299.99, 2, 2));
-            cart.add(new CartItem("rose", 299.99, 2, 2));
-            cart.add(new CartItem("rose", 299.99, 2, 2));
-            cart.add(new CartItem("rose", 299.99, 2, 2));
+            cart.add(new CartItem("sunflower", 159.90, 2, 1, true, 20));
+            cart.add(new CartItem("rose", 299.99, 2, 2,false, 30));
+            cart.add(new CartItem("rose", 299.99, 2, 2, true, 0));
+            cart.add(new CartItem("rose", 299.99, 2, 2, false, 10));
+            cart.add(new CartItem("rose", 299.99, 2, 2, true, 0));
 
             //for trying examples
             for(int i=0; i<20; i++)

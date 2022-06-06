@@ -1,11 +1,14 @@
 package il.client;
 
+import il.entities.CartProduct;
+import il.entities.Order;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 
 import java.io.IOException;
+import java.util.List;
 
 public class OrderClient {
     private static int id = 0;
@@ -19,6 +22,8 @@ public class OrderClient {
     private String phoneReceiver;
     private String Address;
     private String storeChoosen;
+
+    private Order order;
 
     @FXML
     private MFXButton complaint;
@@ -42,6 +47,26 @@ public class OrderClient {
         this.complaint = new MFXButton("Add Complaint");
         this.cancel = new MFXButton("Cancel Order");
         this.storeChoosen = store;
+        buttonsInitilize();
+    }
+    public OrderClient(Order orderEntity) {
+        this.this_id = orderEntity.getId();
+        this.orderDate = orderEntity.getDateOrder();
+        this.orderTime = orderEntity.getTimeOrder();
+        this.orderReceiveTime = orderEntity.getTimeReceive();
+        this.orderReceiveDate = orderEntity.getDateReceive();
+        this.greeting = orderEntity.getGreeting();
+        this.nameReceiver = orderEntity.getNameReceives();
+        this.phoneReceiver = orderEntity.getPhoneReceives();
+        this.Address = orderEntity.getAddress();
+        //this.order_items = orderEntity.
+        this.complaint = new MFXButton("Add Complaint");
+        this.cancel = new MFXButton("Cancel Order");
+        this.storeChoosen = String.valueOf(orderEntity.getStore());
+        List<CartProduct> entityList = orderEntity.getProducts();
+        for(CartProduct cartProd: entityList){
+            this.order_items.add(new CartItem(cartProd));
+        }
         buttonsInitilize();
     }
 

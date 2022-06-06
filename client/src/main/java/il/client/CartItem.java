@@ -1,17 +1,39 @@
 package il.client;
 
 
+import il.entities.CartProduct;
+import il.entities.Order;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 public class CartItem {
     private String item_name;
     private double item_price;
     private int item_id;
     private int item_amount;
+    private boolean onSale;
+    private double discountPercentage;
 
-    public CartItem(String item_name, double item_price, int amount, int item_id) {
+
+    public CartItem(String item_name, double item_price,int item_id, int amount, boolean onSale, double discountPercentage) {
         this.item_name = item_name;
         this.item_price = item_price;
         this.item_id = item_id;
         this.item_amount = amount;
+        this.discountPercentage = discountPercentage;
+        this.onSale = onSale;
+    }
+
+    public CartItem(CartProduct product) {
+        this.onSale = product.isSale();
+        this.item_name = product.getName();
+        this.item_id = product.getIdProduct();
+        this.item_amount=product.getAmount();
+        this.onSale = product.isSale();
+        this.discountPercentage=product.getDiscount_perc();
     }
 
     public int getItem_amount() {

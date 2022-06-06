@@ -45,6 +45,7 @@ public class ComplaintTabController {
 
     ObservableList<ComplaintClient> items = FXCollections.observableArrayList();
 
+
     private MyAccountController my_account_page_holder;
 
     @FXML
@@ -60,11 +61,12 @@ public class ComplaintTabController {
     public void setComplaintList(ComplaintEvent event) {
         Platform.runLater(() -> {
             List<Complain> tempList = event.getComplainList();
-            System.out.println(tempList);
             ObservableList<ComplaintClient> castList = FXCollections.observableArrayList();
-            castList.addAll((ComplaintClient) tempList);
-            System.out.println(castList);
+            for(Complain complaint: tempList){
+                castList.add(new ComplaintClient(complaint));
+            }
             UserClient.getInstance().setComplaintList(castList);
+            items = UserClient.getInstance().getComplaintList();
             complaints_table.setItems(UserClient.getInstance().getComplaintList());
        });
     }

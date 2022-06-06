@@ -94,7 +94,7 @@ public class AddToCartController{
     }
 
     public void addItemToTable(String name, double price, int id, int amount){
-        CartItem item = new CartItem(name,price,id,amount);
+        CartItem item = new CartItem(name,price,id,amount,false,0);
         this.items.addAll(item);
     }
 

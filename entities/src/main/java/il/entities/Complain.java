@@ -21,6 +21,10 @@ public class Complain implements Serializable {
     @Column(name = "complain_date")
     private String date_complain;
 
+
+    @Column(name = "complaint_time")
+    private String complaintTime;
+
     @OneToOne
     private Order order;
 
@@ -119,6 +123,14 @@ public class Complain implements Serializable {
 
     public void setAnswer_text(String answer_text) {
         this.answer_text = answer_text;
+    }
+
+    public String getComplaintTime() {
+        return complaintTime;
+    }
+
+    public void setComplaintTime(String complaintTime) {
+        this.complaintTime = complaintTime;
     }
 
 }
