@@ -102,51 +102,6 @@ public class LoginControl {
                         LinkedList<Store> storelist = new LinkedList<>(s);
                         testDB.closeSession();
                         message.setListStors(storelist);
-
-//
-//                        testDB.openSession();
-//                        CriteriaBuilder builder = testDB.session.getCriteriaBuilder();
-//                        CriteriaQuery<Store> query = builder.createQuery(Store.class);
-//                            Root<Store> student = query.from(Store.class);
-//                            List<Predicate> predicates = new ArrayList<>();
-
-                            // Iterate over each courseName we want to match with
-//                            for(String courseName : courseNames) {
-//                                // Initialize the subquery
-//                                Subquery<Long> subquery = query.subquery(Long.class);
-//                                Root<Store> subqueryStore = subquery.from(Student.class);
-//                                Join<Course, Student> subqueryCourse = subqueryStudent.join("courses");
-//
-//                                // Select the Student ID where one of their courses matches
-//                                subquery.select(subqueryStudent.get("id")).where(
-//                                        cb.equal(subqueryCourse.get("courseName"), courseName));
-//
-//                                // Filter by Students that match one of the Students found in the subquery
-//                                predicates.add(cb.in(student.get("id")).value(subquery));
-//                            }
-//
-//                            // Use all predicates above to query
-//                            cq.where(cb.and(predicates.toArray(new Predicate[predicates.size()])));
-//                            TypedQuery<Student> query = entityManager.createQuery(cq);
-//
-//                            return query.getResultList();
-//                        }
-//
-//
-//                        Root<Store> root = query.from(Store.class);
-//                        query.select(root);
-//                        query.where(root.join("listUsers").in(user.getId()));
-//                        List<T> data = testDB.session.createQuery(query).getResultList();
-//                        LinkedList<T> listItems = new LinkedList<>(data);
-//                        testDB.closeSession();
-//                        return listItems;
-//
-//                        message.setListStors(SimpleServer.getAllItemsByKey(Store.class, "listUsers",user.getId())); //many to many PROblam
-
-
-
-
-
                         return message;
 
                     } else {
