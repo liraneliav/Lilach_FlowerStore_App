@@ -30,7 +30,7 @@
             <Image url="@images/DiscountPhoto/discount.jpg" />
          </image>
       </ImageView>
-      <VBox layoutX="33.0" layoutY="30.0" prefHeight="70.0" prefWidth="175.0">
+      <VBox layoutX="33.0" layoutY="30.0" prefHeight="105.0" prefWidth="159.0">
          <children>
             <Label fx:id="product_name" text="Name">
                <font>
@@ -44,6 +44,17 @@
                </cursor>
             </Label>
             <Label fx:id="product_price" prefHeight="53.0" prefWidth="126.0" text="Price">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <effect>
+                  <ColorAdjust />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </Label>
+            <Label fx:id="product_originalPrice" prefHeight="53.0" prefWidth="126.0" text="Original Price">
                <font>
                   <Font size="24.0" />
                </font>

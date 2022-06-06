@@ -38,6 +38,12 @@ public class PopWindow extends ParentClass{
     @FXML
     private ImageView discount_logo_poped;
 
+    @FXML
+    private Label typeText;
+
+    @FXML
+    private Label colorText;
+
     private ProductView PVController;
 
     private Stage stage;
@@ -56,13 +62,16 @@ public class PopWindow extends ParentClass{
     }
 
     @FXML
-    void FullSetter(int id, String name, String price, boolean on_discount, Image image){
+    void FullSetter(int id, String name, String price, boolean on_discount, Image image, String color, String type){
         this.id_txt.setText(Integer.toString(id));
         this.price_txt.setText(price);
         this.name_txt.setText(name);
         this.on_discount = on_discount;
+        this.colorText.setText(color);
+        this.typeText.setText(type);
         this.product_zoomed_image.setImage(image);
         if(on_discount){
+            System.out.println(on_discount);
             this.discount_logo_poped.setVisible(true);
         }
     }

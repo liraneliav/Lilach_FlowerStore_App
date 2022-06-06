@@ -127,12 +127,21 @@ public class MainPageController extends ParentClass {     //This is a singleton 
         MyThread thread = new MyThread();
         thread.start();
         LoadFirstPage();
-        System.out.println("This code is outside of the thread");
+        System.out.println("This code is outside of the thread from MainPageController Initializer");
     }
 
 
     private void initButtons(){
-        closeIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> Platform.exit());
+        closeIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            try {
+                LogInControl.logout(UserClient.getInstance().getId());
+                UserClient.getInstance().resetUserClient();
+                Platform.exit();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            }
+        );
         minimizeIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> ((Stage) this.main_first_load_pane.getScene().getWindow()).setIconified(true));
         alwaysOnTopIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             boolean newVal = !stage.isAlwaysOnTop();
@@ -275,9 +284,9 @@ public class MainPageController extends ParentClass {     //This is a singleton 
             this.setLogin(false);
             this.setLoginName("Default");
         }
-        UserClient.getInstance().setPriority(1);
-        MainPageController.getInstance().Refresh();
         LogInControl.logout(UserClient.getInstance().getId());
+        UserClient.getInstance().resetUserClient();
+        MainPageController.getInstance().Refresh();
         LoadHomePage();
     }
 

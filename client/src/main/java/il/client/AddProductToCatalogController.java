@@ -41,7 +41,6 @@ public class AddProductToCatalogController{
         stage.setTitle("Add Item");
         stage.setScene(scene);
         stage.show();
-
     }
 
 }

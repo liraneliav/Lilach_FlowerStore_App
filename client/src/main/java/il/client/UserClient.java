@@ -89,6 +89,9 @@ public class UserClient {
         }
         return user;
     }
+    public void resetUserClient(){ //added by Dean
+        this.user = new UserClient();
+    }
 
 //    public void setUserByServer(User UserServer){
 ////        complaintList = UserServer.getComplaints(); //get from server complaints and Orders;

@@ -29,6 +29,7 @@ public class PopWindowCustomProduct extends ParentClass{
     @FXML
     private Label price_txt;
 
+
     @FXML
     private MFXCheckbox product_on_stock;
 
@@ -40,6 +41,12 @@ public class PopWindowCustomProduct extends ParentClass{
 
     @FXML
     private MFXButton getBtn;
+
+    @FXML
+    private Label typeText;
+
+    @FXML
+    private Label colorText;
 
     private ProductView PVController;
 
@@ -61,12 +68,14 @@ public class PopWindowCustomProduct extends ParentClass{
     }
 
     @FXML
-    void FullSetter(int id, String name, String price, boolean on_discount, Image image){
+    void FullSetter(int id, String name, String price, boolean on_discount, Image image, String color, String type){
         this.id_txt.setText(Integer.toString(id));
         this.price_txt.setText(price);
         this.name_txt.setText(name);
         this.on_discount = on_discount;
         this.product_zoomed_image.setImage(image);
+        this.colorText.setText(color);
+        this.typeText.setText(type);
         if(on_discount){
             this.discount_logo_poped.setVisible(true);
         }

@@ -66,7 +66,9 @@ public class EditProductOnCatalogController {
         listFiles.add("*.jpeg");
         this.PVController = controller;
         this.nameText.setText(PVController.getProduct_name());
-        this.PriceText.setText(Double.toString(PVController.getProduct_price()));
+        if(PVController.getProduct_price() != controller.getProduct_price()){
+            this.PriceText.setText(Double.toString(PVController.getProduct_price()));
+        }
         this.productImage.setImage(PVController.getProductImageNotURL());
         this.colorText.setText(PVController.getColor());
         this.typeText.setText(PVController.getType());

@@ -46,6 +46,9 @@ public class ProductView extends ParentClass{
     @FXML
     private MFXButton editFlower;
 
+    @FXML
+    private Label product_originalPrice;
+
     private CatalogController cat_controller;
 
     private boolean on_discount;
@@ -53,6 +56,7 @@ public class ProductView extends ParentClass{
     private double discound_precentage;
 
     private int id_of_flower;
+
 
     private int clicks_image=0;
 
@@ -71,7 +75,9 @@ public class ProductView extends ParentClass{
 
         this.on_discount = a.isOn_discount();
         this.discound_precentage = a.getDiscount_perc();
+        this.product_originalPrice.setText(String.valueOf(a.getPrice()));
         if(this.on_discount){
+            this.product_originalPrice.setStyle("-fx-text-decoration:line-through");
             this.discount_logo.setVisible(true);
             this.product_price.setText(String.valueOf((int)(a.getPrice() - (a.getPrice()*this.discound_precentage)/100)));
         }
@@ -185,7 +191,7 @@ public class ProductView extends ParentClass{
         Scene scene = new Scene(fxmlLoader.load(), 681, 514);
         scene.setFill(Color.TRANSPARENT);
         PopWindow controller = fxmlLoader.getController();
-        controller.FullSetter(this.getId(), this.product_name.getText(), this.product_price.getText(), this.on_discount, this.product_image.getImage());
+        controller.FullSetter(this.getId(), this.product_name.getText(), this.product_price.getText(), this.on_discount, this.product_image.getImage(), this.color, this.type);
         controller.initialize(stage,this);
         controller.setStage(stage);
         stage.setTitle("Edit Flower");
