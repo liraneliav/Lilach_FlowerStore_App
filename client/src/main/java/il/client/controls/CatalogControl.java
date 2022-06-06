@@ -9,7 +9,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class CatalogControl {
-    public static void getItemsList() throws IOException, ClassNotFoundException, InterruptedException {
+    public static void getItemsList() throws IOException {
         Message message = new Message("getCatalogItems");
         SimpleClient.getClient().sendToServer(message);
     }

@@ -1,8 +1,13 @@
 package il.client;
 
 import il.client.DiffClasses.ComplaintClient;
+import il.client.controls.CatalogControl;
+import il.client.controls.ComplainConrtol;
+import il.client.events.ComplaintEvent;
+import il.entities.Complain;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.legacy.MFXLegacyTableView;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,8 +19,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ComplaintTabController {
 
@@ -39,14 +48,29 @@ public class ComplaintTabController {
     private MyAccountController my_account_page_holder;
 
     @FXML
-    void initialize(){
+    void initialize() throws IOException {
+        EventBus.getDefault().register(this);
+       ComplainConrtol.getAllOpenComplaintsByUser(7);
         TableInitializeFields();
-        items = UserClient.getInstance().getComplaintList();
-        for(int i=0; i< items.size(); i++){
-            System.out.println(items.get(i));
+//        items = UserClient.getInstance().getComplaintList();
+//        for(int i=0; i< items.size(); i++){
+//            System.out.println(items.get(i));
         }
-        complaints_table.setItems(UserClient.getInstance().getComplaintList());
+    @Subscribe
+    public void setComplaintList(ComplaintEvent event) {
+        Platform.runLater(() -> {
+            List<Complain> tempList = event.getComplainList();
+            System.out.println(tempList);
+            ObservableList<ComplaintClient> castList = FXCollections.observableArrayList();
+            castList.addAll((ComplaintClient) tempList);
+            System.out.println(castList);
+            UserClient.getInstance().setComplaintList(castList);
+            complaints_table.setItems(UserClient.getInstance().getComplaintList());
+       });
     }
+
+
+
     //
     public void TableInitializeFields() {
         complaints_table.setFixedCellSize(40);

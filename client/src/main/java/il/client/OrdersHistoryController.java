@@ -51,7 +51,7 @@ public class OrdersHistoryController {
         TableInitializeFields();
         items = UserClient.getInstance().getOrderList();
         for(int i=0; i< items.size(); i++){
-            System.out.println(items.get(i));
+//            System.out.println(items.get(i));
         }
         orders_table.setItems(UserClient.getInstance().getOrderList());
     }
@@ -69,7 +69,7 @@ public class OrdersHistoryController {
         orders_table.setRowFactory(s->{
             TableRow<OrderClient> row = new TableRow<OrderClient>();
             row.setOnMouseClicked(mouseEvent -> {
-                        System.out.println(row.getItem());
+//                        System.out.println(row.getItem());
                         try {
                             detailedOrderScreen(row);
                         } catch (IOException e) {

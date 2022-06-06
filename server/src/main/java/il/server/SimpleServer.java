@@ -72,25 +72,27 @@ public class SimpleServer extends AbstractServer {
                 client.sendToClient(sendMessage);
                 System.out.println("send Flowers to catalog");
             }
-
+                //Complint to custmer service
             if (message.getMessage().equals("getAllOpenComplaints")) {
                 sendMessage.setMessage("AllOpenComplaints");
                 sendMessage.setListComplains(ComplainConrtol.getAllOpenComplaint());
                 client.sendToClient(sendMessage);
-                System.out.println("send stores to client");
+                System.out.println("send All Complaints to client");
             }
-            if (message.getMessage().equals("getAllOpenComplaintsForUser")) {
-                sendMessage.setMessage("AllOpenComplaintsForUser");
+            //Complint for custmer USER
+            if (message.getMessage().equals("getAllComplaintsForUser")) {
+                sendMessage.setMessage("AllComplaintsForUser");
                 sendMessage.setListComplains(getAllItemsByKey(Complain.class, "user_id", message.getUserID()));
                 client.sendToClient(sendMessage);
-                System.out.println("send stores to client");
+                System.out.println("send All Complaints for User: "+message.getUserID()+"to client");
             }
-            if (message.getMessage().equals("getAllOpenOrdersForUser")) {
-                sendMessage.setMessage("AllOpenOrdersForUser");
-                sendMessage.setListOrder(getAllItemsByKey(Order.class, "user_id", message.getUserID()));
-                client.sendToClient(sendMessage);
-                System.out.println("send stores to client");
-            }
+                //Order for custmer USER
+//            if (message.getMessage().equals("getAllOrderForUser")) {
+//                sendMessage.setMessage("AllOrderForUser");
+//                sendMessage.setListOrder(getAllItemsByKey(Order.class, "user_id", message.getUserID()));
+//                client.sendToClient(sendMessage);
+//                System.out.println("send All Order for User: "+message.getUserID()+"to client");
+//            }
 
             if (message.getMessage().equals("getReport")) {
                 sendMessage.setMessage("reportData");

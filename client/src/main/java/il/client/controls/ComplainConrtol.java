@@ -5,8 +5,7 @@ import il.entities.Complain;
 import il.entities.Message;
 
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
+
 
 public class ComplainConrtol{
 
@@ -34,9 +33,13 @@ public class ComplainConrtol{
 
     public static void getAllOpenComplaintsByUser (int userID) throws IOException {
         System.out.println("server send me all compliants for user");
-        Message message = new Message("getAllOpenComplaintsForUser");
+        Message message = new Message("getAllComplaintsForUser");
         message.setUserID(userID);
-        SimpleClient.getClient().sendToServer(message);
+        try {
+            SimpleClient.getClient().sendToServer(message);
+        }catch (Exception e){
+            System.out.println(e);
+        }
     }
 
 }

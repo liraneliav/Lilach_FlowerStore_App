@@ -33,10 +33,15 @@ public class SimpleClient extends AbstractClient {
 			EventBus.getDefault().post(new ComplaintEvent(message.getListComplains()));
 		}
 
-		if(message.getMessage().equals("AllOpenComplaintsForUser")){
+		if(message.getMessage().equals("AllComplaintsForUser")){
 			System.out.println("All Open Complaints For User are here!");
 			EventBus.getDefault().post(new ComplaintEvent(message.getListComplains()));
 		}
+		//ORDER
+//		if(message.getMessage().equals("AllOrderForUser")){
+//			System.out.println("All Open Complaints For User are here!");
+//			EventBus.getDefault().post(new OrdertEvent(message.getListOrder()));
+//		}
 
 		if(message.getMessage().equals("reportData")){
 			System.out.println("report data for store"+message.getStoreID()+" are here!");

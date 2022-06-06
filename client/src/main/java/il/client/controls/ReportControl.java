@@ -13,7 +13,7 @@ public class ReportControl {
         message.setStoreID(sotreID);
         SimpleClient.getClient().sendToServer(message);
     }
-//    /ashekd whats beeter send one by one or togheter?
+//    /asked what's better send one by one or togheter?
 //    public static void getReportforStore (int sotreID1, int sotreID2) throws IOException {
 //        System.out.println("server send me all reports for 2 stores");
 //        Message message = new Message("getReports2Stores");

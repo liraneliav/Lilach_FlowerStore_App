@@ -7,6 +7,8 @@ import javafx.collections.ObservableList;
 
 public class UserClient {
     Priority priority = null;
+
+
     private int id = 0;
     private String userName = "Default";
     private String password = "Default";
@@ -156,4 +158,9 @@ public class UserClient {
     public void setName(String name) {
         this.name = name;
     }
+
+    public int getId() {
+        return id;
+    }
+
 }

@@ -2,8 +2,6 @@ package il.server;
 
 import il.entities.*;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -99,12 +97,12 @@ public class LoginControl {
 
                         testDB.openSession();
                         message.setUser(user.getUserForClien());
-                        user = testDB.session.get(User.class, user.getId());
-                        message.setListOrder(user.getOrdersForClient());
-                        message.setListComplains(user.getComplainsForClient());
-                        message.setListStors(user.getStoresForClient());
+//                        user = testDB.session.get(User.class, user.getId());
+//                        message.setListOrder(user.getOrdersForClient());
+//                        message.setListComplains(user.getComplainsForClient());
+//                        message.setListStors(user.getStoresForClient());
 
-                        testDB.closeSession();
+//                        testDB.closeSession();
                         return message;
 
                     } else {
@@ -159,26 +157,5 @@ public class LoginControl {
         testDB.session.getTransaction().commit(); // Save everything.
         testDB.closeSession();
     }
-
-
-//
-//        testDB.openSssion();
-////        CriteriaBuilder builder = testDB.session.getCriteriaBuilder();
-////        CriteriaQuery<User> query = builder.createQuery(User.class);
-////        Root<User> root = query.from(User.class);
-////        query.orderBy(builder.asc(root.get("userName")));
-////        List<User> data = testDB.session.createQuery(query.orderBy()).getResultList();
-////        LinkedList<User> listItems = new LinkedList<>(data);
-////
-////        for (User user : listItems){
-////            if(user.getUserName().equals(username)){
-////                user.setLogin(false);
-////            }
-////        }
-//
-//        testDB.session.flush();
-//        testDB.session.getTransaction().commit(); // Save everything.
-//        testDB.closeSession();
-//    }
 
 }
