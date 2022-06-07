@@ -46,7 +46,7 @@ public class UserControl {
         message.setUserID(userID);
         SimpleClient.getClient().sendToServer(message);
     }
-    public static void setAddress(int userID, String address, boolean isWorker) throws IOException { //NEED TO AD TO SERVER !
+    public static void setAddress(int userID, String address, boolean isWorker) throws IOException {
         Message message = new Message("setInfo");
         message.setSetinfo("setAddress");
         message.setAddress(address);
@@ -63,7 +63,7 @@ public class UserControl {
         SimpleClient.getClient().sendToServer(message);
     }
 
-    public static  void testSetters() throws IOException {//NEED TO AD TO SERVER !
+    public static  void testSetters() throws IOException {
         System.out.println("test setMail");
         setMail(1,"test@test.com", false);
         System.out.println("test set Name to worker");
@@ -71,7 +71,7 @@ public class UserControl {
 
     }
 
-    public static void setPermission(int userID, int permission, boolean isWorker) throws IOException { //NEED TO AD TO SERVER !
+    public static void setPermission(int userID, int permission, boolean isWorker) throws IOException {
         Message message = new Message("setInfo");
         message.setSetinfo("setPermission");
         message.setPermision(permission);
