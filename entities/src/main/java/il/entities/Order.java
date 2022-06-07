@@ -40,7 +40,7 @@ public class Order implements Serializable {
     private String type;
 
 
-    public Order(User user, Store store, String dateReceive, String timeReceive, String dateOrder, String timeOrder, double sum, String greeting, String nameReceives, String phoneReceives, String address) {
+    public Order(User user, Store store, String dateReceive, String timeReceive, String dateOrder, String timeOrder, double sum, String greeting, String nameReceives, String phoneReceives, String address, String type) {
         this.user = user;
         this.store = store;
         this.dateReceive = dateReceive;
@@ -54,6 +54,7 @@ public class Order implements Serializable {
         this.address = address;
         this.status=3;
         this.products = new ArrayList<CartProduct>();
+        this.type= type;
     }
 
     public Order() {

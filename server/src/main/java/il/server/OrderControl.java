@@ -1,11 +1,6 @@
 package il.server;
-
 import il.entities.*;
-
 import java.io.IOException;
-
-
-
 public class OrderControl {
 
     public static void deleteOrder(int id) {

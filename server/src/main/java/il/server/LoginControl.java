@@ -33,8 +33,8 @@ public class LoginControl {
                                 SystemAdmin admin = (SystemAdmin) employee;
                                 message.setEmployee(admin);
                                 message.setPermision(admin.getPermission());
-                                message.setListOrder(SimpleServer.getAllItems(Order.class));
-                                message.setListComplains(SimpleServer.getAllItems(Complain.class));
+                                message.setListOrder(SimpleServer.getAllItemsInorder(Order.class, "dateOrder"));
+                                message.setListComplains(SimpleServer.getAllItemsInorder(Complain.class,"date_complain"));
                                 message.setListStors(SimpleServer.getAllItems(Store.class));
                                 message.setListUsers(SimpleServer.getAllItems(User.class));
                                 message.setEmployeeslist(SimpleServer.getAllItems(Employee.class));
@@ -46,21 +46,21 @@ public class LoginControl {
                             case 4://networkmaneger
                                 NetworkManger net = (NetworkManger) employee;
                                 message.setEmployee(net);
-                                message.setListComplains(SimpleServer.getAllItems(Complain.class));
-                                message.setListOrder(SimpleServer.getAllItems(Order.class));
+                                message.setListOrder(SimpleServer.getAllItemsInorder(Order.class, "dateOrder"));
+                                message.setListComplains(SimpleServer.getAllItemsInorder(Complain.class,"date_complain"));
                                 message.setListStors(SimpleServer.getAllItems(Store.class));
                                 break;
                             case 3://branchManager
                                 //report
                                 BranchManager e = (BranchManager) employee;
                                 message.setEmployee(employee);
-                                message.setListOrder(SimpleServer.getAllItemsByKey(Order.class, "store", e.getStore().getId()));
-                                message.setListComplains(SimpleServer.getAllItemsByKey(Complain.class, "store",e.getStore().getId()));
+                                message.setListOrder(SimpleServer.getAllItemsByKeyandOrderby(Order.class, "store", e.getStore().getId(), "dateOrder"));
+                                message.setListComplains(SimpleServer.getAllItemsByKeyandOrderby(Complain.class, "store",e.getStore().getId(),"date_complain"));
                                 break;
                             case 2://CustomerService
                                 CustomerService c = (CustomerService)employee;
                                 message.setEmployee(c);
-                                message.setListComplains(SimpleServer.getAllItems(Complain.class));
+                                message.setListComplains(SimpleServer.getAllItemsInorder(Complain.class,"date_complain"));
                                 message.setListOrder(SimpleServer.getAllItems(Order.class));
                                 break;
                             case 1://StoreEmployee

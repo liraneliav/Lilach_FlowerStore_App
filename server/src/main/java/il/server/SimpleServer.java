@@ -27,6 +27,22 @@ public class SimpleServer extends AbstractServer {
         this.close();
     }
 
+
+    //get item by order
+    public static <T, S> LinkedList<T> getAllItemsByKeyandOrderby(Class<T> object, String colum,S key, String orderby){
+        testDB.openSession();
+        CriteriaBuilder builder = testDB.session.getCriteriaBuilder();
+        CriteriaQuery<T> query = builder.createQuery(object);
+        Root<T> root = query.from(object);
+        query.select(root);
+        query.where(builder.equal(root.get(colum),key));
+        query.orderBy(builder.desc(root.get(orderby)));
+        List<T> data = testDB.session.createQuery(query).getResultList();
+        LinkedList<T> listItems = new LinkedList<>(data);
+        testDB.closeSession();
+        return listItems;
+    }
+
     public static <T, S> LinkedList<T> getAllItemsByKey(Class<T> object, String colum,S key){
         testDB.openSession();
         CriteriaBuilder builder = testDB.session.getCriteriaBuilder();
@@ -39,6 +55,19 @@ public class SimpleServer extends AbstractServer {
         testDB.closeSession();
         return listItems;
     }
+
+    public static <T> LinkedList<T> getAllItemsInorder(Class<T> object, String orderby){
+        testDB.openSession();
+        CriteriaBuilder builder = testDB.session.getCriteriaBuilder();
+        CriteriaQuery<T> query = builder.createQuery(object);
+        Root<T> root = query.from(object);
+        query.orderBy(builder.desc(root.get(orderby)));
+        List<T> data = testDB.session.createQuery(query).getResultList();
+        LinkedList<T> listItems = new LinkedList<>(data);
+        testDB.closeSession();
+        return listItems;
+    }
+
 
     public static <T> LinkedList<T> getAllItems(Class<T> object){
         testDB.openSession();
