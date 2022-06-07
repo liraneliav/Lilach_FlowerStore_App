@@ -1,12 +1,7 @@
 package il.entities;
 
-
-
-
-
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.hibernate.boot.cfgxml.spi.MappingReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
