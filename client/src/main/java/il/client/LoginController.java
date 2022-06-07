@@ -175,6 +175,7 @@ public class LoginController extends ParentClass{
     @FXML
     void WorkerChecked(MouseEvent event) {
         this.isWorker = workerChecker.isSelected(); //if the GUI user checked for 'worker login' return 'true'
+        System.out.println(this.workerChecker.isSelected() + "isWorker Toggle From LoginController");
     }
 
     /* Getters and Setters */
