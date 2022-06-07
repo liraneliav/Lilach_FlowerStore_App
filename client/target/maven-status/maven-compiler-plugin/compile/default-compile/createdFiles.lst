@@ -17,6 +17,7 @@ il/client/OrdersHistoryController.class
 il/client/CatalogController.class
 module-info.class
 il/client/UserClient.class
+il/client/CancelOrdersTabController.class
 il/client/ParentClass.class
 il/client/DiffClasses/ComplaintClient.class
 il/client/CustomProductController$ItemCellFactory.class
@@ -45,6 +46,7 @@ il/client/events/LoginEvent.class
 il/client/AddProductToCatalogDialogController.class
 il/client/controls/LogInControl.class
 il/client/MainPageController$MyThread.class
+il/client/ComplaintOrdersTabController.class
 il/client/PopWindow.class
 il/client/MainPageController.class
 il/client/ocsf/ObservableClient.class

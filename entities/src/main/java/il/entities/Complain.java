@@ -28,24 +28,19 @@ public class Complain implements Serializable {
     private boolean status;
     private String complain_text;
     private String answer_text;
+    private String timeComplain;
 
 
-    public Complain(String complain_text, String date_complain) {
+
+    public Complain(String complain_text, String date_complain, String timeComplain) {
         this.complain_text = complain_text;
         this.date_complain = date_complain;
         this.status=true;
         this.refund = 0;
         this.answer_text="";
+        this.timeComplain = timeComplain;
     }
 
-    public Complain getComplainForClient(){
-        Complain c =  new Complain(this.complain_text, this.date_complain);
-        c.setRefund(this.refund);
-        c.setAnswer_text(this.answer_text);
-        c.setId(this.id);
-        return c;
-
-    }
 
     public Complain() {}
 
@@ -119,6 +114,14 @@ public class Complain implements Serializable {
 
     public void setAnswer_text(String answer_text) {
         this.answer_text = answer_text;
+    }
+
+    public String getTimeComplain() {
+        return timeComplain;
+    }
+
+    public void setTimeComplain(String timeComplain) {
+        this.timeComplain = timeComplain;
     }
 
 }
