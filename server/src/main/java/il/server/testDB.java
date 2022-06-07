@@ -151,7 +151,7 @@ public class testDB {
         store3.addUser(u2);
         store3.addUser(u3);
 
-        Order o = new Order(u1, store, "orde1", "asas","asas","1212", 100.0,"121212", "21212","", "");
+        Order o = new Order(u1, store, "orde1", "asas","17/01/2020","1212", 100.0,"121212", "21212","", "","");
         session.save(o);
         o.addProduct(new CartProduct(products.get(0), 1));
         o.addProduct(new CartProduct(products.get(1), 4));
@@ -159,7 +159,7 @@ public class testDB {
         for(CartProduct p : o.getProducts())
             session.save(p);
 
-        o = new Order(u2, store2, "order2", "asas","asas","1212", 100.0,"121212", "21212","", "");
+        o = new Order(u2, store2, "order2", "asas","18/01/2020","1212", 100.0,"121212", "21212","", "","");
         session.save(o);
         o.addProduct(new CartProduct(products.get(5), 1));
         o.addProduct(new CartProduct(products.get(3), 1));
@@ -170,7 +170,7 @@ public class testDB {
         o.getProducts().get(0).decAmount();
 
 
-        o = new Order(u6, store3, "order3", "asas","asas","1212", 100.0,"121212", "21212","", "");
+        o = new Order(u6, store3, "order3", "asas","18/01/1990","1212", 100.0,"121212", "21212","", "","");
         session.save(o);
         o.addProduct(new CartProduct(products.get(5), 4));
         o.addProduct(new CartProduct(products.get(3), 4));

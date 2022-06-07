@@ -62,7 +62,7 @@ public class LoginController extends ParentClass{
         Platform.runLater(()->{
             correctLogin = event.isLoginStatus();
             if(correctLogin){
-                 //get this data from the server by sending the User Entity to this function
+                //get this data from the server by sending the User Entity to this function
                 //goto var which represent the login option on the Main Controller and change it to 1.
                 //change Main Controller AnchorPane to Catalog -> "maybe return to the last page the client was inside"
                 MainPageController.LoginName = event.getUsername();
@@ -78,7 +78,6 @@ public class LoginController extends ParentClass{
                     UserClient.getInstance().setWorker(true);
                     UserClient.getInstance().setUserName(username);
                     UserClient.getInstance().setPriority(permission);
-                    UserClient.getInstance().setId(event.getId());
                 }
                 else{
                     user = event.getUser();
@@ -162,12 +161,12 @@ public class LoginController extends ParentClass{
         } else {
             LogInControl.logIn(username, password, isWorker);
 //            UserClient.getInstance().setUserByServer(UserClient.getInstance().getUserServer());
-            }
-            //correctLogin = (send msg to server - to find (string = username-password)
-            // for specific client id in the client table
-            //  return 'true' if username found and the password matches the username's id found
-            // don't return list of clients, just return true or false according to the result)
         }
+        //correctLogin = (send msg to server - to find (string = username-password)
+        // for specific client id in the client table
+        //  return 'true' if username found and the password matches the username's id found
+        // don't return list of clients, just return true or false according to the result)
+    }
 
     public Button getLoginBTN() {
         return loginBTN;
@@ -176,6 +175,7 @@ public class LoginController extends ParentClass{
     @FXML
     void WorkerChecked(MouseEvent event) {
         this.isWorker = workerChecker.isSelected(); //if the GUI user checked for 'worker login' return 'true'
+        System.out.println(this.workerChecker.isSelected() + "isWorker Toggle From LoginController");
     }
 
     /* Getters and Setters */
