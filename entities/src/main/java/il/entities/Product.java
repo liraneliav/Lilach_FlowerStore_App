@@ -44,7 +44,6 @@ public class Product implements Serializable {
     }
 
 
-
     public byte[] getImage() {
         return image;
     }

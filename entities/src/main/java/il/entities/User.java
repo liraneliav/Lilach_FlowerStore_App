@@ -6,13 +6,11 @@ import org.hibernate.annotations.FetchMode;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 
 @SuppressWarnings("serial")
 @Entity
-//@Inheritance(strategy = InheritanceType.JOINED) // not must
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,35 +41,11 @@ public class User implements Serializable {
     private List<Complain> listComplains;
 
 
-
     @ManyToMany
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Store> liststore;
 
 
-
-    public LinkedList<Order> getOrdersForClient(){
-        List<Order> orders = this.getListOrders();
-        LinkedList<Order> newOrders = new LinkedList<>();
-        for(Order o : orders)
-            newOrders.add(o.getOrderForClient());
-        return newOrders;
-    }
-
-    public LinkedList<Complain> getComplainsForClient(){
-        List<Complain> complains = this.getListComplains();
-        LinkedList<Complain> newComplains = new LinkedList<>();
-        for(Complain o : complains)
-            newComplains.add(o.getComplainForClient());
-        return newComplains;
-    }
-
-    public LinkedList<Store> getStoresForClient(){
-        List<Store> stores = this.getListstore();
-        LinkedList<Store> newStores = new LinkedList<>();
-        for(Store o : stores)
-            newStores.add(o.getStoreForClient());
-        return newStores;
-    }
 
 
 
@@ -273,17 +247,11 @@ public class User implements Serializable {
     public void setPriority(int priority) {
         this.priority = priority;
     }
-
     public void addStore(Store store){
         this.liststore.add(store);
     }
     public void removeStore(Store store){
         this.liststore.remove(store);
     }
-    public void addStore2(List<Store> stores) {
-        for (Store store : stores) {
-            this.liststore.add(store);
-            store.addUser2(this);
-        }
-    }
+
 }

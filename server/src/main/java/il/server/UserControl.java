@@ -4,7 +4,6 @@ import il.entities.*;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import java.util.LinkedList;
 import java.util.List;
 
 public class UserControl {
@@ -132,28 +131,6 @@ public class UserControl {
         testDB.session.getTransaction().commit(); // Save everything.
         testDB.closeSession();
     }
-
-
-    public static LinkedList<User> getAllnUser(){
-        List<User> complains = SimpleServer.getAllItems(User.class);
-        LinkedList<User> c = new LinkedList<>();
-        for(User comp : complains){
-            c.add(comp.getUserForClien());
-        }
-        return c;
-    }
-
-    public static LinkedList<Employee> getAllnEmployee(int storeID){
-        testDB.openSession();
-        List<Employee> complains = SimpleServer.getAllItems(Employee.class);
-        testDB.closeSession();
-        LinkedList<Employee> c = new LinkedList<>();
-        for(Employee comp : complains){
-            c.add(comp);
-        }
-        return c;
-    }
-
 
 }
 

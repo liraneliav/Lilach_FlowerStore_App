@@ -1,6 +1,4 @@
 package il.server;
-
-//import il.client.UserClient;
 import il.entities.*;
 import il.server.ocsf.ConnectionToClient;
 import il.server.ocsf.AbstractServer;
@@ -15,7 +13,7 @@ import java.util.List;
 
 public class SimpleServer extends AbstractServer {
 
-    public SimpleServer(int port, boolean initServer) throws Exception {
+    public SimpleServer(int port, boolean initServer) {
         super(port);
         System.out.println("Server listen on port:" + port);
         if(initServer)

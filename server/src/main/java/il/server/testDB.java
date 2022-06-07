@@ -200,44 +200,6 @@ public class testDB {
         session.flush();
     }
 
-//    private static void generateEmployee()throws Exception {
-//
-//        Employee employee;
-//
-//        employee = new Employee("Malki Grossman", "malki123456" , "123456789", 1 , "All");
-//
-//        employee = new Employee("Shir Snea", "shir123456" , "123456789", 2 , "All");
-//
-//        employee = new Employee("Liran Eliav", "liran123456" , "123456789", 3 , "Store 1");
-//
-//        employee = new Employee("Dean Amar", "dean123456" , "123456789", 3 , "Store 2");
-//
-//        employee = new Employee("Ido Shitrit", "ido123456" , "123456789", 3 , "Store 3");
-//
-//        employee = new Employee("Roie Shahar", "roie123456" , "123456789", 3 , "Store 4");
-//
-//        employee = new Employee("Shahar Tavor", "shahar123456" , "123456789", 5 , "Store 1");
-//
-//        employee = new Employee("Itai Zeitony", "itai123456" , "123456789", 5 , "Store 2");
-//
-//        employee = new Employee("Shira Tzadok", "shira123456" , "123456789", 5 , "Store 3");
-//
-//        employee = new Employee("Gal Some", "gal123456" , "123456789", 5 , "Store 4");
-//
-//        employee = new Employee("Saar Gorman", "saar123456" , "123456789", 4 , "All");
-//
-//        employee = new Employee("Demian Brom", "demian123456" , "123456789", 4 , "All");
-//
-//        employee = new Employee("Shani Koren", "shanik98" , "123456789", 5 , "Store 1");
-//
-//        employee = new Employee("Shani Amar", "shani123456" , "123456789", 5 , "Store 2");
-//
-//        employee = new Employee("Aviv Shitrit", "aviv123456" , "123456789", 5 , "Store 3");
-//
-//        session.flush();
-//        session.getTransaction().commit(); // Save everything.
-//    }
-
     public static void openSession(){
         try {
             System.out.println("open session to mySQL");

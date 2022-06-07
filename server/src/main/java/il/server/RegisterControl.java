@@ -8,12 +8,8 @@ import java.util.List;
 public class RegisterControl {
 
 
-
-
     public static String checknewUser(User newUser){
         List<User> lUsers = SimpleServer.getAllItems(User.class);
-//        compare_name c = new compare_name();
-//        int result = Collections.binarySearch(lUsers,newUser, c.comparename());
         for (User user: lUsers){
             if (user.getUserName().equals(newUser.getUserName()) || user.getIdentifyNumbers().equals(newUser.getIdentifyNumbers()) ||
                     user.getCreditCard().equals(newUser.getCreditCard()))

@@ -68,17 +68,6 @@ public class Order implements Serializable {
         this.type = type;
     }
 
-    public Order getOrderForClient(){
-        Order o = new Order(null, null, this.dateReceive, this.timeReceive, this.dateOrder, this.timeOrder, this.sum, this.greeting, this.nameReceives, this.phoneReceives, this.address);
-        o.setId(this.id);
-        for(CartProduct p : this.products){
-            o.addProduct(p);
-            if(this.complain!=null)
-                o.setComplain(this.complain.getComplainForClient());
-        }
-
-        return o;
-    }
 
     public String getPhoneReceives() {
         return phoneReceives;
@@ -114,15 +103,6 @@ public class Order implements Serializable {
         this.products.remove(product);
         this.sum-=product.getTotalPrice();
     }
-
-
-//    public HashMap<Product, Integer> getOrderD() {
-//        return orderD;
-//    }
-//
-//    public void setOrderD(HashMap<Product, Integer> orderD) {
-//        this.orderD = orderD;
-//    }
 
     public int getId() {
         return id;

@@ -1,158 +1,89 @@
 package il.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
+
 
 
 @SuppressWarnings("serial")
 public class Message implements Serializable {
-    String message;
+    private String message;
 
     public Message(String message){
         this.message = message;
     }
 
-    LinkedList<Product> listItem=null;
-    LinkedList<Store> listStors=null;
-    LinkedList<Order> listOrder = null;
-    LinkedList<Complain> listComplains = null;
-    LinkedList<User> listUsers = null;
-//
-//    public LinkedList<Employee> getListEmploeeys() {
-//        return listEmploeeys;
-//    }
-//
-//    public void setListEmploeeys(LinkedList<Employee> listEmploeeys) {
-//        this.listEmploeeys = listEmploeeys;
-//    }
-//
-//    LinkedList<Employee> listEmploeeys=null;
+    private  LinkedList<Product> listItem=null;
+    private LinkedList<Store> listStors=null;
+    private LinkedList<Order> listOrder = null;
+    private LinkedList<Complain> listComplains = null;
+    private LinkedList<User> listUsers = null;
 
 
     //login/register
-    String username;
-    int idUser;
-    String id;
-    String pass;
-    boolean isWorker;
-    String credit_card;
-    int plan;
-    String name;
-    String phone;
-    String mail;
-    double creadit;
-    String priorty;
-
-
+    private String username;
+    private int userID;
+    private String id;
+    private String pass;
+    private boolean isWorker;
+    private String credit_card;
+    private int plan;
+    private String name;
+    private String phone;
+    private String mail;
+    private double creadit;
+    private String priorty;
+    private Employee employee;
+    private User user;
 
     //login System admin
-    LinkedList<Employee> employeeslist;   //login System admin
+    private LinkedList<Employee> employeeslist;   //login System admin
 
 
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    String address;
-
-
-
-    User user;
-
-
-
-    Employee employee;
-
-
-
-
-    int permision;
-
-    Product product;
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public int getPermision() {
-        return permision;
-    }
-
-    public void setPermision(int permision) {
-        this.permision = permision;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public int getAccountStatus() {
-        return accountStatus;
-    }
-
-    public void setAccountStatus(int accountStatus) {
-        this.accountStatus = accountStatus;
-    }
-
-    int accountStatus;
-
-    public double getCreadit() {
-        return creadit;
-    }
-
-    public void setCreadit(double creadit) {
-        this.creadit = creadit;
-    }
-
-    public LinkedList<Employee> getEmployeeslist() {
-        return employeeslist;
-    }
-
-    public void setEmployeeslist(LinkedList<Employee> employeeslist) {
-        this.employeeslist = employeeslist;
-    }
+    private String address;
+    private int permision;
+    private Product product;
+    private int accountStatus;
 
 
     //recive login
-    boolean loginStatus;
-    String loginResult;
+    private boolean loginStatus;
+    private String loginResult;
 
     //recive register
-    boolean registerStatus;
-    String registerResult;
+    private boolean registerStatus;
+    private String registerResult;
 
     //setProduct
-    byte[] bFile;
-    double price;
-    String nameProduct;
-    int idProduct;
-    boolean sale;
-    double discountPer;
-    int idItem;
-    double newPrice;
+    private byte[] bFile;
+    private double price;
+    private String nameProduct;
+    private int idProduct;
+    private boolean sale;
+    private double discountPer;
+    private int idItem;
+    private double newPrice;
+
+    private String type;
+    private String color;
+
+    //order
+    private int orderID;
+    private Order order;
+    private int storeID;
+    private String timeCancel;
+    private String dateCancel;
+
+    //complain
+    private Complain complain;
+    private String answer;
+    private double refund;
+    private int complainID;
+
+
+    //logut
+    private int iddatabase;
+
 
     public String getType() {
         return type;
@@ -169,28 +100,6 @@ public class Message implements Serializable {
     public void setColor(String color) {
         this.color = color;
     }
-
-    String type;
-    String color;
-
-    //order
-    int orderID;
-    Order order;
-    int storeID;
-    String timeCancel;
-    String dateCancel;
-
-    //complain
-    Complain complain;
-    String answer;
-    double refund;
-    int complainID;
-
-
-
-    int userID;
-
-    int iddatabase;
 
     public String getAnswer() {
         return answer;
@@ -494,14 +403,6 @@ public class Message implements Serializable {
         this.listUsers = listUsers;
     }
 
-    public int getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
-    }
-
     public String getPriorty() {
         return priorty;
     }
@@ -509,5 +410,72 @@ public class Message implements Serializable {
     public void setPriorty(String priorty) {
         this.priorty = priorty;
     }
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public int getPermision() {
+        return permision;
+    }
+
+    public void setPermision(int permision) {
+        this.permision = permision;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public int getAccountStatus() {
+        return accountStatus;
+    }
+
+    public void setAccountStatus(int accountStatus) {
+        this.accountStatus = accountStatus;
+    }
+
+
+    public double getCreadit() {
+        return creadit;
+    }
+
+    public void setCreadit(double creadit) {
+        this.creadit = creadit;
+    }
+
+    public LinkedList<Employee> getEmployeeslist() {
+        return employeeslist;
+    }
+
+    public void setEmployeeslist(LinkedList<Employee> employeeslist) {
+        this.employeeslist = employeeslist;
+    }
+
+
 
 }

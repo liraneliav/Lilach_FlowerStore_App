@@ -1,7 +1,4 @@
 package il.entities;
-
-import org.hibernate.boot.jaxb.hbm.spi.NativeQueryNonScalarRootReturn;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -95,14 +95,4 @@ public abstract class Employee implements Serializable{
     public void setUsername(String username) {
         this.username = username;
     }
-//
-//    public String getStore() {
-//        return store;
-//    }
-//
-//    public void setStore(String store) {
-//        this.store = store;
-//    }
-
-    /* end gets and sets*/
 }
