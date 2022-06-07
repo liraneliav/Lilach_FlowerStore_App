@@ -101,18 +101,6 @@ public class User implements Serializable {
 //        this.expiryDate = expiryDate;
 //        this.discount=discount;
     }
-    public User getUserForClien(){
-        User u = new User(this.userName, this.password, this.creditCard, this.priority, this.name, this.identifyNumbers);
-        u.setId(this.id);
-        u.setMail(this.mail);
-        u.setCredit(this.credit);
-        u.setPhone(this.phone);
-        u.setAccountStatus(this.accountStatus);
-        u.setLogin(this.login);
-//        u.setDiscount(this.discount);
-//        u.setExpiryDate(this.expiryDate);
-        return u;
-    }
 
     public User(int id, String username, String name, String identifyNumbers, int priority, int acountStatus, double credit){
         this.id = id;

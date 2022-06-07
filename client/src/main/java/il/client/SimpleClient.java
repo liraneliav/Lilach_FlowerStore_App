@@ -18,8 +18,6 @@ public class SimpleClient extends AbstractClient {
 	protected void handleMessageFromServer(Object msg){
 		Message message = (Message) msg;
 		System.out.println("get message from server: "+ message.getMessage());
-
-
 		if(message.getMessage().equals("item catalog list")){
 			System.out.println("get init data");
 			EventBus.getDefault().post(new CatalogItemsEvent(message.getListItem(), message.getListStors()));
@@ -60,7 +58,9 @@ public class SimpleClient extends AbstractClient {
 		if(message.getMessage().equals("result register")){
 			EventBus.getDefault().post(new RegisterEvent(message.isRegisterStatus(), message.getRegisterResult()));
 		}
-
+		if(message.getMessage().equals("result client info update")){
+			EventBus.getDefault().post(new UpdateinfroEvent(message.getUodateResult(),message.getListUsers(),message.getEmployeeslist()));
+		}
 	}
 	
 	public static SimpleClient getClient() {

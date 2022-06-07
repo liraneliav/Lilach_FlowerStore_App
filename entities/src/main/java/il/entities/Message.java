@@ -45,6 +45,11 @@ public class Message implements Serializable {
     private Product product;
     private int accountStatus;
 
+    //INFO UPATE
+    private String uodateResult;
+
+
+    private String setinfo;
 
     //recive login
     private boolean loginStatus;
@@ -85,6 +90,15 @@ public class Message implements Serializable {
     private int iddatabase;
 
 
+
+
+    public String getSetinfo() {
+        return setinfo;
+    }
+
+    public void setSetinfo(String setinfo) {
+        this.setinfo = setinfo;
+    }
     public String getType() {
         return type;
     }
@@ -475,6 +489,14 @@ public class Message implements Serializable {
     public void setEmployeeslist(LinkedList<Employee> employeeslist) {
         this.employeeslist = employeeslist;
     }
+    public String getUodateResult() {
+        return uodateResult;
+    }
+
+    public void setUodateResult(String uodateResult) {
+        this.uodateResult = uodateResult;
+    }
+
 
 
 

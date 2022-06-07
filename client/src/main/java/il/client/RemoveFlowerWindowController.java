@@ -17,7 +17,7 @@ public class RemoveFlowerWindowController {
     private MFXButton deleteProductBtn;
 
     private Stage stage;
-//    private int flowerID;
+    //    private int flowerID;
     private ProductView flowerController;
 
     @FXML

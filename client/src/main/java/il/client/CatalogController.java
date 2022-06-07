@@ -65,7 +65,7 @@ public class CatalogController extends ParentClass{
 
     private MainPageController main_page_holder;
 
-//    private LinkedList<ProductView> flowersFXML;
+    //    private LinkedList<ProductView> flowersFXML;
     private HashMap<Integer,ProductView> productsControllers;
 
     public static List<Product> getFlowerlist() {
@@ -153,9 +153,10 @@ public class CatalogController extends ParentClass{
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    scrollPane.setContent(this.gridPane);
+            scrollPane.setContent(this.gridPane);
                 }
-                );
+        );
+        UserControl.setName(1, "TEST",true);
 
     }
 

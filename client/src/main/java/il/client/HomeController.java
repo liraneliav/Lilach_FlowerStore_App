@@ -100,7 +100,7 @@ public class HomeController {
     /* gets and sets*/
 
     public void setDeterminateSpinner100() {
-         determinateSpinner.setProgress(100.0);
+        determinateSpinner.setProgress(100.0);
     }
 
     public void setDeterminateSpinnerDisable() {

@@ -54,6 +54,12 @@ public class LoginController extends ParentClass{
     public static String username;
     public static boolean isWorker;
     public int storeIDWork;
+    public static String credit_card;
+    public static String password;
+    public static String phone;
+    public static String mail;
+    public static double credit;
+    public static int frozen;
 
 
 
@@ -75,9 +81,21 @@ public class LoginController extends ParentClass{
                     orders = event.getOrderList();
                     complains = event.getComplainList();
                     storeIDWork = event.getStoreId();
+                    password = event.getPassword();
                     UserClient.getInstance().setWorker(true);
                     UserClient.getInstance().setUserName(username);
+                    UserClient.getInstance().setId(event.getId());
+                    switch(permission){
+                        case 1: {UserClient.getInstance().setPriority(3); UserClient.getInstance().setPlan(permission); break;} //worker
+                        case 2: {UserClient.getInstance().setPriority(4); UserClient.getInstance().setPlan(permission); break;} //service worker
+                        case 3: {UserClient.getInstance().setPriority(5); UserClient.getInstance().setPlan(permission); break;} //store manager
+                        case 4: {UserClient.getInstance().setPriority(6); UserClient.getInstance().setPlan(permission); break;} //network manager
+                        case 5: {UserClient.getInstance().setPriority(7); UserClient.getInstance().setPlan(permission); break;}//system admin
+                    }
+                    System.out.println("LoginController getPriority "+UserClient.getInstance().getPriority()+ "plan "+UserClient.getInstance().getPlan());
                     UserClient.getInstance().setPriority(permission);
+                    UserClient.getInstance().setPassword(password);
+                    UserClient.getInstance().setStoresOfStore(event.getStoreList());
                 }
                 else{
                     user = event.getUser();
@@ -86,11 +104,30 @@ public class LoginController extends ParentClass{
                     stores = event.getStoreList();
                     username = user.getUserName();
                     idConnected = user.getId();
+                    password = user.getPassword();
+                    credit_card = user.getCreditCard();
+                    phone = user.getPhone();
+                    mail = user.getMail();
+                    credit = user.getCredit();
+                    frozen = user.getAccountStatus();
                     UserClient.getInstance().setWorker(false);
                     UserClient.getInstance().setUserName(username);
                     UserClient.getInstance().setPriority(2);
                     UserClient.getInstance().setId(idConnected);
                     UserClient.getInstance().setPlan(user.getPriority());
+                    UserClient.getInstance().setPassword(password);
+                    UserClient.getInstance().setCreditCard(credit_card);
+                    UserClient.getInstance().setPhone(phone);
+                    UserClient.getInstance().setMail(mail);
+                    UserClient.getInstance().setCredit(credit);
+                    UserClient.getInstance().setOrderList(orders);
+                    UserClient.getInstance().setComplaintList(complains);
+                    UserClient.getInstance().setStoresOfStore(stores);
+                    if (frozen == 1) {
+                        UserClient.getInstance().setFrozen(true);
+                    } else {
+                        UserClient.getInstance().setFrozen(false);
+                    }
                 }
 
                 //set priority UserClient.getInstance()
@@ -152,14 +189,14 @@ public class LoginController extends ParentClass{
 
         }
         if(isWorker){
-            LogInControl.logIn(username, password, isWorker);
+            LogInControl.logIn(username, password, workerChecker.isSelected());
 //            UserClient.getInstance().setUserByServer(UserClient.getInstance().getUserServer());
             //correctLogin = (send msg to server - to find (string = username-password)
             // for specific worker id in the worker table
             //  return 'true' if username found and the password matches the username's id found
             // don't return list of workers, just return true or false according to the result)
         } else {
-            LogInControl.logIn(username, password, isWorker);
+            LogInControl.logIn(username, password, workerChecker.isSelected());
 //            UserClient.getInstance().setUserByServer(UserClient.getInstance().getUserServer());
         }
         //correctLogin = (send msg to server - to find (string = username-password)
@@ -175,7 +212,6 @@ public class LoginController extends ParentClass{
     @FXML
     void WorkerChecked(MouseEvent event) {
         this.isWorker = workerChecker.isSelected(); //if the GUI user checked for 'worker login' return 'true'
-        System.out.println(this.workerChecker.isSelected() + "isWorker Toggle From LoginController");
     }
 
     /* Getters and Setters */

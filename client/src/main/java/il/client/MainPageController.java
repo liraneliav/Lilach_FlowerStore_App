@@ -226,7 +226,7 @@ public class MainPageController extends ParentClass {     //This is a singleton 
 
     }
 
-/*-------------------------------------- Response Functions-------------------------------------- */
+    /*-------------------------------------- Response Functions-------------------------------------- */
     @FXML
     void HomeBTNClicked(MouseEvent event) throws IOException {
         LoadHomePage();
@@ -250,7 +250,7 @@ public class MainPageController extends ParentClass {     //This is a singleton 
 
     @FXML
     void CatalogBTNClicked(ActionEvent event) throws IOException {
-       LoadCatalogPage();
+        LoadCatalogPage();
     }
 
     @FXML
@@ -515,23 +515,23 @@ public class MainPageController extends ParentClass {     //This is a singleton 
 
     }
 
-   public void LoadCatalogFromZero() throws IOException {
+    public void LoadCatalogFromZero() throws IOException {
         FXMLLoader fxmlLoader;
         URL var;
         Parent root;
-       fxmlLoader = new FXMLLoader();
-       var = getClass().getResource("Catalog.fxml");
-       fxmlLoader.setLocation(var);
-       root = fxmlLoader.load();
-       CatalogController controller = fxmlLoader.getController();
-       root_map.remove("Catalog");
-       controller_map.remove("Catalog");
-       root_map.put("Catalog",root);
-       controller_map.put("Catalog",controller);
-       this.main_first_load_pane.getChildren().clear();
-       ((CatalogController)controller_map.get("Catalog")).setMain_page_holder(this);
-       this.main_first_load_pane.getChildren().addAll(root_map.get("Catalog"));
-   }
+        fxmlLoader = new FXMLLoader();
+        var = getClass().getResource("Catalog.fxml");
+        fxmlLoader.setLocation(var);
+        root = fxmlLoader.load();
+        CatalogController controller = fxmlLoader.getController();
+        root_map.remove("Catalog");
+        controller_map.remove("Catalog");
+        root_map.put("Catalog",root);
+        controller_map.put("Catalog",controller);
+        this.main_first_load_pane.getChildren().clear();
+        ((CatalogController)controller_map.get("Catalog")).setMain_page_holder(this);
+        this.main_first_load_pane.getChildren().addAll(root_map.get("Catalog"));
+    }
 
     public void AddCustomProductPage() throws IOException {
         FXMLLoader fxmlLoader;
@@ -546,5 +546,4 @@ public class MainPageController extends ParentClass {     //This is a singleton 
     }
     /* --------------------------------------- END --------------------------------------- */
 }
-
 

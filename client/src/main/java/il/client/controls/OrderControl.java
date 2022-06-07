@@ -1,9 +1,7 @@
 package il.client.controls;
 
-import il.client.CatalogController;
 import il.client.SimpleClient;
-import il.entities.CartProduct;
-import il.entities.Complain;
+
 import il.entities.Message;
 import il.entities.Order;
 
@@ -25,11 +23,23 @@ public class OrderControl {
 //    }
 
 
+    //need to add here also double of the refund to save the refund in the user. just added the correct sign.
     public static void cancelOrder(int orderID) throws IOException {
         System.out.println("cancel order: "+ orderID);
         Message message = new Message("cancelOrder");
         message.setTimeCancel(java.time.LocalTime.now().toString());
         message.setDateCancel(java.time.LocalDate.now().toString());
+        message.setOrderID(orderID);
+        message.setRefund(-1);
+        SimpleClient.getClient().sendToServer(message);
+    }
+
+    public static void cancelOrder(int orderID,double refund) throws IOException{
+        System.out.println("cancel order: "+ orderID);
+        Message message = new Message("cancelOrder");
+        message.setTimeCancel(java.time.LocalTime.now().toString());
+        message.setDateCancel(java.time.LocalDate.now().toString());
+        message.setRefund(refund);
         message.setOrderID(orderID);
         SimpleClient.getClient().sendToServer(message);
     }

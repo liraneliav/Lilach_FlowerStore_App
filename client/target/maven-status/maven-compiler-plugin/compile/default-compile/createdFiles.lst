@@ -35,6 +35,7 @@ il/client/ComplainHandlerController.class
 il/client/OrderController.class
 il/client/DetailsChecker.class
 il/client/ProductView.class
+il/client/events/UpdateinfroEvent.class
 il/client/ComplainController.class
 il/client/controls/UserControl.class
 il/client/CartItem.class

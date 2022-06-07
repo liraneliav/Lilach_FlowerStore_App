@@ -137,7 +137,6 @@ public class SimpleServer extends AbstractServer {
 
                 String result = RegisterControl.checknewUser(newUser);
 
-
                 if (result.equals("")) {
                     RegisterControl.register(newUser, stores);
                 } else {
@@ -179,25 +178,35 @@ public class SimpleServer extends AbstractServer {
             if (message.getMessage().equals("complainAnswer")) {
                 ComplainConrtol.complainAnswer(message.getAnswer(), message.getRefund(), message.getComplainID());
             }
-            if (message.getMessage().equals("setUserName")) {
-                UserControl.setUserName(message.getUserID(), message.getUsername(), message.isWorker());
-            }
-            if (message.getMessage().equals("setName")) {
-                UserControl.setName(message.getUserID(), message.getName(), message.isWorker());
-            }
-            if (message.getMessage().equals("setPassword")) {
-                UserControl.setPassword(message.getUserID(), message.getPass(), message.isWorker());
-            }
-            if (message.getMessage().equals("setCreditCard")) {
-                UserControl.setCreditCard(message.getUserID(), message.getCredit_card(), message.isWorker());
-            }
-            if (message.getMessage().equals("setPhone")) {
-                UserControl.setPhone(message.getUserID(), message.getPhone(), message.isWorker());
-            }
-            if (message.getMessage().equals("setMail")) {
-                UserControl.setName(message.getUserID(), message.getMail(), message.isWorker());
-            }
+            if (message.getMessage().equals("setInfo")) {
+                String result = "";
+                sendMessage.setMessage("result client info update");
+                if (message.getSetinfo().equals("setUserName"))
+                    result = UserControl.setUserName(message.getUserID(), message.getUsername(), message.isWorker());
+                if (message.getSetinfo().equals("setName"))
+                    UserControl.setName(message.getUserID(), message.getName(), message.isWorker());
+                if (message.getSetinfo().equals("setPassword"))
+                    UserControl.setPassword(message.getUserID(), message.getPass(), message.isWorker());
+                if (message.getSetinfo().equals("setCreditCard"))
+                    result =  UserControl.setCreditCard(message.getUserID(), message.getCredit_card(), message.isWorker());
+                if (message.getSetinfo().equals("setPhone"))
+                    UserControl.setPhone(message.getUserID(), message.getPhone(), message.isWorker());
+                if (message.getSetinfo().equals("setMail"))
+                    UserControl.setName(message.getUserID(), message.getMail(), message.isWorker());
+                if (message.getSetinfo().equals("setAddress"))
+                    UserControl.setAddress(message.getUserID(), message.getAddress(), message.isWorker());
+                if (message.getSetinfo().equals("setPermission"))
+                    UserControl.setPermission(message.getUserID(), message.getPermision(), message.isWorker());
+                if (message.getSetinfo().equals("setAccountStatus"))
+                    result = UserControl.setAccountStatus(message.getUserID(), message.getAccountStatus(), message.isWorker(), getAllItems(User.class));
 
+                sendMessage.setUodateResult(result);
+                sendMessage.setEmployeeslist(getAllItems(Employee.class));
+                sendMessage.setListUsers(getAllItems(User.class));
+                System.out.println("send new data to cleint");
+                client.sendToClient(sendMessage);
+                System.out.println("send new data to cleint");
+                }
             } catch(IOException e){
             System.out.println(e.getMessage());
             System.out.println("handleMessageFromClient Error!" + client.getInetAddress());

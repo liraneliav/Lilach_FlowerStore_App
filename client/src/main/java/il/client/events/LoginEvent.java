@@ -21,6 +21,7 @@ public class LoginEvent {
     private boolean loginStatus;
     private String result;
     private User user;
+    private String password;
     private List<Store> userlistStore=null;
 
 
@@ -214,4 +215,11 @@ public class LoginEvent {
         this.user = user;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

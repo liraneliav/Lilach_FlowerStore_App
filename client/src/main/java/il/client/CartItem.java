@@ -1,6 +1,7 @@
 package il.client;
 
 
+import il.entities.CartProduct;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,6 +34,13 @@ public class CartItem {
         this.removeBtn = new MFXButton("Remove Item");
         this.amountChangeBtn = new MFXButton("Change Amount");
         buttonsInit();
+    }
+
+    public CartItem(CartProduct product){
+        this.item_name = product.getName();
+        this.item_price = product.getPrice();
+        this.item_id = product.getId();
+        this.item_amount = product.getAmount();
     }
 
 
@@ -74,7 +82,7 @@ public class CartItem {
             stage.setTitle("Add To Cart Section");
             stage.setScene(scene);
             stage.show();
-         //   AddToCartController.getInstance().setAmountByID(this.item_id, amount);
+            //   AddToCartController.getInstance().setAmountByID(this.item_id, amount);
         });
     }
 
