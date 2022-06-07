@@ -9,12 +9,12 @@ import java.io.IOException;
  */
 
 
-public class AppServer
+public class Main
 {
     private static SimpleServer server;
 
 
-    private static int port = 3000;
+    private static int port = 3001;
     private static boolean initServer = false;
 
     public static void main( String[] args ) throws IOException {

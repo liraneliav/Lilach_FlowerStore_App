@@ -3,6 +3,7 @@ il/server/CatalogControl.class
 il/server/ocsf/ObservableOriginatorServer.class
 il/server/ocsf/ConnectionToClient.class
 il/server/TestControl.class
+il/server/Main.class
 il/server/ocsf/AdaptableServer.class
 module-info.class
 il/server/ocsf/AbstractServer.class
@@ -17,6 +18,5 @@ il/server/ocsf/AbstractServer$1.class
 il/server/SendEmail$1.class
 il/server/ComplainConrtol.class
 il/server/OrderControl.class
-il/server/AppServer.class
 il/server/LoginControl.class
 il/server/UserControl.class

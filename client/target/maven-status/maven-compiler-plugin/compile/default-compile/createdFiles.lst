@@ -1,4 +1,5 @@
 il/client/ComplaintTabController.class
+il/client/Main.class
 il/client/App.class
 il/client/CartAdderCustomController.class
 il/client/events/RegisterEvent.class
