@@ -83,8 +83,8 @@ public class SimpleServer extends AbstractServer {
             }
 
             if (message.getMessage().equals("getStore")) {
-                sendMessage.setMessage("item store list");
-                sendMessage.setStores(getAllItems(Store.class));
+                sendMessage.setMessage("store list");
+                sendMessage.setListStors(getAllItems(Store.class));
                 client.sendToClient(sendMessage);
                 System.out.println("send stores to client");
             }

@@ -59,6 +59,9 @@ public class SimpleClient extends AbstractClient {
 		if(message.getMessage().equals("result register")){
 			EventBus.getDefault().post(new RegisterEvent(message.isRegisterStatus(), message.getRegisterResult()));
 		}
+		if(message.getMessage().equals("store list")){
+			EventBus.getDefault().post(new RegisterEvent(message.getListStors()));
+		}
 
 	}
 	
