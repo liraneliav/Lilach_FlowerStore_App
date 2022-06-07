@@ -68,25 +68,14 @@ public class SimpleServer extends AbstractServer {
                 sendMessage = LoginControl.checkLogin(username, pass, isWorker);
                 System.out.println(sendMessage.getLoginResult());
                 client.sendToClient(sendMessage);
-            }
+                }
 
             if (message.getMessage().equals("getCatalogItems")) {
                 sendMessage.setMessage("item catalog list");
                 sendMessage.setListItem(getAllItems(Product.class));
-                List<Store> stores = getAllItems(Store.class);
-                LinkedList<Store> newStores= new LinkedList<>();
-                for(Store s : stores)
-                    newStores.add(s.getStoreForClient());
-                sendMessage.setListStors(newStores);
+                sendMessage.setListStors(getAllItems(Store.class));
                 client.sendToClient(sendMessage);
                 System.out.println("send init data to: " + client.getInetAddress());
-            }
-
-            if (message.getMessage().equals("getStore")) {
-                sendMessage.setMessage("item store list");
-                sendMessage.setListStors(getAllItems(Store.class));;
-                client.sendToClient(sendMessage);
-                System.out.println("send stores to client");
             }
 
 
@@ -181,7 +170,6 @@ public class SimpleServer extends AbstractServer {
             if (message.getMessage().equals("setMail")) {
                 UserControl.setName(message.getUserID(), message.getMail(), message.isWorker());
             }
-
 
             } catch(IOException e){
             System.out.println(e.getMessage());

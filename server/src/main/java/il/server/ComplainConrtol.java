@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-import static il.server.SimpleServer.getAllItems;
-
 public class ComplainConrtol{
 
     public static void newComplain(Complain complain, int orderID) throws IOException {

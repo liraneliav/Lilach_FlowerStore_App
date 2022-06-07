@@ -19,16 +19,16 @@ public class Message implements Serializable {
     LinkedList<Order> listOrder = null;
     LinkedList<Complain> listComplains = null;
     LinkedList<User> listUsers = null;
-
-    public LinkedList<Employee> getListEmploeeys() {
-        return listEmploeeys;
-    }
-
-    public void setListEmploeeys(LinkedList<Employee> listEmploeeys) {
-        this.listEmploeeys = listEmploeeys;
-    }
-
-    LinkedList<Employee> listEmploeeys=null;
+//
+//    public LinkedList<Employee> getListEmploeeys() {
+//        return listEmploeeys;
+//    }
+//
+//    public void setListEmploeeys(LinkedList<Employee> listEmploeeys) {
+//        this.listEmploeeys = listEmploeeys;
+//    }
+//
+//    LinkedList<Employee> listEmploeeys=null;
 
 
     //login/register
@@ -44,6 +44,12 @@ public class Message implements Serializable {
     String mail;
     double creadit;
     String priorty;
+
+
+
+    //login System admin
+    LinkedList<Employee> employeeslist;   //login System admin
+
 
 
     public String getAddress() {
@@ -121,7 +127,13 @@ public class Message implements Serializable {
         this.creadit = creadit;
     }
 
+    public LinkedList<Employee> getEmployeeslist() {
+        return employeeslist;
+    }
 
+    public void setEmployeeslist(LinkedList<Employee> employeeslist) {
+        this.employeeslist = employeeslist;
+    }
 
 
     //recive login

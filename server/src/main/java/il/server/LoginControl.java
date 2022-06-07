@@ -1,8 +1,8 @@
 package il.server;
 
 import il.entities.*;
+import il.entities.Order;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,52 +25,51 @@ public class LoginControl {
                         }
 
                         //employee
-                        setToActiveEmp(employee.getId());
                         message.setLoginStatus(true);
-                        message.setWorker(true);
-                        message.setUsername(employee.getUsername());
-                        message.setName(employee.getName());
-                        message.setIddatabase(employee.getId());
+                        setToActiveEmp(employee.getId());
                         message.setPermision(employee.getPermission());
-                        message.setPass(employee.getPassword());
-
-                        StoreEmployee storeEmployee;
-                        BranchManager branchManager;
-
-                        LinkedList<User> users = UserControl.getAllnUser();
-                        LinkedList<Order> orders = OrderControl.getAllnOrders(-1);
-                        LinkedList<Employee> employees = UserControl.getAllnEmployee(-1);
-
                         switch (employee.getPermission()){
                             case 5://system admin send all information
-                                message.setListComplains(ComplainConrtol.getAllnComplaint(-1));
-                                message.setListOrder(OrderControl.getAllnOrders(-1));
-                                message.setListUsers(UserControl.getAllnUser());
-                                message.setListEmploeeys(UserControl.getAllnEmployee(-1));
+                                SystemAdmin admin = (SystemAdmin) employee;
+                                message.setEmployee(admin);
+                                message.setPermision(admin.getPermission());
+                                message.setListOrder(SimpleServer.getAllItems(Order.class));
+                                message.setListComplains(SimpleServer.getAllItems(Complain.class));
+                                message.setListStors(SimpleServer.getAllItems(Store.class));
+                                message.setListUsers(SimpleServer.getAllItems(User.class));
+                                message.setEmployeeslist(SimpleServer.getAllItems(Employee.class));
+                                //users
+                                //employees
+                                //stores
+                                //report
                                 break;
                             case 4://networkmaneger
-                                message.setListComplains(ComplainConrtol.getAllnComplaint(-1));
-                                message.setListOrder(OrderControl.getAllnOrders(-1));
+                                NetworkManger net = (NetworkManger) employee;
+                                message.setEmployee(net);
+                                message.setListComplains(SimpleServer.getAllItems(Complain.class));
+                                message.setListOrder(SimpleServer.getAllItems(Order.class));
+                                message.setListStors(SimpleServer.getAllItems(Store.class));
                                 break;
-                            case 3:
+                            case 3://branchManager
                                 //report
-                                branchManager = (BranchManager) employee;
-                                message.setStoreID(branchManager.getStore().getId());
-                                message.setListComplains(ComplainConrtol.getAllnComplaint(branchManager.getStore().getId()));
-                                message.setListOrder(OrderControl.getAllnOrders(branchManager.getStore().getId()));
+                                BranchManager e = (BranchManager) employee;
+                                message.setEmployee(employee);
+                                message.setListOrder(SimpleServer.getAllItemsByKey(Order.class, "store", e.getStore().getId()));
+                                message.setListComplains(SimpleServer.getAllItemsByKey(Complain.class, "store",e.getStore().getId()));
                                 break;
-                            case 2:
-                                message.setListComplains(ComplainConrtol.getAllnComplaint(-1));
-                                message.setListOrder(OrderControl.getAllOrder(SimpleServer.getAllItems(Order.class)));
+                            case 2://CustomerService
+                                CustomerService c = (CustomerService)employee;
+                                message.setEmployee(c);
+                                message.setListComplains(SimpleServer.getAllItems(Complain.class));
+                                message.setListOrder(SimpleServer.getAllItems(Order.class));
                                 break;
-                            case 1:
-                                storeEmployee = (StoreEmployee) employee;
-                                message.setStoreID(storeEmployee.getStore().getId());
-                                message.setListOrder(OrderControl.getAllnOrders(storeEmployee.getStore().getId()));
+                            case 1://StoreEmployee
+                                StoreEmployee s = (StoreEmployee)employee;
+                                message.setEmployee(s);
+                                message.setStoreID(s.getStore().getId());
                                 break;
                         }
                         return message;
-
                     } else {
                         message.setLoginResult("incorrect password!");
                         message.setLoginStatus(false);
@@ -94,14 +93,15 @@ public class LoginControl {
                         setToActiveUser(user.getId());
                         message.setLoginStatus(true);
                         message.setWorker(false);
-
+                        message.setUser(user);
+                        message.setListOrder(SimpleServer.getAllItemsByKey(Order.class, "user",user.getId()));
+                        message.setListComplains(SimpleServer.getAllItemsByKey(Complain.class, "user",user.getId()));
                         testDB.openSession();
                         user = testDB.session.get(User.class, user.getId());
-                        message.setUser(user.getUserForClien());
-                        message.setListOrder(user.getOrdersForClient());
-                        message.setListComplains(user.getComplainsForClient());
-                        message.setListStors(user.getStoresForClient());
+                        List<Store> s = user.getListstore();
+                        LinkedList<Store> storelist = new LinkedList<>(s);
                         testDB.closeSession();
+                        message.setListStors(storelist);
                         return message;
 
                     } else {
@@ -158,24 +158,6 @@ public class LoginControl {
     }
 
 
-//
-//        testDB.openSssion();
-////        CriteriaBuilder builder = testDB.session.getCriteriaBuilder();
-////        CriteriaQuery<User> query = builder.createQuery(User.class);
-////        Root<User> root = query.from(User.class);
-////        query.orderBy(builder.asc(root.get("userName")));
-////        List<User> data = testDB.session.createQuery(query.orderBy()).getResultList();
-////        LinkedList<User> listItems = new LinkedList<>(data);
-////
-////        for (User user : listItems){
-////            if(user.getUserName().equals(username)){
-////                user.setLogin(false);
-////            }
-////        }
-//
-//        testDB.session.flush();
-//        testDB.session.getTransaction().commit(); // Save everything.
-//        testDB.closeSession();
-//    }
+
 
 }
