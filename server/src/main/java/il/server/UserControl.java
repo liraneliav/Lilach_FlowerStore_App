@@ -184,19 +184,19 @@ public class UserControl {
         testDB.closeSession();
     }
 
-    public static void setPermission(int empID, int p, boolean isWorker){
-        if (!isWorker)
-            return;
-        testDB.openSession();
-        Employee e = null;
-        e = testDB.session.get(Employee.class, empID);
-        if (e != null) {
-            e.setPermission(p);
-            testDB.session.flush();
-            testDB.session.getTransaction().commit(); // Save everything.
-        }
-        testDB.closeSession();
-    }
+//    public static void setPermission(int empID, int p, boolean isWorker){
+//        if (!isWorker)
+//            return;
+//        testDB.openSession();
+//        Employee e = null;
+//        e = testDB.session.get(Employee.class, empID);
+//        if (e != null) {
+//            e.setPermission(p);
+//            testDB.session.flush();
+//            testDB.session.getTransaction().commit(); // Save everything.
+//        }
+//        testDB.closeSession();
+//    }
 
     public static void setAddress(int userID, String mail, boolean isWorker){
         if (isWorker)
