@@ -36,8 +36,9 @@ public class Message implements Serializable {
     private Employee employee;
     private User user;
 
+
     //login System admin
-    private LinkedList<Employee> employeeslist;   //login System admin
+    private LinkedList<Employee> listEmploeeys;   //login System admin
 
 
     private String address;
@@ -482,13 +483,6 @@ public class Message implements Serializable {
         this.creadit = creadit;
     }
 
-    public LinkedList<Employee> getEmployeeslist() {
-        return employeeslist;
-    }
-
-    public void setEmployeeslist(LinkedList<Employee> employeeslist) {
-        this.employeeslist = employeeslist;
-    }
     public String getUodateResult() {
         return uodateResult;
     }
@@ -498,6 +492,13 @@ public class Message implements Serializable {
     }
 
 
+    public LinkedList<Employee> getListEmploeeys() {
+        return listEmploeeys;
+    }
+
+    public void setListEmploeeys(LinkedList<Employee> listEmploeeys) {
+        this.listEmploeeys = listEmploeeys;
+    }
 
 
 }

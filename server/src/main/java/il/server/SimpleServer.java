@@ -201,7 +201,7 @@ public class SimpleServer extends AbstractServer {
                     result = UserControl.setAccountStatus(message.getUserID(), message.getAccountStatus(), message.isWorker(), getAllItems(User.class));
 
                 sendMessage.setUodateResult(result);
-                sendMessage.setEmployeeslist(getAllItems(Employee.class));
+                sendMessage.setListEmploeeys(getAllItems(Employee.class));
                 sendMessage.setListUsers(getAllItems(User.class));
                 System.out.println("send new data to cleint");
                 client.sendToClient(sendMessage);

@@ -92,8 +92,8 @@ public class LoginController extends ParentClass{
                         {
                             UserClient.getInstance().setPriority(7);
                             UserClient.getInstance().setPlan(permission);
-                            UserClient.getInstance().setEmployees(event.getEmpolyeeList());
-                            UserClient.getInstance().setAllusers(event.getUserList());
+                            UserClient.getInstance().setEmployees(event.getStoreEmploeey());
+                            UserClient.getInstance().setAllusers(event.getStoreUser());
                             break;
                         }//system admin
                     }

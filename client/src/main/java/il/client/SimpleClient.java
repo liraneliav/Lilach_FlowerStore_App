@@ -32,23 +32,33 @@ public class SimpleClient extends AbstractClient {
 					eventlogIN = new LoginEvent(true, message.getUser(), message.getListComplains(), message.getListOrder(), message.getListStors());
 					eventlogIN.setId(message.getUser().getId());
 				} else {//worker
+					eventlogIN = new LoginEvent(message.getUsername(), message.getPermision());
+					eventlogIN.setId(message.getIddatabase());
+					eventlogIN.setPassword(message.getPass());
 					switch (message.getPermision()) {
 						case 5://system admin
-							eventlogIN = new LoginEvent((SystemAdmin) message.getEmployee(), message.getPermision(), message.getListComplains(), message.getListOrder(),
-									message.getListStors(), message.getListUsers(), message.getEmployeeslist());
+							eventlogIN.setComplainList(message.getListComplains());
+							eventlogIN.setOrderList(message.getListOrder());
+							eventlogIN.setStoreEmploeey(message.getListEmploeeys());
+							eventlogIN.setStoreUser(message.getListUsers());
 							break;
 						case 4://networkmaneger
-							eventlogIN = new LoginEvent((NetworkManger) message.getEmployee(), message.getPermision(), message.getListComplains(), message.getListOrder(),
-									message.getListStors());
+							eventlogIN.setComplainList(message.getListComplains());
+							eventlogIN.setOrderList(message.getListOrder());
 							break;
-						case 3://branchManager
-							eventlogIN = new LoginEvent((BranchManager) message.getEmployee(), message.getPermision(), message.getListComplains(), message.getListOrder());
+						case 3:
+							//report
+							eventlogIN.setStoreId(message.getStoreID());
+							eventlogIN.setComplainList(message.getListComplains());
+							eventlogIN.setOrderList(message.getListOrder());
 							break;
-						case 2://CustomerService
-							eventlogIN = new LoginEvent((CustomerService) message.getEmployee(), message.getPermision(), message.getListComplains(), message.getListOrder());
+						case 2:
+							eventlogIN.setComplainList(message.getListComplains());
+							eventlogIN.setOrderList(message.getListOrder());
 							break;
-						case 1://StoreEmployee
-							eventlogIN = new LoginEvent((StoreEmployee) message.getEmployee(), message.getPermision(), message.getStoreID());
+						case 1:
+							eventlogIN.setStoreId(message.getStoreID());
+							eventlogIN.setOrderList(message.getListOrder());
 							break;
 					}
 				}
@@ -59,7 +69,7 @@ public class SimpleClient extends AbstractClient {
 			EventBus.getDefault().post(new RegisterEvent(message.isRegisterStatus(), message.getRegisterResult()));
 		}
 		if(message.getMessage().equals("result client info update")){
-			EventBus.getDefault().post(new UpdateinfroEvent(message.getUodateResult(),message.getListUsers(),message.getEmployeeslist()));
+			EventBus.getDefault().post(new UpdateinfroEvent(message.getUodateResult(),message.getListUsers(),message.getListEmploeeys()));
 		}
 	}
 	

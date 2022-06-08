@@ -25,19 +25,23 @@ public class LoginControl {
                         }
 
                         //employee
-                        message.setLoginStatus(true);
                         setToActiveEmp(employee.getId());
+                        message.setLoginStatus(true);
+                        message.setWorker(true);
+                        message.setUsername(employee.getUsername());
+                        message.setName(employee.getName());
+                        message.setIddatabase(employee.getId());
                         message.setPermision(employee.getPermission());
+                        message.setPass(employee.getPassword());
                         switch (employee.getPermission()){
                             case 5://system admin send all information
                                 SystemAdmin admin = (SystemAdmin) employee;
                                 message.setEmployee(admin);
-                                message.setPermision(admin.getPermission());
                                 message.setListOrder(SimpleServer.getAllItemsInorder(Order.class, "dateOrder"));
                                 message.setListComplains(SimpleServer.getAllItemsInorder(Complain.class,"date_complain"));
                                 message.setListStors(SimpleServer.getAllItems(Store.class));
                                 message.setListUsers(SimpleServer.getAllItems(User.class));
-                                message.setEmployeeslist(SimpleServer.getAllItems(Employee.class));
+                                message.setListEmploeeys(SimpleServer.getAllItems(Employee.class));
                                 //users
                                 //employees
                                 //stores
@@ -67,6 +71,7 @@ public class LoginControl {
                                 StoreEmployee s = (StoreEmployee)employee;
                                 message.setEmployee(s);
                                 message.setStoreID(s.getStore().getId());
+                                message.setListComplains(SimpleServer.getAllItemsByKeyandOrderby(Complain.class, "store",s.getStore().getId(),"date_complain"));
                                 break;
                         }
                         return message;
