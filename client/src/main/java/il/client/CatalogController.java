@@ -90,6 +90,10 @@ public class CatalogController extends ParentClass{
         Platform.runLater(()->{
                     flowerlist = event.getItems();
                     MainPageController.allStores = event.getStores();
+                    for(int i=0; i<event.getStores().size(); i++){
+                        ((RegisterController)MainPageController.getInstance().getController_map().get("Register")).store_choose.getItems().add(event.getStores().get(i).getAddress());
+                    }
+
                     int col = 0;
                     int row = 0;
 

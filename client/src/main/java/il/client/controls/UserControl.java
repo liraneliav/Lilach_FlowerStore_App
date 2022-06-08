@@ -27,12 +27,12 @@ public class UserControl {
         message.setUserID(userID);
         SimpleClient.getClient().sendToServer(message);
     }
-    public static void setCreditCard(int userID, String cc, boolean isWorker){
+    public static void setCreditCard(int userID, String cc, boolean isWorker) throws IOException {
         Message message = new Message("setCreditCard");
         message.setCredit_card(cc);
         message.setWorker(isWorker);
         message.setUserID(userID);
-
+        SimpleClient.getClient().sendToServer(message);
     }
     public static void setPhone(int userID, String phone, boolean isWorker) throws IOException {
         Message message = new Message("setPhone");
