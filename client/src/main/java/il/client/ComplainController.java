@@ -104,7 +104,7 @@ public class ComplainController {
         ComplainConrtol.newComplain(new_complaint, Integer.parseInt(this.order_number_field.getText()));
         complain_ancorpane2.setVisible(false);
         complain_ancorpane3.setVisible(true);
-        //      ComplaintOrdersTabController.getInstance().RemoveOrderById(Integer.parseInt(this.order_number_field.getText()));
+  //      ComplaintOrdersTabController.getInstance().RemoveOrderById(Integer.parseInt(this.order_number_field.getText()));
 
     }
 

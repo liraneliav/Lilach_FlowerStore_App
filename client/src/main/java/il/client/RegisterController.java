@@ -152,7 +152,7 @@ public class RegisterController extends ParentClass{
             //need to add store here
 
             if(plan.equals("Specific Store Member"))
-                RegisterControl.register(name, username, pass, id ,credit_card, 1);
+              RegisterControl.register(name, username, pass, id ,credit_card, 1);
             if(plan.equals("Store Wide Member"))
                 RegisterControl.register(name, username, pass, id ,credit_card, 2);
             if(plan.equals("Yearly Member"))

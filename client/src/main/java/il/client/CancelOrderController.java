@@ -102,7 +102,7 @@ public class CancelOrderController {
 
         UserClient.getInstance().removeOrderById(Integer.parseInt(this.order_num_filed.getText()));
 
-        //  CancelOrdersTabController.getInstance().RemoveOrderById(Integer.parseInt(this.order_num_filed.getText()));
+      //  CancelOrdersTabController.getInstance().RemoveOrderById(Integer.parseInt(this.order_num_filed.getText()));
     }
 
     public void setDetailsCancelOrder() throws ParseException {

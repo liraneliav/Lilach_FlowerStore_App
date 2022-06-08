@@ -145,10 +145,10 @@ public class PeopleListController {
         stage.setTitle("Change Person Details");
         stage.setScene(scene);
         controller.initialize(stage);
-        controller.setCreditCardText(row.getItem().getCreditCard());
-        controller.setMailText(row.getItem().getMail());
-        controller.setPhoneText(row.getItem().getPhone());
-        controller.setWorker(false);
+            controller.setCreditCardText(row.getItem().getCreditCard());
+            controller.setMailText(row.getItem().getMail());
+            controller.setPhoneText(row.getItem().getPhone());
+            controller.setWorker(false);
         controller.setPasswordText(row.getItem().getPassword());
         controller.setUsernameText(row.getItem().getUserName());
         controller.setPermissionsText(Integer.toString(row.getItem().getPriority()));
@@ -183,13 +183,13 @@ public class PeopleListController {
     void workerToggleClicked(MouseEvent event) {
         clicks++;
         if(clicks%2==1){
-            people_table.getItems().clear();
-            TableInitializeFields();
+         people_table.getItems().clear();
+         TableInitializeFields();
 //       people_table.setItems(/* gets the employee table*/);
         }
         else{
-            people_table.getItems().clear();
-            TableInitializeFields();
+         people_table.getItems().clear();
+         TableInitializeFields();
 //       people_table.setItems(/* gets the user table*/);
         }
     }

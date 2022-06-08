@@ -70,8 +70,8 @@ public class OrderClient {
         for(int i=0; i<order.getProducts().size(); i++){
             this.order_items.add(new CartItem(order.getProducts().get(i)));
         }
-        //  this.storeChoosen = order.getStore().getAddress();
-        //  this.isDelivery = order.isDelivery();
+      //  this.storeChoosen = order.getStore().getAddress();
+      //  this.isDelivery = order.isDelivery();
     }
 
     public void buttonsInitilize(){
