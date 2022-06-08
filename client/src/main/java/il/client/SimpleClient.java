@@ -22,7 +22,6 @@ public class SimpleClient extends AbstractClient {
 			System.out.println("get init data");
 			EventBus.getDefault().post(new CatalogItemsEvent(message.getListItem(), message.getListStors()));
 		}
-
 		if(message.getMessage().equals("result login")) {
 			LoginEvent eventlogIN = null;
 			if (!message.isLoginStatus())

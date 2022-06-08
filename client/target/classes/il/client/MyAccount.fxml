@@ -36,13 +36,13 @@
         <Label graphicTextGap="15.0" prefWidth="204.0" styleClass="HeadersNoBackground" stylesheets="@CSSfiles/Backgrounds.css" text="My Account">
             <graphic>
                 <MFXFontIcon description="mfx-user" size="52.0">
-               <color>
-                  <Color red="1.0" green="1.0" blue="1.0" />
-               </color></MFXFontIcon>
+                    <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                    </color></MFXFontIcon>
             </graphic>
-         <font>
-            <Font name="Calibri" size="29.0" />
-         </font>
+            <font>
+                <Font name="Calibri" size="29.0" />
+            </font>
         </Label>
         <Label styleClass="menu-label" text="Components">
             <VBox.margin>
@@ -59,5 +59,5 @@
             <VBox fx:id="navBar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" styleClass="navbar" />
         </MFXScrollPane>
     </VBox>
-   <StackPane fx:id="contentPane" layoutX="262.0" layoutY="2.0" prefHeight="646.0" prefWidth="976.0" />
+    <StackPane fx:id="contentPane" layoutX="262.0" layoutY="2.0" prefHeight="646.0" prefWidth="976.0" />
 </AnchorPane>

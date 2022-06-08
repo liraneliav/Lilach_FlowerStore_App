@@ -192,7 +192,7 @@ public class SimpleServer extends AbstractServer {
                 if (message.getSetinfo().equals("setPhone"))
                     UserControl.setPhone(message.getUserID(), message.getPhone(), message.isWorker());
                 if (message.getSetinfo().equals("setMail"))
-                    UserControl.setName(message.getUserID(), message.getMail(), message.isWorker());
+                    UserControl.setMail(message.getUserID(), message.getMail(), message.isWorker());
                 if (message.getSetinfo().equals("setAddress"))
                     UserControl.setAddress(message.getUserID(), message.getAddress(), message.isWorker());
                 if (message.getSetinfo().equals("setPermission"))
