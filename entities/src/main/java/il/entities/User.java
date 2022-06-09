@@ -267,7 +267,9 @@ public class User implements Serializable {
         listOrders.remove(order);
     }
 
-    public void addOrder(Order order) {listOrders.add(order);
+    public void addOrder(Order order) {
+        listOrders.add(order);
+
         order.setUser(this);}
 
     public List<Order> getListOrders() {
