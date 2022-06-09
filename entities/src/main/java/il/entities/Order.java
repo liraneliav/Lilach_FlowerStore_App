@@ -26,7 +26,8 @@ public class Order implements Serializable {
 
     @OneToOne(fetch = FetchType.EAGER, orphanRemoval = true)
     private Complain complain;
-
+    //add!
+    private String creditCard;
     private String dateReceive;
     private String timeReceive;
     private String dateOrder;
@@ -40,7 +41,8 @@ public class Order implements Serializable {
     private String type;
     private boolean isCanceled;
 
-    public Order(User user, Store store, String dateReceive, String timeReceive, String dateOrder, String timeOrder, double sum, String greeting, String nameReceives, String phoneReceives, String address, boolean isCanceled) {
+    public Order(User user, Store store, String dateReceive, String timeReceive, String dateOrder, String timeOrder, double sum, String greeting, String nameReceives, String phoneReceives,
+                 String address, boolean isCanceled, String creditCard) {
         this.user = user;
         this.store = store;
         this.dateReceive = dateReceive;
@@ -55,6 +57,7 @@ public class Order implements Serializable {
         this.status=3;
         this.isCanceled = isCanceled;
         this.products = new ArrayList<CartProduct>();
+        this.creditCard=creditCard;
     }
 
     public Order() {
@@ -70,7 +73,8 @@ public class Order implements Serializable {
     }
 
     public Order getOrderForClient(){
-        Order o = new Order(null, null, this.dateReceive, this.timeReceive, this.dateOrder, this.timeOrder, this.sum, this.greeting, this.nameReceives, this.phoneReceives, this.address,false);
+        Order o = new Order(null, null, this.dateReceive, this.timeReceive, this.dateOrder, this.timeOrder, this.sum, this.greeting,
+                this.nameReceives, this.phoneReceives, this.address,false, this.creditCard);
         o.setId(this.id);
         for(CartProduct p : this.products){
             o.addProduct(p);
@@ -80,6 +84,15 @@ public class Order implements Serializable {
 
         return o;
     }
+
+    public String getCreditCard() {
+        return creditCard;
+    }
+
+    public void setCreditCard(String creditCard) {
+        this.creditCard = creditCard;
+    }
+
 
     public String getPhoneReceives() {
         return phoneReceives;
