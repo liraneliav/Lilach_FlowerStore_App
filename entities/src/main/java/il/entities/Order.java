@@ -40,6 +40,16 @@ public class Order implements Serializable {
     private String type;
     private boolean isCanceled;
 
+    public String getReciveEmail() {
+        return reciveEmail;
+    }
+
+    public void setReciveEmail(String reciveEmail) {
+        this.reciveEmail = reciveEmail;
+    }
+
+    private String reciveEmail="";
+
     public Order(User user, Store store, String dateReceive, String timeReceive, String dateOrder, String timeOrder, double sum, String greeting, String nameReceives, String phoneReceives, String address, boolean isCanceled) {
         this.user = user;
         this.store = store;

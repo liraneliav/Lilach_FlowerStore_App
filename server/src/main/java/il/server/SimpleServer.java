@@ -244,6 +244,8 @@ public class SimpleServer extends AbstractServer {
                 } catch(IOException e){
                 System.out.println(e.getMessage());
                 System.out.println("handleMessageFromClient Error!" + client.getInetAddress());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        }
+    }
     }

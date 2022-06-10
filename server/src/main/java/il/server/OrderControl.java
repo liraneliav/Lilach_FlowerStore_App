@@ -21,9 +21,11 @@ public class OrderControl {
 //        testDB.closeSession();
 //    }
 
-    public static void cancelOrder(int id){
+    public static void cancelOrder(int id) throws Exception {
         testDB.openSession();
         Order a = testDB.session.get(Order.class, id);
+        if(a.isCanceled())
+            throw new Exception("order "+a.getId()+ "allready canceld");
         a.setStatus(1);
         a.setCanceled(true);
         testDB.session.flush();
@@ -35,7 +37,12 @@ public class OrderControl {
         try{
             String title = "New order from Lilach Store";
             String text = "Hey!, \n we receive you order number " + o.getId() + ",\n to "+o.getAddress()+".\n";
-            SendEmail.sendTo(o.getUser().getMail(),title,text);
+            String mail;
+            if(!o.getReciveEmail().equals(""))
+                mail = o.getReciveEmail();
+            else
+                mail = o.getUser().getMail();
+            SendEmail.sendTo(mail,title,text);
         }
         catch (Exception e){
 
