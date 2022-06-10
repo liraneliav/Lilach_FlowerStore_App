@@ -861,7 +861,10 @@ public class OrderController {
         }
 
         String pickStore = store_chooser.getSelectedItem();
-
+        if(elseOrderChecker.isSelected()){
+            full_order.setReciveEmail(this.my_mail_field.getText());
+        }
+        full_order.setCc(this.my_credit_card_field.getText());
         for(Store s: MainPageController.allStores){
             if(s.getAddress().equals(pickStore))
                 OrderControl.newOrder(full_order, s.getId(), UserClient.getInstance().getId());

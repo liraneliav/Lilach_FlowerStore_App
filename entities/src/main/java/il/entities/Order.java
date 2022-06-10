@@ -40,6 +40,16 @@ public class Order implements Serializable {
     private String type;
     private boolean isCanceled;
 
+    public String getCc() {
+        return cc;
+    }
+
+    public void setCc(String cc) {
+        this.cc = cc;
+    }
+
+    private String cc="";
+
     public String getReciveEmail() {
         return reciveEmail;
     }

@@ -37,12 +37,7 @@ public class OrderControl {
         try{
             String title = "New order from Lilach Store";
             String text = "Hey!, \n we receive you order number " + o.getId() + ",\n to "+o.getAddress()+".\n";
-            String mail;
-            if(!o.getReciveEmail().equals(""))
-                mail = o.getReciveEmail();
-            else
-                mail = o.getUser().getMail();
-            SendEmail.sendTo(mail,title,text);
+            SendEmail.sendTo(o.getReciveEmail(),title,text);
         }
         catch (Exception e){
 
@@ -97,7 +92,8 @@ public class OrderControl {
         testDB.session.flush();
         testDB.session.getTransaction().commit(); // Save everything.
         testDB.closeSession();
-        sendNewOrder(order);
+        if(!order.getReciveEmail().equals(""))
+            sendNewOrder(order);
         return order;
     }
 
