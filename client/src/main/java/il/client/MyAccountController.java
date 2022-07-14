@@ -68,7 +68,7 @@ public class MyAccountController{
 
     private void initializeLoader() {
         MFXLoader loader = new MFXLoader();
-        System.out.println("MyAccount isworker?"+UserClient.getInstance().isWorker()+UserClient.getInstance().getUserName());
+        System.out.println("MyAccount isworker? "+UserClient.getInstance().isWorker()+UserClient.getInstance().getUserName());
         if (UserClient.getInstance().isWorker()==false){
             System.out.println("in if");
             loader.addView(MFXLoaderBean.of("MyAccount", loadURL("EditAccountDetails.fxml")).setBeanToNodeMapper(() -> createToggle("mfx-variant7-mark", "Account Preferences")).setDefaultRoot(true).get());
