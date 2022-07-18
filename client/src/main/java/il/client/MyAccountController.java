@@ -83,7 +83,7 @@ public class MyAccountController{
 
         if(UserClient.getInstance().isWorker() && UserClient.getInstance().getPlan()==5){
         loader.addView(MFXLoaderBean.of("System Admin Panel", loadURL("PeopleList.fxml")).setBeanToNodeMapper(() -> createToggle("mfx-users", "System Admin Panel")).setDefaultRoot(true).get());
-        loader.addView(MFXLoaderBean.of("Revenue Report", loadURL("RevenueReport.fxml")).setBeanToNodeMapper(() -> createToggle("mfx-file", "Revenue Report")).setDefaultRoot(true).get());
+        loader.addView(MFXLoaderBean.of("Revenue Report", loadURL("RevenueReport.fxml")).setBeanToNodeMapper(() -> createToggle("mfx-file", "Revenue Report")).get());
             loader.addView(MFXLoaderBean.of("Products Report", loadURL("ProductsReport.fxml")).setBeanToNodeMapper(() -> createToggle("mfx-file", "Products Report")).get());
             loader.addView(MFXLoaderBean.of("Complaints Report", loadURL("CompalintsReport.fxml")).setBeanToNodeMapper(() -> createToggle("mfx-file", "Complaints Report")).get());
         }
@@ -187,6 +187,26 @@ public class MyAccountController{
             controller_map.put("ComplaintsTab", controller);
             ((ComplaintTabController) controller_map.get("ComplaintsTab")).setMy_account_page_holder(this);
         }
+        {
+            fxmlLoader = new FXMLLoader();
+            var = getClass().getResource("CancelOrders.fxml");
+            fxmlLoader.setLocation(var);
+            root = fxmlLoader.load();
+            CancelOrdersTabController controller = fxmlLoader.getController();
+            root_map.put("CancelOrdersTab", root);
+            controller_map.put("CancelOrdersTab", controller);
+            ((CancelOrdersTabController) controller_map.get("CancelOrdersTab")).setMy_account_page_holder(this);
+        }
+        {
+            fxmlLoader = new FXMLLoader();
+            var = getClass().getResource("ComplaintOrders.fxml");
+            fxmlLoader.setLocation(var);
+            root = fxmlLoader.load();
+            ComplaintOrdersTabController controller = fxmlLoader.getController();
+            root_map.put("ComplaintOrdersTab", root);
+            controller_map.put("ComplaintOrdersTab", controller);
+            ((ComplaintOrdersTabController) controller_map.get("ComplaintOrdersTab")).setMy_account_page_holder(this);
+        }
 //        {
 //            fxmlLoader = new FXMLLoader();
 //            var = getClass().getResource("PeopleList.fxml");
@@ -210,9 +230,11 @@ public class MyAccountController{
         this.contentPane.getChildren().addAll(root_map.get("Complaint"));
     }
 
+
     public void LoadOrdersHistoryPage() throws IOException {
         this.contentPane.getChildren().clear();
         ((OrdersHistoryController)controller_map.get("OrdersHistory")).setMy_account_page_holder(this);
+        ((OrdersHistoryController)controller_map.get("OrdersHistory")).refreshTable();
         this.contentPane.getChildren().addAll(root_map.get("OrdersHistory"));
     }
 
@@ -230,8 +252,21 @@ public class MyAccountController{
 
     public void LoadComplaintsTab() {
         this.contentPane.getChildren().clear();
-        ((ComplaintTabController)controller_map.get("ComplaintsTab")).setMy_account_page_holder(this);
+        ((ComplaintOrdersTabController)controller_map.get("ComplaintsTab")).setMy_account_page_holder(this);
         this.contentPane.getChildren().addAll(root_map.get("ComplaintsTab"));
+    }
+
+    public void LoadCancelOrdersTab() {
+        this.contentPane.getChildren().clear();
+        ((CancelOrdersTabController)controller_map.get("CancelOrdersTab")).setMy_account_page_holder(this);
+        this.contentPane.getChildren().addAll(root_map.get("CancelOrdersTab"));
+    }
+
+    public void LoadComplaintOrdersTab() {
+        this.contentPane.getChildren().clear();
+        ((ComplaintOrdersTabController)controller_map.get("ComplaintOrdersTab")).setMy_account_page_holder(this);
+        ((ComplaintOrdersTabController)controller_map.get("ComplaintOrdersTab")).refreshTable();
+        this.contentPane.getChildren().addAll(root_map.get("ComplaintOrdersTab"));
     }
 
 
@@ -268,6 +303,40 @@ public class MyAccountController{
         ((ComplaintTabController)controller_map.get("ComplaintsTab")).setMy_account_page_holder(this);
     }
 
+    public void ComplaintOrdersTabRefresh() throws IOException {
+        Parent root;
+        URL var;
+        FXMLLoader fxmlLoader;
+        fxmlLoader = new FXMLLoader();
+        var = getClass().getResource("ComplaintOrders.fxml");
+        fxmlLoader.setLocation(var);
+        root = fxmlLoader.load();
+        ComplaintOrdersTabController controller = fxmlLoader.getController();
+        root_map.remove("ComplaintOrdersTab");
+        controller_map.remove("ComplaintOrdersTab");
+        root_map.put("ComplaintOrdersTab",root);
+        controller_map.put("ComplaintOrdersTab",controller);
+        ((ComplaintOrdersTabController)controller_map.get("ComplaintOrdersTab")).refreshTable();
+        ((ComplaintOrdersTabController)controller_map.get("ComplaintOrdersTab")).setMy_account_page_holder(this);
+    }
+
+    public void OrdersHistoryRefresh() throws IOException {
+        Parent root;
+        URL var;
+        FXMLLoader fxmlLoader;
+        fxmlLoader = new FXMLLoader();
+        var = getClass().getResource("OrdersHistory.fxml");
+        fxmlLoader.setLocation(var);
+        root = fxmlLoader.load();
+        OrdersHistoryController controller = fxmlLoader.getController();
+        root_map.remove("OrdersHistory");
+        controller_map.remove("OrdersHistory");
+        root_map.put("OrdersHistory",root);
+        controller_map.put("OrdersHistory",controller);
+        ((OrdersHistoryController)controller_map.get("OrdersHistory")).refreshTable();
+        ((OrdersHistoryController)controller_map.get("OrdersHistory")).setMy_account_page_holder(this);
+    }
+
     public void CancelOrderRefresh() throws IOException {
         Parent root;
         URL var;
@@ -283,6 +352,7 @@ public class MyAccountController{
         controller_map.put("CancelOrder",controller);
         ((CancelOrderController)controller_map.get("CancelOrder")).setMy_account_page_holder(this);
     }
+
 
     public void AccountPrefRefresh() throws IOException {
         Parent root;

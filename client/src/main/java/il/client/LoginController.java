@@ -102,7 +102,7 @@ public class LoginController extends ParentClass{
                             break;
                         }//system admin
                     }
-                    System.out.println("LoginController getPriority "+UserClient.getInstance().getPriority()+ "plan "+UserClient.getInstance().getPlan());
+                    System.out.println("LoginController getPriority "+UserClient.getInstance().getPriority()+ "plan "+UserClient.getInstance().getPlan()+" in LoginController");
 //                    UserClient.getInstance().setPriority(permission);
                     UserClient.getInstance().setPassword(password);
                     UserClient.getInstance().setStoreId(storeIDWork);

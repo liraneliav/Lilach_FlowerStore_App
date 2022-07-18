@@ -1,5 +1,6 @@
 package il.client;
 
+import il.client.controls.UserControl;
 import il.entities.User;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -248,10 +249,31 @@ public class AddToCartController{
         if(items.size()!=0 || customItems.size() != 0) {
             OrderController order_controller = (OrderController) MainPageController.getInstance().getController_map().get("Order");
             if(UserClient.getInstance().getPlan()==3 && (total_sum+total_sum_custom)>50) { //yearly membership
-                order_controller.setSum_label(Double.toString(((total_sum+total_sum_custom) * 0.9) - UserClient.getInstance().getCredit()));
+                if(UserClient.getInstance().getCredit()<(total_sum+total_sum_custom) * 0.9) {
+                    order_controller.setSum_label(Double.toString(((total_sum + total_sum_custom) * 0.9) - UserClient.getInstance().getCredit()));
+                    order_controller.setNew_credit(0.0);
+//                    UserClient.getInstance().setCredit(0.0);
+//                    UserControl.setCredit(UserClient.getInstance().getId(), 0.0,false);
+                } else{
+                    order_controller.setSum_label(Double.toString(0.0));
+                    order_controller.setNew_credit(UserClient.getInstance().getCredit()-((total_sum + total_sum_custom) * 0.9));
+//                    UserClient.getInstance().setCredit(UserClient.getInstance().getCredit()-((total_sum + total_sum_custom) * 0.9));
+//                    UserControl.setCredit(UserClient.getInstance().getId(), UserClient.getInstance().getCredit()-((total_sum + total_sum_custom) * 0.9),false);
+                }
             }
             else{
-                order_controller.setSum_label(Double.toString((total_sum+total_sum_custom)- UserClient.getInstance().getCredit()));
+                if(UserClient.getInstance().getCredit()<(total_sum+total_sum_custom)){
+                    order_controller.setSum_label(Double.toString((total_sum+total_sum_custom)- UserClient.getInstance().getCredit()));
+                    order_controller.setNew_credit(0.0);
+//                    UserClient.getInstance().setCredit(0.0);
+//                    UserControl.setCredit(UserClient.getInstance().getId(), 0.0,false);
+                } else{
+                    order_controller.setSum_label(Double.toString( 0.0));
+                    order_controller.setNew_credit(UserClient.getInstance().getCredit()-(total_sum + total_sum_custom));
+//                    UserClient.getInstance().setCredit(UserClient.getInstance().getCredit()-(total_sum + total_sum_custom));
+//                    UserControl.setCredit(UserClient.getInstance().getId(), UserClient.getInstance().getCredit()-(total_sum + total_sum_custom),false);
+                }
+
             }
             OrderController.getInstance().setCart(this.items);
             OrderController.getInstance().setCustomCart(this.customItems);

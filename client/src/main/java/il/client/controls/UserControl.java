@@ -38,6 +38,16 @@ public class UserControl {
         message.setUserID(userID);
         SimpleClient.getClient().sendToServer(message);
     }
+
+    public static void setCredit(int userID, double credit, boolean isWorker) throws IOException{
+        Message message = new Message("setInfo");
+        message.setSetinfo("setCredit");
+        message.setCreadit(credit);
+        message.setWorker(isWorker);
+        message.setUserID(userID);
+        SimpleClient.getClient().sendToServer(message);
+    }
+
     public static void setPhone(int userID, String phone, boolean isWorker) throws IOException {
         Message message = new Message("setInfo");
         message.setSetinfo("setPhone");

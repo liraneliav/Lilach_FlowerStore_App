@@ -108,7 +108,8 @@ public class Order implements Serializable {
     public void addProduct(CartProduct product){
         this.products.add(product);
         product.setOrder(this);
-        this.sum+=product.getTotalPrice();
+        //this.sum+=product.getTotalPrice();
+
     }
 
     public void removeProduct(CartProduct product){

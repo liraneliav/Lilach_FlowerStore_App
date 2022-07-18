@@ -222,6 +222,8 @@ public class SimpleServer extends AbstractServer {
                             UserControl.setPassword(message.getUserID(), message.getPass(), message.isWorker());
                         if (message.getSetinfo().equals("setCreditCard"))
                             result =  UserControl.setCreditCard(message.getUserID(), message.getCredit_card(), message.isWorker());
+                        if (message.getSetinfo().equals("setCredit"))
+                            result =  UserControl.setCredit(message.getUserID(), message.getCreadit(), message.isWorker());
                         if (message.getSetinfo().equals("setPhone"))
                             UserControl.setPhone(message.getUserID(), message.getPhone(), message.isWorker());
                         if (message.getSetinfo().equals("setMail"))

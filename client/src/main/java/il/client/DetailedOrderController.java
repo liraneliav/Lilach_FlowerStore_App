@@ -64,6 +64,7 @@ public class DetailedOrderController {
             sum = sum + holder.get(i).getItem_price();
         }
         sumText.setText(Double.toString(sum));
+        sumText.setText(Double.toString(order.getSum()));
         timeReceiverText.setText(orderToLook.getOrderReceiveTime());
     }
 

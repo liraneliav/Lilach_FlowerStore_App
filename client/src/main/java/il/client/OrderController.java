@@ -1,6 +1,7 @@
 package il.client;
 
 import il.client.controls.OrderControl;
+import il.client.controls.UserControl;
 import il.client.events.OrderEvent;
 import il.entities.*;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -175,6 +176,10 @@ public class OrderController {
 
     private double extra_for_delivery= 30.0;
 
+    private double new_credit = 0.0;
+
+    private OrderEvent order_event;
+
     @FXML
     private Label error_label;
 
@@ -305,7 +310,7 @@ public class OrderController {
             return;
         }
         else {
-            System.out.println("because of general we accept");
+            System.out.println("because of general we accept in OrderController");
             correctOrder();
         }
     }
@@ -319,6 +324,9 @@ public class OrderController {
 
     @FXML
     void bringDetailsClicked(MouseEvent event) {
+
+        System.out.println("in OrderController in bringDetailsClicked function sum= "+Double.parseDouble(this.sum_label.getText()));
+
         //get the details from the initialize we did here
         counter_details_clicks++;
         if(counter_details_clicks%2==1){
@@ -846,6 +854,7 @@ public class OrderController {
         String date_good_format = dtf2.format(this.date_picker.getValue());
 
         Order full_order = new Order(UserClient.getInstance().fromUserClientToUser(), chosen_store, date_good_format, this.time_choose.getSelectedItem(), date_time[0],date_time[1], Double.parseDouble(this.sum_label.getText()), this.greeting_field.getText(),this.reciver_name_field.getText(), this.reciver_phone_field.getText()+this.reciver_phone_field.getText(),address,false);
+        System.out.println("in OrderController in correctorder function sum= "+full_order.getSum());
         for(int i=0; i<cart.size(); i++)
         {
             Product product = new Product(cart.get(i).getItem_name(), cart.get(i).getItem_price(), false, 0.0, null, null);
@@ -866,6 +875,9 @@ public class OrderController {
             if(s.getAddress().equals(pickStore))
                 OrderControl.newOrder(full_order, s.getId(), UserClient.getInstance().getId());
         }
+
+        UserClient.getInstance().setCredit(getNew_credit());
+        UserControl.setCredit(UserClient.getInstance().getId(), getNew_credit(),false);
 //
 //        if(store_chooser.getSelectedItem().equals("Haifa"))
 //            OrderControl.newOrder(full_order, 1, UserClient.getInstance().getId());
@@ -886,7 +898,11 @@ public class OrderController {
     @Subscribe
     public void compliteNewOrder(OrderEvent event){
         Platform.runLater(()-> {
-            UserClient.getInstance().addOrder(event.getOrder());
+            event.getOrder().setSum(Double.parseDouble(this.sum_label.getText()));
+           UserClient.getInstance().addOrder(event.getOrder());
+           //UserClient.getInstance().setOrderSumById(event.getOrder().getId(), Double.parseDouble(this.sum_label.getText()));
+
+           System.out.println("in OrderController in compliteNewOrder sum= "+event.getOrder().getSum());
             try {
                 MainPageController.getInstance().AddToCartRefresh();
                 MainPageController.getInstance().MyAccountRefresh();
@@ -943,6 +959,10 @@ public class OrderController {
     public void setExtra_for_delivery(double extra_for_delivery) {
         this.extra_for_delivery = extra_for_delivery;
     }
+
+    public double getNew_credit() { return new_credit; }
+
+    public void setNew_credit(double new_credit) { this.new_credit = new_credit; }
 
     //end gets and sets
     /*end gets and sets*/

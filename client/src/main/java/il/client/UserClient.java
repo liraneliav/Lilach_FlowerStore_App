@@ -335,6 +335,14 @@ public class UserClient {
         return null;
     }
 
+    public void setOrderSumById(int id,double sum){
+        for(int i=0; i< orderList.size(); i++){
+            if(orderList.get(i).getThis_id()==id){
+                orderList.get(i).setSum(sum);
+            }
+        }
+    }
+
     public ComplaintClient getComplaintById(int id){
         ComplaintClient complaint;
         for(int i=0; i< complaintList.size(); i++){
@@ -417,6 +425,10 @@ public class UserClient {
     public void setOrdersEntity(LinkedList<Order> ordersEntity) { this.ordersEntity = ordersEntity; }
 
     public void addOrder(Order order){
+        for(int i=0; i<orderList.size(); i++){
+            if(orderList.get(i).getThis_id()==order.getId())
+                return;
+        }
         this.orderList.add(new OrderClient(order));
     }
 

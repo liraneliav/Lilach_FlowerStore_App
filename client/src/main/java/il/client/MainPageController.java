@@ -529,6 +529,19 @@ public class MainPageController extends ParentClass {
         controller_map.put("MyAccount",controller);
         ((MyAccountController)controller_map.get("MyAccount")).setMain_page_holder(this);
     }
+
+    /*
+        this.main_first_load_pane.getChildren().clear();
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        URL var = getClass().getResource("MyAccount.fxml");
+        fxmlLoader.setLocation(var);
+        Parent root = fxmlLoader.load();
+        MyAccountController controller = fxmlLoader.getController();
+        controller.setMain_page_holder(this);
+        this.main_first_load_pane.getChildren().addAll(root);
+    */
+
+
     public void AddToCartRefresh() throws IOException {
         Parent root;
         URL var;

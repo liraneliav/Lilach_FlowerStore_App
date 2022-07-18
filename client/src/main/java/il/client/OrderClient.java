@@ -67,6 +67,7 @@ public class OrderClient {
             this.orderReceiveTime = order.getTimeReceive();
             this.orderReceiveDate = order.getDateReceive();
             this.greeting = order.getGreeting();
+            this.isCanceled = order.isCanceled();
             try{
                 if(order.getNameReceives().equals(""))
                     this.nameReceiver = order.getUser().getName();
@@ -270,6 +271,8 @@ public class OrderClient {
     public String toString() {
         return "Order{" +
                 "this_id=" + this_id +
+                ", isCanceled=" + isCanceled +
+                ", sum=" + sum +
                 ", orderDate='" + orderDate + '\'' +
                 ", orderTime='" + orderTime + '\'' +
                 ", orderReceiveTime='" + orderReceiveTime + '\'' +

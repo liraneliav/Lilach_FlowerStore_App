@@ -47,6 +47,7 @@ public class OrdersHistoryController {
 
 
     ObservableList<OrderClient> items = FXCollections.observableArrayList();
+    ObservableList<OrderClient> notCanceled = FXCollections.observableArrayList();
 
     private MyAccountController my_account_page_holder;
 
@@ -60,10 +61,36 @@ public class OrdersHistoryController {
         if(orders_table.getItems().size()!=0){
             this.orders_table.getItems().clear();
         } //?????????
-        orders_table.setItems(UserClient.getInstance().getOrderList());
+
+        for(int i=0; i< items.size(); i++){
+            if(items.get(i).isCanceled()==false){
+                notCanceled.add(items.get(i));
+            }
+        }
+        //orders_table.setItems(UserClient.getInstance().getOrderList());
+        orders_table.setItems(notCanceled);
     }
 //
 
+    public void refreshTable(){
+        items = UserClient.getInstance().getOrderList();
+//        for(int i=0; i< items.size(); i++){
+//            System.out.println(items.get(i));
+//        } printing the orders
+        if(orders_table.getItems().size()!=0){
+            this.orders_table.getItems().clear();
+        } //?????????
+        if(notCanceled.size()!=0){
+            notCanceled.clear();
+        }
+        for(int i=0; i< items.size(); i++){
+            if(items.get(i).isCanceled()==false){
+                notCanceled.add(items.get(i));
+            }
+        }
+        //orders_table.setItems(UserClient.getInstance().getOrderList());
+        orders_table.setItems(notCanceled);
+    }
 
     public void TableInitializeFields() {
             orders_table.setFixedCellSize(40);

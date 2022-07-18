@@ -1,5 +1,6 @@
 package il.client;
 
+import il.client.DiffClasses.ComplaintClient;
 import io.github.palexdev.materialfx.controls.legacy.MFXLegacyTableView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -38,6 +39,7 @@ public class ComplaintOrdersTabController {
     private TableColumn<OrderClient, String> time_col;
 
     ObservableList<OrderClient> items = FXCollections.observableArrayList();
+    ObservableList<OrderClient> notCanceled = FXCollections.observableArrayList();
 
     private MyAccountController my_account_page_holder;
 
@@ -58,8 +60,37 @@ public class ComplaintOrdersTabController {
 //        for(int i=0; i< items.size(); i++){
 //            System.out.println(items.get(i));
 //        } printing the orders
-        complaint_order_table.setItems(UserClient.getInstance().getOrderList());
+        for(int i=0; i<items.size(); i++){
+            if(items.get(i).isCanceled()==false){
+                notCanceled.add(items.get(i));
+            }
+        }
+       // complaint_order_table.setItems(UserClient.getInstance().getOrderList());
+        complaint_order_table.setItems(notCanceled);
     }
+
+    public void refreshTable(){
+        items = UserClient.getInstance().getOrderList();
+//        for(int i=0; i< items.size(); i++){
+//            System.out.println(items.get(i));
+//        } printing the orders
+        if(complaint_order_table.getItems().size()!=0){
+            this.complaint_order_table.getItems().clear();
+        }
+        System.out.println("before in CopmlaintOrdersTabController "+notCanceled.toString());
+        if(notCanceled.size()!=0){
+            notCanceled.clear();
+        }
+        System.out.println("after in CopmlaintOrdersTabController "+notCanceled.toString());
+        for(int i=0; i<items.size(); i++){
+            if(items.get(i).isCanceled()==false){
+                notCanceled.add(items.get(i));
+            }
+        }
+        // complaint_order_table.setItems(UserClient.getInstance().getOrderList());
+        complaint_order_table.setItems(notCanceled);
+    }
+
     //
     public void TableInitializeFields() {
         complaint_order_table.setFixedCellSize(40);

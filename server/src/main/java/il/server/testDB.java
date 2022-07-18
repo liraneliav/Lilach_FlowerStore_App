@@ -25,13 +25,13 @@ public class testDB {
             configuration.setProperty("hibernate.hbm2ddl.auto", "create");
         else
             configuration.setProperty("hibernate.hbm2ddl.auto", "update");
-        configuration.setProperty("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver");
-        configuration.setProperty("hibernate.show-sql", "true");
-        configuration.setProperty("hibernate.connection.username", "root");
-        configuration.setProperty("hibernate.connection.timezone", "UTC");
-        configuration.setProperty("hibernate.connection.serverTimezone", "UTC");
-        configuration.setProperty("spring.jpa.hibernate.ddl-auto", "create");
-        configuration.addAnnotatedClass(Product.class).addAnnotatedClass(User.class).addAnnotatedClass(Complain.class).addAnnotatedClass(Order.class)
+            configuration.setProperty("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver");
+            configuration.setProperty("hibernate.show-sql", "true");
+            configuration.setProperty("hibernate.connection.username", "root");
+            configuration.setProperty("hibernate.connection.timezone", "UTC");
+            configuration.setProperty("hibernate.connection.serverTimezone", "UTC");
+            configuration.setProperty("spring.jpa.hibernate.ddl-auto", "create");
+            configuration.addAnnotatedClass(Product.class).addAnnotatedClass(User.class).addAnnotatedClass(Complain.class).addAnnotatedClass(Order.class)
                 .addAnnotatedClass(Employee.class).addAnnotatedClass(Store.class).addAnnotatedClass(SystemAdmin.class)
                 .addAnnotatedClass(StoreEmployee.class).addAnnotatedClass(NetworkManger.class).addAnnotatedClass(CustomerService.class)
                 .addAnnotatedClass(BranchManager.class).addAnnotatedClass(CartProduct.class);
@@ -47,46 +47,46 @@ public class testDB {
         Product flower;
 
         flower = new Product("whiteroses", 20,true,25,"flower", "white");
-        CatalogControl.saveNewFlower(flower,"src/main/resources/images/Lotus.png");
+        CatalogControl.saveNewFlower(flower,"src/main/resources/images/Flower0.jpg");
 
         flower = new Product("sunflower", 50,true, 5, "flower", "yellow");
-        CatalogControl.saveNewFlower(flower, "src/main/resources/images/Lotus.png");
+        CatalogControl.saveNewFlower(flower, "src/main/resources/images/Flower1.jpg");
 
         flower = new Product("chinaFlower", 70,false, 0, "flower", "red");
-        CatalogControl.saveNewFlower(flower, "src/main/resources/images/Lotus.png");
+        CatalogControl.saveNewFlower(flower, "src/main/resources/images/Flower2.jpg");
 
         flower = new Product("pin", 90,false, 0,"flower", "pink");
-        CatalogControl.saveNewFlower(flower, "src/main/resources/images/Lotus.png");
+        CatalogControl.saveNewFlower(flower, "src/main/resources/images/Flower3.jpg");
 
         flower = new Product("whiteroses", 120,true, 50, "flower", "white");
-        CatalogControl.saveNewFlower(flower, "src/main/resources/images/Lotus.png");
+        CatalogControl.saveNewFlower(flower, "src/main/resources/images/Flower4.jpg");
 
         flower = new Product("sunflower", 25.99,true, 50, "flower", "yellow");
-        CatalogControl.saveNewFlower(flower, "src/main/resources/images/Lotus.png");
+        CatalogControl.saveNewFlower(flower, "src/main/resources/images/Flower5.jpg");
 
         flower = new Product("Lotus", 100, true, 10,"flower","pink");
-        CatalogControl.saveNewFlower(flower, "src/main/resources/images/Lotus.png");
+        CatalogControl.saveNewFlower(flower, "src/main/resources/images/Flower6.jpg");
 
         flower = new Product("Rose1", 200,true,25,"flower", "offwhite");
-        CatalogControl.saveNewFlower(flower,"src/main/resources/images/Lotus.png");
+        CatalogControl.saveNewFlower(flower,"src/main/resources/images/Flower7.jpg");
 
         flower = new Product("Rose12", 250,true, 5, "flower", "light blue");
-        CatalogControl.saveNewFlower(flower, "src/main/resources/images/Lotus.png");
+        CatalogControl.saveNewFlower(flower, "src/main/resources/images/Flower8.jpg");
 
         flower = new Product("Rose14", 300,false, 0, "flower", "gentle fuchsia");
-        CatalogControl.saveNewFlower(flower, "src/main/resources/images/Lotus.png");
+        CatalogControl.saveNewFlower(flower, "src/main/resources/images/Flower9.jpg");
 
         flower = new Product("Rose13", 350,false, 0,"flower", "fuchsia");
-        CatalogControl.saveNewFlower(flower, "src/main/resources/images/Lotus.png");
+        CatalogControl.saveNewFlower(flower, "src/main/resources/images/Flower10.jpg");
 
         flower = new Product("Rose15", 400,true, 50, "flower", "fuchsia white");
-        CatalogControl.saveNewFlower(flower, "src/main/resources/images/Lotus.png");
+        CatalogControl.saveNewFlower(flower, "src/main/resources/images/Flower11.jpg");
 
         flower = new Product("Rose16", 450,true, 50, "flower", "yellow greenish");
-        CatalogControl.saveNewFlower(flower, "src/main/resources/images/Lotus.png");
+        CatalogControl.saveNewFlower(flower, "src/main/resources/images/Flower12.jpg");
 
         flower = new Product("Rose17", 550, true, 10,"flower","pink");
-        CatalogControl.saveNewFlower(flower, "src/main/resources/images/Lotus.png");
+        CatalogControl.saveNewFlower(flower, "src/main/resources/images/Flower13.jpg");
 
 
         session.flush();

@@ -44,9 +44,9 @@ public class ComplaintTabController {
     void initialize(){
         TableInitializeFields();
         items = UserClient.getInstance().getComplaintList();
-        for(int i=0; i< items.size(); i++){
-            System.out.println(items.get(i));
-        }
+//        for(int i=0; i< items.size(); i++){
+//            System.out.println(items.get(i));
+//        }
         complaints_table.setItems(UserClient.getInstance().getComplaintList());
     }
     //

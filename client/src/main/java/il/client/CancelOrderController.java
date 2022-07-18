@@ -1,6 +1,7 @@
 package il.client;
 
 import il.client.controls.OrderControl;
+import il.client.controls.UserControl;
 import il.entities.Order;
 import il.client.controls.OrderControl;
 import il.entities.User;
@@ -87,7 +88,7 @@ public class CancelOrderController {
         OrderControl.cancelOrder(this.this_order.getThis_id(),this.refund); //doesnt deleting
         this.cancel_order_anchorpane2.setVisible(false);
         this.cancel_order_anchorpane3.setVisible(true);
-        System.out.println(UserClient.getInstance().getCredit());
+        System.out.println(UserClient.getInstance().getCredit()+" in CancelOrderController");
 //        this.stage.close();
     }
 
@@ -104,7 +105,11 @@ public class CancelOrderController {
         }
         UserClient.getInstance().setOrderList(order_list);
 
-        MyAccountController.getInstance().LoadOrdersHistoryPage();
+        MyAccountController.getInstance().ComplaintOrdersTabRefresh();
+//        MyAccountController.getInstance().LoadComplaintOrdersTab();
+        MyAccountController.getInstance().OrdersHistoryRefresh();
+//        MyAccountController.getInstance().LoadOrdersHistoryPage();
+//        MyAccountController.getInstance().LoadCancelOrdersTab();
 
         OrderControl.cancelOrder(Integer.parseInt(this.order_num_filed.getText()),refund);
 
@@ -112,6 +117,7 @@ public class CancelOrderController {
 //        UserClient.getInstance().removeOrderById(Integer.parseInt(this.order_num_filed.getText()));
         UserClient.getInstance().cancelOrderById(Integer.parseInt(this.order_num_filed.getText()));
         UserClient.getInstance().addCredit(refund);
+        UserControl.setCredit(UserClient.getInstance().getId(), UserClient.getInstance().getCredit()+refund, false);
         MyAccountController.getInstance().setCreditTextField(UserClient.getInstance().getCredit());
         this.stage.close();
       //  CancelOrdersTabController.getInstance().RemoveOrderById(Integer.parseInt(this.order_num_filed.getText()));

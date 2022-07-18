@@ -48,6 +48,15 @@ public class UserControl {
         testDB.closeSession();
     }
 
+    public static void changeClientCredit(int userID, double credit) {
+        testDB.openSession();
+        User user = testDB.session.get(User.class, userID);
+        user.setCredit(credit);
+        testDB.session.flush();
+        testDB.session.getTransaction().commit(); // Save everything.
+        testDB.closeSession();
+    }
+
     public static void changeEmpUsename(int userID , String newUserName) {
         testDB.openSession();
         Employee employee = testDB.session.get(Employee.class, userID);
@@ -159,6 +168,20 @@ public class UserControl {
             }
         }
         changeClientCC(userID, cc);
+        return "";
+    }
+
+    public static String setCredit (int userID, double credit, boolean isWorker) {
+        if (isWorker)
+            return "Error: Data base dont save employee Credit ";
+        testDB.openSession();
+        User user = testDB.session.get(User.class, userID);
+        testDB.closeSession();
+        if (user == null)
+            return "Error: User not found";
+        if(user.getAccountStatus()==0)
+            return "Error: this credit belong to frozen account";
+        changeClientCredit(userID, credit);
         return "";
     }
 
